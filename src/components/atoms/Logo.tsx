@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { ReactComponent as LogoAssetFull } from '@oceanprotocol/art/logo/logo.svg'
-import { ReactComponent as LogoAssetBranding } from '../../images/gaia-x-logo.svg'
+import { ReactComponent as LogoAssetBranding } from '../../images/euProGigant-logo.svg'
 import { ReactComponent as LogoAsset } from '../../images/ocean-logo.svg'
 import styles from './Logo.module.css'
 import classNames from 'classnames/bind'
