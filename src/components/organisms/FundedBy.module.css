@@ -1,0 +1,26 @@
+.wrapper {
+  margin-top: calc(var(--spacer) * 2);
+}
+
+.wrapper h3 {
+  font-size: var(--font-size-large);
+  color: var(--color-secondary);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 40rem) {
+  .container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
