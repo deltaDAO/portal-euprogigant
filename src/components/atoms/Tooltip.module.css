@@ -7,6 +7,7 @@
   padding: calc(var(--spacer) / 4);
   max-width: 25rem;
   font-size: var(--font-size-small);
+  border: none;
   background: var(--brand-purple);
 }
 
@@ -35,7 +36,7 @@
 .arrow::before {
   content: '';
   transform: rotate(45deg);
-  background: var(--border-color);
+  background: var(--brand-purple);
 }
 
 .content[data-placement*='top'] > .arrow {

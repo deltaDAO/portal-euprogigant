@@ -18,7 +18,9 @@
 }
 
 .action,
-.addToken {
+.action:hover,
+.addToken,
+.addToken:hover {
   color: var(--brand-white);
 }
 
