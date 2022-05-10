@@ -56,6 +56,6 @@
   height: var(--font-size-h5);
 }
 
-.input:hover .searchIcon {
+.search:hover .searchIcon {
   fill: var(--color-menu-active);
 }
