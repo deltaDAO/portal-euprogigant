@@ -7,6 +7,7 @@
   padding: calc(var(--spacer) / 4);
   max-width: 25rem;
   font-size: var(--font-size-small);
+  background: var(--brand-purple);
 }
 
 .content p {

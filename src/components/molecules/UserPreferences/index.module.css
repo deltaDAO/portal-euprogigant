@@ -22,7 +22,7 @@ svg.caret {
   height: var(--font-size-small);
   fill: var(--border-color-menu);
   margin-left: calc(var(--spacer) / 4);
-  transition: transform 0.2s ease-out;
+  transition: 0.3s ease-out;
   display: none;
 }
 
@@ -35,15 +35,15 @@ svg.caret {
 
 .icon {
   fill: var(--border-color-menu);
-  transition: 0.2s ease-out;
+  transition: 0.3s ease-out;
   width: 1em;
   height: 1em;
 }
 
 .preferences:hover .icon,
-.preferences:focus .icon,
-.preferences:active .icon,
-.preferences[aria-expanded='true'] .icon {
+.preferences[aria-expanded='true'] .icon,
+.preferences:hover svg,
+.preferences[aria-expanded='true'] svg {
   fill: var(--color-menu-active);
 }
 

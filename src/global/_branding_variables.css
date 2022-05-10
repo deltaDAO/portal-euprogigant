@@ -10,7 +10,7 @@
 
   --color-primary: var(--brand-pink);
 
-  --color-menu-active: #465aff;
+  --color-menu-active: var(--brand-purple);
   --border-color-menu: var(--color-primary);
   --border-radius-menu: 2px;
 
