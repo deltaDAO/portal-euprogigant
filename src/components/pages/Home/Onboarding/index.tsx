@@ -70,8 +70,8 @@ export default function OnboardingSection(): ReactElement {
 
   return (
     <div className={styles.wrapper}>
-      <Header />
       <Container className={styles.cardWrapper}>
+        <Header />
         <div className={styles.cardContainer}>
           <Stepper
             stepLabels={stepLabels}
