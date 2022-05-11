@@ -1,5 +1,5 @@
+import React, { ReactElement, TouchEvent, useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
-import React, { ReactElement, useEffect, useState } from 'react'
 import styles from './Carousel.module.css'
 
 const cx = classNames.bind(styles)
@@ -50,12 +50,12 @@ export default function Carousel({
     }
   }
 
-  const handleTouchStart = (e) => {
+  const handleTouchStart = (e: TouchEvent) => {
     const touchDown = e.touches[0].clientX
     setTouchPosition(touchDown)
   }
 
-  const handleTouchMove = (e) => {
+  const handleTouchMove = (e: TouchEvent) => {
     const touchDown = touchPosition
 
     if (touchDown === null) {
