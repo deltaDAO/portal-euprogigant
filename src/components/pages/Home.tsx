@@ -27,6 +27,7 @@ import { useAddressConfig } from '../../hooks/useAddressConfig'
 import OnboardingSection from './Home/Onboarding'
 import FundedBy from '../organisms/FundedBy'
 import ProjectPartners from '../organisms/ProjectPartners'
+import FeaturedAssets from '../organisms/FeaturedAssets'
 
 function sortElements(items: DDO[], sorted: string[]) {
   items.sort(function (a, b) {
@@ -144,7 +145,8 @@ export default function HomePage(): ReactElement {
         <section className={styles.content}>
           <HomeContent />
         </section>
-        <Container>
+        <FeaturedAssets />
+        {/* <Container>
           {queryLatest && (
             <SectionQueryResult
               title={
@@ -158,7 +160,7 @@ export default function HomePage(): ReactElement {
               }
             />
           )}
-        </Container>
+        </Container> */}
         <section>
           <ProjectPartners />
         </section>

@@ -13,7 +13,7 @@ export default function PageGatsbyTutorial(props: PageProps): ReactElement {
     .childTutorialJson
 
   return (
-    <Page title={title} description={description} uri={props.uri} headerCenter>
+    <Page title={title} description={description} uri={props.uri}>
       <Permission eventType="browse">
         <AssetProvider asset={tutorialDdo?.id}>
           <OceanProvider>

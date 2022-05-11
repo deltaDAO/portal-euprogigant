@@ -10,7 +10,7 @@
 }
 
 .logo:not(.branding) path {
-  fill: var(--brand-black);
+  fill: var(--brand-primary);
 }
 
 a > .logo:hover:not(.branding) path {
