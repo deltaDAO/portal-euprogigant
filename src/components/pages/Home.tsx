@@ -26,6 +26,7 @@ import Container from '../atoms/Container'
 import { useAddressConfig } from '../../hooks/useAddressConfig'
 import OnboardingSection from './Home/Onboarding'
 import FundedBy from '../organisms/FundedBy'
+import ProjectPartners from '../organisms/ProjectPartners'
 
 function sortElements(items: DDO[], sorted: string[]) {
   items.sort(function (a, b) {
@@ -158,6 +159,9 @@ export default function HomePage(): ReactElement {
             />
           )}
         </Container>
+        <section>
+          <ProjectPartners />
+        </section>
         <section>
           <FundedBy />
         </section>

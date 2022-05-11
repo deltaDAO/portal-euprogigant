@@ -1,0 +1,11 @@
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.logo {
+  max-height: 8rem;
+  object-fit: contain;
+}
