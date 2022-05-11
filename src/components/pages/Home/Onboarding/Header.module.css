@@ -4,7 +4,7 @@
   align-items: center;
   height: var(--wrapper-height);
   padding-left: 0;
-  background-color: var(--brand-cyan);
+  background-color: var(--brand-pink);
   color: var(--brand-white);
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   box-shadow: var(--box-shadow);
@@ -17,9 +17,9 @@
 .subtitle {
   display: inline-block;
   padding: calc(var(--spacer) / 8) calc(var(--spacer) / 4) 0;
-  background-color: var(--brand-pink);
+  background-color: var(--brand-violet);
   margin-bottom: 0;
-  color: var(--brand-white);
+  color: var(--brand-pink);
 }
 
 .title {
@@ -28,5 +28,19 @@
 
 .paragraph p {
   margin-bottom: 0;
-  color: var(--brand-pink);
+  color: var(--brand-white);
+}
+
+.container svg {
+  display: none;
+}
+
+@media screen and (min-width: 40rem) {
+  .container svg {
+    width: 8rem;
+    display: inline;
+  }
+  .container svg path {
+    fill: var(--brand-white);
+  }
 }

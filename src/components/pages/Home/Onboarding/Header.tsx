@@ -3,6 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import Container from '../../../atoms/Container'
 import Markdown from '../../../atoms/Markdown'
 import styles from './Header.module.css'
+import { ReactComponent as LightBulb } from '../../../../images/lightBulb.svg'
 
 const query = graphql`
   query OnboardingQuery {
@@ -37,6 +38,7 @@ export default function Header(): ReactElement {
         <h2 className={styles.title}>{title}</h2>
         <Markdown text={body} className={styles.paragraph} />
       </div>
+      <LightBulb />
     </Container>
   )
 }

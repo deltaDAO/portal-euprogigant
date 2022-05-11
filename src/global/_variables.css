@@ -23,8 +23,8 @@
   --color-secondary: #8b98a9;
 
   /* Only use these vars for most color referencing for easy light/dark mode */
-  --font-color-text: var(--brand-grey);
-  --font-color-heading: var(--brand-black);
+  --font-color-text: var(--brand-pink);
+  --font-color-heading: var(--brand-purple);
   --background-body: var(--brand-white);
   --background-content: var(--brand-white);
   --background-body-transparent: rgba(255, 255, 255, 0.85);
