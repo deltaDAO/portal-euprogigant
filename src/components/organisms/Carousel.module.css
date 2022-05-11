@@ -62,6 +62,7 @@
   border: none;
   border-radius: var(--border-radius);
   font-size: var(--font-size-h3);
+  cursor: pointer;
 }
 
 .leftArrow {

@@ -3,6 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import styles from './ProjectPartners.module.css'
 import Carousel from './Carousel'
 import Container from '../atoms/Container'
+import LinkOpener from '../molecules/LinkOpener'
 
 const query = graphql`
   {
@@ -39,7 +40,8 @@ export default function ProjectPartners(): ReactElement {
   const logos: Logo[] = data?.allFile?.edges
 
   return (
-    <Container>
+    <Container className={styles.container}>
+      <h3 className={styles.title}>Project Partners</h3>
       <Carousel show={4} infiniteLoop>
         {logos.map((logo) => (
           <div
@@ -53,6 +55,14 @@ export default function ProjectPartners(): ReactElement {
           </div>
         ))}
       </Carousel>
+      <div className={styles.footer}>
+        <LinkOpener
+          uri="https://euprogigant.com/partner/projektpartner/"
+          openNewTab
+        >
+          All project partners
+        </LinkOpener>
+      </div>
     </Container>
   )
 }

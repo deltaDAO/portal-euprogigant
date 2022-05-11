@@ -15,7 +15,6 @@ export default function Carousel({
 }): ReactElement {
   const [currentIndex, setCurrentIndex] = useState(infiniteLoop ? show : 0)
   const [length, setLength] = useState(children.length)
-  console.log(children.length, children)
 
   const [isRepeating, setIsRepeating] = useState(
     infiniteLoop && children.length > show
@@ -24,7 +23,6 @@ export default function Carousel({
 
   const [touchPosition, setTouchPosition] = useState(null)
 
-  // Set the length to match current children from props
   useEffect(() => {
     setLength(children.length)
     setIsRepeating(infiniteLoop && children.length > show)
