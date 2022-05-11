@@ -1,10 +1,12 @@
-.container {
-  margin: calc(var(--spacer) * 2) 0;
+.wrapper {
+  margin: calc(var(--spacer) / 2) 0;
+  padding: var(--spacer) 0;
+  background-color: var(--brand-purple);
 }
 
 .title {
   font-size: var(--font-size-large);
-  color: var(--color-secondary);
+  color: var(--brand-white);
 }
 
 .logoContainer {
@@ -23,4 +25,7 @@
   margin-top: 1rem;
   width: 100%;
   text-align: center;
+}
+.footer a {
+  color: var(--brand-white);
 }

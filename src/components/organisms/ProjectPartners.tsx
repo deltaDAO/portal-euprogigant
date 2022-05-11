@@ -40,29 +40,31 @@ export default function ProjectPartners(): ReactElement {
   const logos: Logo[] = data?.allFile?.edges
 
   return (
-    <Container className={styles.container}>
-      <h3 className={styles.title}>Project Partners</h3>
-      <Carousel show={4} infiniteLoop>
-        {logos.map((logo) => (
-          <div
-            key={logo.node.childImageSharp.id}
-            className={styles.logoContainer}
+    <div className={styles.wrapper}>
+      <Container className={styles.container}>
+        <h3 className={styles.title}>These partners work with us</h3>
+        <Carousel show={4} infiniteLoop>
+          {logos.map((logo) => (
+            <div
+              key={logo.node.childImageSharp.id}
+              className={styles.logoContainer}
+            >
+              <img
+                src={logo.node.childImageSharp.original.src}
+                className={styles.logo}
+              />
+            </div>
+          ))}
+        </Carousel>
+        <div className={styles.footer}>
+          <LinkOpener
+            uri="https://euprogigant.com/partner/projektpartner/"
+            openNewTab
           >
-            <img
-              src={logo.node.childImageSharp.original.src}
-              className={styles.logo}
-            />
-          </div>
-        ))}
-      </Carousel>
-      <div className={styles.footer}>
-        <LinkOpener
-          uri="https://euprogigant.com/partner/projektpartner/"
-          openNewTab
-        >
-          All project partners
-        </LinkOpener>
-      </div>
-    </Container>
+            All project partners
+          </LinkOpener>
+        </div>
+      </Container>
+    </div>
   )
 }

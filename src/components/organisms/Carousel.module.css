@@ -9,6 +9,7 @@
   width: 100%;
   position: relative;
   padding: 1rem;
+  background-color: var(--brand-white);
 }
 
 .carouselContentWrapper {
@@ -60,7 +61,6 @@
   background-color: rgba(0, 0, 0, 0.3);
   color: var(--brand-white);
   border: none;
-  border-radius: var(--border-radius);
   font-size: var(--font-size-h3);
   cursor: pointer;
 }
