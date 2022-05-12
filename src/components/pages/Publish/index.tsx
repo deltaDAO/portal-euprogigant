@@ -1,6 +1,6 @@
 import React, { ReactElement, useState, useEffect, useRef } from 'react'
 import Permission from '../../organisms/Permission'
-import { Field, Formik, FormikState } from 'formik'
+import { Formik, FormikState } from 'formik'
 import { usePublish } from '../../../hooks/usePublish'
 import styles from './index.module.css'
 import FormPublish from './FormPublish'
@@ -30,7 +30,6 @@ import { useUserPreferences } from '../../../providers/UserPreferences'
 import { DDO, Logger, Metadata, MetadataMain } from '@oceanprotocol/lib'
 import { Persist } from '../../atoms/FormikPersist'
 import Debug from './Debug'
-import Alert from '../../atoms/Alert'
 import MetadataFeedback from '../../molecules/MetadataFeedback'
 import { useAccountPurgatory } from '../../../hooks/useAccountPurgatory'
 import { useWeb3 } from '../../../providers/Web3'
@@ -42,20 +41,14 @@ const formNameAlgorithms = 'ocean-publish-form-algorithms'
 
 function TabContent({
   publishType,
-  values,
-  tutorial
+  values
 }: {
   publishType: MetadataMain['type']
   values: Partial<MetadataPublishFormAlgorithm | MetadataPublishFormDataset>
-  tutorial?: boolean
 }) {
   return (
     <article className={styles.grid}>
-      {publishType === 'dataset' ? (
-        <FormPublish tutorial={tutorial} />
-      ) : (
-        <FormAlgoPublish />
-      )}
+      {publishType === 'dataset' ? <FormPublish /> : <FormAlgoPublish />}
 
       <aside>
         <div className={styles.sticky}>
@@ -275,13 +268,7 @@ export default function PublishPage({
           const tabs = [
             {
               title: 'Data Set',
-              content: (
-                <TabContent
-                  values={values}
-                  publishType={publishType}
-                  tutorial={tutorial}
-                />
-              )
+              content: <TabContent values={values} publishType={publishType} />
             },
             {
               title: 'Algorithm',
@@ -320,7 +307,6 @@ export default function PublishPage({
                       } →`,
                       to: `/asset/${did}`
                     }}
-                    tutorial={tutorial}
                     ddo={ddo}
                   />
                 </>
