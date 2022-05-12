@@ -29,3 +29,9 @@
 .footer a {
   color: var(--brand-white);
 }
+
+.footer a:hover {
+  transition: none;
+  color: var(--brand-white);
+  font-weight: var(--font-weight-bold);
+}

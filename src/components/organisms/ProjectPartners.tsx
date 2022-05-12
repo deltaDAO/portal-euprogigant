@@ -43,7 +43,7 @@ export default function ProjectPartners(): ReactElement {
     <div className={styles.wrapper}>
       <Container className={styles.container}>
         <h3 className={styles.title}>These partners work with us</h3>
-        <Carousel show={4} infiniteLoop>
+        <Carousel show={4} infiniteLoop autoScroll>
           {logos.map((logo) => (
             <div
               key={logo.node.childImageSharp.id}

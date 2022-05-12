@@ -7,11 +7,13 @@ const cx = classNames.bind(styles)
 export default function Carousel({
   children,
   show = 1,
-  infiniteLoop
+  infiniteLoop,
+  autoScroll
 }: {
   children: ReactElement[]
   show?: 1 | 2 | 3 | 4
   infiniteLoop?: boolean
+  autoScroll?: boolean
 }): ReactElement {
   const [currentIndex, setCurrentIndex] = useState(infiniteLoop ? show : 0)
   const [length, setLength] = useState(children.length)
@@ -22,6 +24,8 @@ export default function Carousel({
   const [transitionEnabled, setTransitionEnabled] = useState(true)
 
   const [touchPosition, setTouchPosition] = useState(null)
+
+  let autoScrollTimeout = 0
 
   useEffect(() => {
     setLength(children.length)
@@ -47,6 +51,17 @@ export default function Carousel({
       setCurrentIndex((prevState) => prevState - 1)
     }
   }
+
+  useEffect(() => {
+    if (!autoScroll) return
+
+    clearTimeout(autoScrollTimeout)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    autoScrollTimeout = window.setTimeout(() => next(), 3000)
+    return () => {
+      clearTimeout(autoScrollTimeout)
+    }
+  }, [currentIndex])
 
   const handleTouchStart = (e: TouchEvent) => {
     const touchDown = e.touches[0].clientX
