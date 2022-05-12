@@ -11,3 +11,8 @@
     padding: var(--spacer);
   }
 }
+
+a.box:hover,
+a.box:focus {
+  box-shadow: var(--box-shadow-hover);
+}
