@@ -1,7 +1,6 @@
 .selection {
   padding: 0;
   border: 1px solid var(--border-color);
-  background-color: var(--background-highlight);
   border-radius: var(--border-radius);
   margin-bottom: calc(var(--spacer) / 2);
   font-size: var(--font-size-small);
@@ -112,7 +111,6 @@
   font-size: 0.63rem;
   display: block;
   text-align: left;
-  color: var(--color-secondary);
   /* makes sure DotDotDot will kick in */
   overflow-wrap: break-word;
   word-wrap: break-word;

@@ -22,9 +22,23 @@
   margin-right: calc(var(--spacer) / 4);
 }
 
+.assetType > * {
+  border-color: var(--brand-white);
+}
+
 .datatoken {
   white-space: pre;
   margin-right: calc(var(--spacer) / 3);
+}
+
+.datatoken svg {
+  fill: var(--brand-white);
+}
+
+.datatoken:hover,
+.datatoken:hover svg {
+  color: var(--brand-violet);
+  fill: var(--brand-violet);
 }
 
 .byline {
