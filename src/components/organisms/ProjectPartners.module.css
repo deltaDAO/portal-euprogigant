@@ -5,7 +5,6 @@
 }
 
 .title {
-  font-size: var(--font-size-large);
   color: var(--brand-white);
 }
 
@@ -26,6 +25,7 @@
   width: 100%;
   text-align: center;
 }
+
 .footer a {
   color: var(--brand-white);
 }
