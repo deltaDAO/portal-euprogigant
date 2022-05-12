@@ -67,16 +67,12 @@ function TabContent({
 export default function PublishPage({
   content,
   datasetOnly,
-  tutorial,
   ddo,
-  setTutorialDdo,
   loading
 }: {
   content: { warning: string }
   datasetOnly?: boolean
-  tutorial?: boolean
   ddo?: DDO
-  setTutorialDdo?: (value: DDO) => void
   loading?: boolean
 }): ReactElement {
   const { debug } = useUserPreferences()
@@ -127,15 +123,6 @@ export default function PublishPage({
       : setTitle('Publishing Algorithm')
   }, [publishType])
 
-  const publishRef = useRef(null)
-  const executeScroll = () =>
-    publishRef.current.scrollIntoView({ block: 'center', behavior: 'smooth' })
-  useEffect(() => {
-    if (tutorial && isLoading) {
-      executeScroll()
-    }
-  }, [isLoading])
-
   async function handleSubmit(
     values: Partial<MetadataPublishFormDataset>,
     resetForm: (
@@ -170,7 +157,6 @@ export default function PublishPage({
         return
       }
       // Publish succeeded
-      if (tutorial) setTutorialDdo(ddo)
       setDid(ddo.id)
       setSuccess(
         '🎉 Successfully published. 🎉 Now create a price on your data set.'
@@ -180,9 +166,7 @@ export default function PublishPage({
         status: 'empty'
       })
       // move user's focus to top of screen
-      if (!tutorial) {
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     } catch (error) {
       setError(error.message)
       Logger.error(error.message)
