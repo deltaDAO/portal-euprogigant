@@ -24,16 +24,19 @@ export default function Page({
 
   const childElements = (
     <>
-      {title && !noPageHeader && (
-        <Container>
+      {title &&
+        !noPageHeader &&
+        (isHome ? (
+          <Container>
+            <PageHeader title={title} description={description} powered />
+          </Container>
+        ) : (
           <PageHeader
             title={title}
             description={description}
             center={headerCenter}
-            powered={isHome}
           />
-        </Container>
-      )}
+        ))}
       {children}
     </>
   )
