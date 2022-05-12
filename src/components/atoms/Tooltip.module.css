@@ -9,6 +9,7 @@
   font-size: var(--font-size-small);
   border: none;
   background: var(--brand-purple);
+  color: var(--brand-white);
 }
 
 .content p {
@@ -22,7 +23,6 @@
   display: inline-block;
   margin-bottom: -0.1em;
   margin-left: calc(var(--spacer) / 6);
-  fill: var(--color-secondary);
 }
 
 .arrow,

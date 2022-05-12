@@ -43,7 +43,7 @@ export default function FeaturedAssets(): ReactElement {
   const { featured }: Featured = data.file.childIndexJson
 
   return (
-    <Container>
+    <Container className={styles.container}>
       <h3>Featured Assets</h3>
       <div className={styles.section}>
         {featured.map((type) => (
