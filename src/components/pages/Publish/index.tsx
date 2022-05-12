@@ -261,7 +261,7 @@ export default function PublishPage({
           ]
 
           return (
-            <div ref={publishRef}>
+            <div>
               <Persist
                 name={
                   publishType === 'dataset'
