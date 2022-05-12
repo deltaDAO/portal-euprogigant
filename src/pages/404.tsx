@@ -34,7 +34,12 @@ export default function PageGatsby404(props: PageProps): ReactElement {
           }
         `}</style>
       </Helmet>
-      <Page title={title} description={description} uri={props.uri}>
+      <Page
+        title={title}
+        description={description}
+        uri={props.uri}
+        headerCenter
+      >
         {actions.map((action: { title: string; url: string }) => (
           <Button style="primary" key={action.title} to={action.url}>
             {action.title}

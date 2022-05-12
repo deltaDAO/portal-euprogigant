@@ -14,7 +14,7 @@ export default function PageTemplateMarkdown(props: PageProps): ReactElement {
   const isPrivacy = slug.includes('/privacy/')
 
   return (
-    <Page title={title} description={description} uri={props.uri}>
+    <Page title={title} description={description} uri={props.uri} headerCenter>
       <Container narrow>
         {isPrivacy && (
           <PrivacyPolicyHeader

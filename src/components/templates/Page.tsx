@@ -9,6 +9,7 @@ export interface PageProps {
   uri: string
   description?: string
   noPageHeader?: boolean
+  headerCenter?: boolean
 }
 
 export default function Page({
@@ -16,14 +17,22 @@ export default function Page({
   title,
   uri,
   description,
-  noPageHeader
+  noPageHeader,
+  headerCenter
 }: PageProps): ReactElement {
   const isHome = uri === '/'
 
   const childElements = (
     <>
       {title && !noPageHeader && (
-        <PageHeader title={title} description={description} powered={isHome} />
+        <Container>
+          <PageHeader
+            title={title}
+            description={description}
+            center={headerCenter}
+            powered={isHome}
+          />
+        </Container>
       )}
       {children}
     </>
