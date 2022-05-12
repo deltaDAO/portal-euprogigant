@@ -1,7 +1,9 @@
 .tabList {
-  text-align: center;
+  height: calc(var(--spacer) * 2);
   border-bottom: 1px solid var(--border-color);
   padding: calc(var(--spacer) / 2);
+  text-align: center;
+  background-color: var(--color-primary);
 }
 
 .tab {
@@ -11,9 +13,9 @@
   font-size: var(--font-size-small);
   text-transform: uppercase;
   cursor: pointer;
-  color: var(--color-secondary);
-  background-color: var(--background-body);
-  border: 1px solid var(--border-color);
+  color: var(--color-primary);
+  background-color: var(--brand-white);
+  border: 1px solid var(--brand-white);
   margin-right: -1px;
   min-width: 100px;
 }
@@ -29,9 +31,9 @@
 }
 
 .tab[aria-selected='true'] {
-  background-color: var(--font-color-heading);
-  color: var(--background-body);
-  border-color: var(--font-color-heading);
+  background-color: var(--brand-violet);
+  color: var(--color-primary);
+  border-color: var(--brand-violet);
 }
 
 .tabContent {

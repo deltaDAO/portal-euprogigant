@@ -12,14 +12,18 @@
   margin-top: -1rem;
 }
 
-.grid > div {
-  overflow: hidden;
-}
-
 .content {
   composes: box from '../../atoms/Box.module.css';
   margin-top: var(--spacer);
+  padding: 0;
   position: relative;
+  box-shadow: var(--box-shadow);
+}
+
+.contentBody {
+  composes: box from '../../atoms/Box.module.css';
+  padding-top: 0;
+  box-shadow: none;
 }
 
 @media (min-width: 60rem) {

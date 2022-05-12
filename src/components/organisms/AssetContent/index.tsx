@@ -100,63 +100,64 @@ export default function AssetContent({
           <div className={styles.content}>
             <MetaMain />
             <Bookmark did={ddo.id} />
-
-            {isInPurgatory ? (
-              <Alert
-                title={content.title}
-                badge={`Reason: ${purgatoryData?.reason}`}
-                text={content.description}
-                state="error"
-              />
-            ) : (
-              <>
-                <Markdown
-                  className={styles.description}
-                  text={metadata?.additionalInformation?.description || ''}
+            <div className={styles.contentBody}>
+              {isInPurgatory ? (
+                <Alert
+                  title={content.title}
+                  badge={`Reason: ${purgatoryData?.reason}`}
+                  text={content.description}
+                  state="error"
                 />
+              ) : (
+                <>
+                  <Markdown
+                    className={styles.description}
+                    text={metadata?.additionalInformation?.description || ''}
+                  />
 
-                <MetaSecondary />
+                  <MetaSecondary />
 
-                {isOwner && isAssetNetwork && (
-                  <div className={styles.ownerActions}>
-                    <Button
-                      style="text"
-                      size="small"
-                      onClick={handleEditButton}
-                    >
-                      Edit Metadata
-                    </Button>
-                    {accountId && appConfig.allowAdvancedSettings === 'true' && (
-                      <>
-                        <span className={styles.separator}>|</span>
-                        <Button
-                          style="text"
-                          size="small"
-                          onClick={handleEditAdvancedSettingsButton}
-                        >
-                          Edit Advanced Settings
-                        </Button>
-                      </>
-                    )}
-                    {ddo.findServiceByType('compute') && type === 'dataset' && (
-                      <>
-                        <span className={styles.separator}>|</span>
-                        <Button
-                          style="text"
-                          size="small"
-                          onClick={handleEditComputeButton}
-                        >
-                          Edit Compute Settings
-                        </Button>
-                      </>
-                    )}
-                  </div>
-                )}
-              </>
-            )}
+                  {isOwner && isAssetNetwork && (
+                    <div className={styles.ownerActions}>
+                      <Button
+                        style="text"
+                        size="small"
+                        onClick={handleEditButton}
+                      >
+                        Edit Metadata
+                      </Button>
+                      {accountId && appConfig.allowAdvancedSettings === 'true' && (
+                        <>
+                          <span className={styles.separator}>|</span>
+                          <Button
+                            style="text"
+                            size="small"
+                            onClick={handleEditAdvancedSettingsButton}
+                          >
+                            Edit Advanced Settings
+                          </Button>
+                        </>
+                      )}
+                      {ddo.findServiceByType('compute') && type === 'dataset' && (
+                        <>
+                          <span className={styles.separator}>|</span>
+                          <Button
+                            style="text"
+                            size="small"
+                            onClick={handleEditComputeButton}
+                          >
+                            Edit Compute Settings
+                          </Button>
+                        </>
+                      )}
+                    </div>
+                  )}
+                </>
+              )}
 
-            <MetaFull />
-            <EditHistory />
+              <MetaFull />
+              <EditHistory />
+            </div>
             {debug === true && <DebugOutput title="DDO" output={ddo} />}
           </div>
         </div>
