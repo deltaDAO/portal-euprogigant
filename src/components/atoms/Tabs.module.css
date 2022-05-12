@@ -1,9 +1,9 @@
 .tabList {
   height: calc(var(--spacer) * 2);
-  border-bottom: 1px solid var(--border-color);
   padding: calc(var(--spacer) / 2);
   text-align: center;
   background-color: var(--color-primary);
+  box-shadow: var(--box-shadow);
 }
 
 .tab {
