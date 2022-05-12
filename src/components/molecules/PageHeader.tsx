@@ -10,12 +10,14 @@ export default function PageHeader({
   title,
   description,
   center,
-  powered
+  powered,
+  isHome
 }: {
   title: string
   description?: string
   center?: boolean
   powered?: boolean
+  isHome?: boolean
 }): ReactElement {
   const styleClasses = cx({
     header: true,
@@ -23,7 +25,7 @@ export default function PageHeader({
   })
 
   return (
-    <div className={powered ? styles.homeWrapper : styles.wrapper}>
+    <div className={isHome ? styles.homeWrapper : styles.wrapper}>
       <header className={styleClasses}>
         <h1 className={styles.title}>{title}</h1>
         {description && (

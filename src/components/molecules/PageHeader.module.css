@@ -1,4 +1,9 @@
 .homeWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 20rem;
+  margin-bottom: var(--spacer);
   background-image: url('../../images/euprogigant-home-eyecatcher-scaled.jpeg');
   background-size: cover;
   background-repeat: no-repeat;

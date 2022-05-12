@@ -28,7 +28,7 @@ export default function Page({
         !noPageHeader &&
         (isHome ? (
           <Container>
-            <PageHeader title={title} description={description} powered />
+            <PageHeader title={title} description={description} isHome />
           </Container>
         ) : (
           <PageHeader
