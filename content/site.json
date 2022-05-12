@@ -1,7 +1,7 @@
 {
   "site": {
     "siteTitle": "EuProGigant Portal",
-    "siteTagline": "A platform to find, publish and consume Data Services in the Gaia-X Test Network.",
+    "siteTagline": "The lighthouse project for Gaia-X in manufacturing",
     "siteUrl": "https://portal.minimal-gaia-x.eu",
     "siteIcon": "./src/images/siteIcon.png",
     "siteImage": "../src/images/share.png",

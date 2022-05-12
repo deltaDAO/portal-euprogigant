@@ -11,6 +11,13 @@
   max-width: 30rem;
 }
 
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+}
+
 .title {
   font-size: var(--font-size-h3);
   margin-top: 0;

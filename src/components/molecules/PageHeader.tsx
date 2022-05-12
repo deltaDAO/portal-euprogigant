@@ -32,7 +32,7 @@ export default function PageHeader({
             <Markdown text={description} className={styles.description} />
           )}
           {powered && (
-            <>
+            <div className={styles.logoContainer}>
               <p className={styles.powered}>powered by</p>
               <a
                 href="https://oceanprotocol.com/"
@@ -41,7 +41,7 @@ export default function PageHeader({
               >
                 <Logo />
               </a>
-            </>
+            </div>
           )}
         </header>
       </div>

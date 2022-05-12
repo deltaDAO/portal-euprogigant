@@ -6,7 +6,6 @@ import OnboardingSection from './Home/Onboarding'
 import FundedBy from '../organisms/FundedBy'
 import ProjectPartners from '../organisms/ProjectPartners'
 import FeaturedAssets from '../organisms/FeaturedAssets'
-import HomeIntro from '../organisms/HomeIntro'
 
 export default function HomePage(): ReactElement {
   return (
@@ -14,9 +13,6 @@ export default function HomePage(): ReactElement {
       <>
         <section className={styles.content}>
           <OnboardingSection />
-        </section>
-        <section className={styles.intro}>
-          <HomeIntro />
         </section>
         <section className={styles.content}>
           <HomeContent />
