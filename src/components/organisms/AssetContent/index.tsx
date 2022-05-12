@@ -103,7 +103,7 @@ export default function AssetContent(props: AssetContentProps): ReactElement {
     <>
       <div className={styles.networkWrap}>
         <NetworkName networkId={ddo.chainId} className={styles.network} />
-        <VerifiedPublisher address={owner} className={styles.verified} />
+        <VerifiedPublisher address={owner} />
       </div>
 
       <article className={tutorial ? styles.gridTutorial : styles.grid}>
