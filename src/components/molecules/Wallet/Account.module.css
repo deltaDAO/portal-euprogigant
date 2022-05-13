@@ -24,6 +24,7 @@
   color: var(--color-primary);
 }
 
+.button:hover,
 .button:hover .address,
 [aria-expanded='true'] .address {
   color: var(--color-menu-active);
