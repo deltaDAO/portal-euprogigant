@@ -5,10 +5,13 @@ import Container from '../atoms/Container'
 
 const query = graphql`
   {
-    allFile(filter: { absolutePath: { regex: "/src/images/fundedBy/" } }) {
+    fundedBy: allFile(
+      filter: { absolutePath: { regex: "/src/images/fundedBy/" } }
+    ) {
       edges {
         node {
           childImageSharp {
+            id
             original {
               src
             }
@@ -16,11 +19,30 @@ const query = graphql`
         }
       }
     }
+    deltaDao: file(relativePath: { eq: "deltaDAO-logo.png" }) {
+      childImageSharp {
+        original {
+          src
+        }
+      }
+    }
   }
 `
 
-interface Logo {
-  node: {
+interface Logos {
+  fundedBy: {
+    edges: {
+      node: {
+        childImageSharp: {
+          id: string
+          original: {
+            src: string
+          }
+        }
+      }
+    }[]
+  }
+  deltaDao: {
     childImageSharp: {
       original: {
         src: string
@@ -30,18 +52,26 @@ interface Logo {
 }
 
 export default function FundedBy(): ReactElement {
-  const data = useStaticQuery(query)
-  const logos: Logo[] = data?.allFile?.edges
+  const data: Logos = useStaticQuery(query)
+  const { fundedBy, deltaDao } = data
 
   return (
     <Container className={styles.wrapper}>
-      <h3>Funded By</h3>
-      <div className={styles.container}>
-        {logos?.map((logo, i) => (
-          <div key={i} className={styles.logo}>
-            <img src={logo.node.childImageSharp.original.src} />
-          </div>
-        ))}
+      <div>
+        <h3>Funded By</h3>
+        <div className={styles.container}>
+          {fundedBy?.edges.map((logo) => (
+            <div key={logo.node.childImageSharp.id} className={styles.logo}>
+              <img src={logo.node.childImageSharp.original.src} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className={styles.poweredByContainer}>
+        <h3>Powered By</h3>
+        <div className={styles.logo}>
+          <img src={deltaDao.childImageSharp.original.src} />
+        </div>
       </div>
     </Container>
   )

@@ -53,6 +53,7 @@ export default function Carousel({
   }
 
   useEffect(() => {
+    console.log(currentIndex)
     if (!autoScroll) return
 
     clearTimeout(autoScrollTimeout)
@@ -107,6 +108,7 @@ export default function Carousel({
       output.push(children[length - 1 - index])
     }
     output.reverse()
+    console.log(output)
     return output
   }
 
@@ -115,6 +117,7 @@ export default function Carousel({
     for (let index = 0; index < show; index++) {
       output.push(children[index])
     }
+    console.log(output)
     return output
   }
 

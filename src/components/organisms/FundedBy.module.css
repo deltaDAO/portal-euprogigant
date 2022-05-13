@@ -1,4 +1,6 @@
 .wrapper {
+  display: flex;
+  flex-direction: column;
   margin-top: calc(var(--spacer) * 2);
 }
 
@@ -13,9 +15,21 @@
   justify-content: center;
 }
 
-@media screen and (min-width: 40rem) {
+.poweredByContainer {
+  margin-top: var(--spacer);
+}
+
+@media screen and (min-width: 45rem) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: var(--spacer);
+  }
   .container {
     flex-direction: row;
     justify-content: space-between;
+  }
+  .poweredByContainer {
+    margin-top: 0;
   }
 }
