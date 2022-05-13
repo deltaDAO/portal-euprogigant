@@ -1,12 +1,12 @@
 .button {
   font-family: var(--font-family-base);
   font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-small);
-  border: var(--border-size) solid var(--border-color-menu);
-  padding: calc(var(--spacer) / 6) var(--spacer);
+  font-size: var(--font-size-large);
+  border: none;
   white-space: nowrap;
   background: var(--background-content);
   margin: 0;
+  padding: 0;
   cursor: pointer;
   height: 100%;
   display: flex;
@@ -34,33 +34,16 @@
   display: none;
 }
 
-@media screen and (min-width: 42rem) {
-  .button.initial span {
-    display: inline;
-  }
-}
-
 .address {
   display: none;
   text-transform: none;
-  border-right: 2px solid var(--border-color-menu);
-  padding-right: calc(var(--spacer) / 3);
   padding-left: calc(var(--spacer) / 8);
-}
-
-@media screen and (min-width: 60rem) {
-  .address {
-    display: inline-block;
-  }
-
-  .blockies {
-    margin-right: calc(var(--spacer) / 6);
-  }
 }
 
 .button svg {
   width: 1em;
   height: 1em;
+  font-size: var(--font-size-small);
   fill: var(--border-color);
   display: inline-block;
   vertical-align: middle;
@@ -89,7 +72,16 @@ svg.caret {
   fill: var(--color-menu-active);
 }
 
-@media screen and (min-width: 42rem) {
+@media screen and (min-width: 35rem) {
+  .button.initial span {
+    display: inline;
+  }
+  .address {
+    display: inline-block;
+  }
+  .blockies {
+    margin-right: calc(var(--spacer) / 6);
+  }
   .caret,
   svg.caret {
     display: inline-block;

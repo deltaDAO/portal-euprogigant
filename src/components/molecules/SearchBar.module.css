@@ -6,8 +6,9 @@
 .button {
   color: var(--color-secondary);
   cursor: pointer;
-  background: var(--background-content);
+  background-color: var(--background-content);
   border: none;
+  border-radius: var(--border-radius);
   box-shadow: none;
   padding: 0;
   position: absolute;
@@ -17,12 +18,12 @@
   left: 1px;
   top: 1px;
   bottom: 1px;
+  transition: all 0.3s ease-in-out;
   z-index: -1;
 }
 
-.button:hover,
-.button:focus {
-  color: var(--font-color-text);
+.search:hover .button {
+  background-color: var(--brand-violet);
 }
 
 .input {
@@ -44,8 +45,8 @@
   left: calc(var(--spacer) / 2);
   right: 0;
   z-index: 2;
-  border: var(--border-size) solid var(--border-color-menu);
-  border-radius: var(--border-radius-menu);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
   cursor: text;
 }
 
@@ -54,8 +55,4 @@
   transition: 0.2s ease-out;
   width: var(--font-size-h5);
   height: var(--font-size-h5);
-}
-
-.search:hover .searchIcon {
-  fill: var(--color-menu-active);
 }
