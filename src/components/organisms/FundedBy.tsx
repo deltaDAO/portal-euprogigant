@@ -19,13 +19,6 @@ const query = graphql`
         }
       }
     }
-    deltaDao: file(relativePath: { eq: "deltaDAO-logo.png" }) {
-      childImageSharp {
-        original {
-          src
-        }
-      }
-    }
   }
 `
 
@@ -42,36 +35,21 @@ interface Logos {
       }
     }[]
   }
-  deltaDao: {
-    childImageSharp: {
-      original: {
-        src: string
-      }
-    }
-  }
 }
 
 export default function FundedBy(): ReactElement {
   const data: Logos = useStaticQuery(query)
-  const { fundedBy, deltaDao } = data
+  const { fundedBy } = data
 
   return (
     <Container className={styles.wrapper}>
-      <div>
-        <h3>Funded By</h3>
-        <div className={styles.container}>
-          {fundedBy?.edges.map((logo) => (
-            <div key={logo.node.childImageSharp.id} className={styles.logo}>
-              <img src={logo.node.childImageSharp.original.src} />
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className={styles.poweredByContainer}>
-        <h3>Powered By</h3>
-        <div className={styles.logo}>
-          <img src={deltaDao.childImageSharp.original.src} />
-        </div>
+      <h3>Funded By</h3>
+      <div className={styles.container}>
+        {fundedBy?.edges.map((logo) => (
+          <div key={logo.node.childImageSharp.id} className={styles.logo}>
+            <img src={logo.node.childImageSharp.original.src} />
+          </div>
+        ))}
       </div>
     </Container>
   )

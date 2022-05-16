@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: calc(var(--spacer) * 2);
+}
+
+.container h4 {
+  margin-bottom: 0;
+}
+
+.logo {
+  width: 5rem;
+}
