@@ -14,7 +14,7 @@
   position: relative;
   composes: box from '../atoms/Box.module.css';
   width: 100%;
-  height: fill;
+  height: stretch;
   overflow: hidden;
 }
 
