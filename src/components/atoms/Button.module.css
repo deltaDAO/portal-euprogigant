@@ -13,7 +13,7 @@
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   border-radius: var(--border-radius);
-  transition: 0.3s ease-in-out;
+  transition: var(--transition-duration) ease-in-out;
   color: var(--brand-pink);
   background: var(--brand-grey-light);
   box-shadow: 0 9px 18px 0 rgba(0, 0, 0, 0.1);

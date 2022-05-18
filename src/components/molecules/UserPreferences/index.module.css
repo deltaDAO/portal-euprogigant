@@ -21,7 +21,7 @@ svg.caret {
   height: var(--font-size-small);
   fill: var(--border-color-menu);
   margin-left: calc(var(--spacer) / 4);
-  transition: 0.3s ease-out;
+  transition: var(--transition-duration) ease-out;
   display: none;
 }
 
@@ -35,7 +35,7 @@ svg.caret {
 .icon {
   font-size: var(--font-size-large);
   fill: var(--border-color-menu);
-  transition: 0.3s ease-out;
+  transition: var(--transition-duration) ease-out;
   width: 1em;
   height: 1em;
 }

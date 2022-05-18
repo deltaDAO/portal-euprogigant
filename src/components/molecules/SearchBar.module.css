@@ -18,7 +18,7 @@
   left: 1px;
   top: 1px;
   bottom: 1px;
-  transition: all 0.3s ease-in-out;
+  transition: all var(--transition-duration) ease-in-out;
   z-index: -1;
 }
 

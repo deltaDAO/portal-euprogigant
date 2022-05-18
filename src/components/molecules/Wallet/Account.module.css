@@ -16,7 +16,7 @@
 .button,
 .address {
   color: var(--color-primary);
-  transition: 0.3s ease-in-out;
+  transition: var(--transition-duration) ease-in-out;
   z-index: 1;
 }
 
@@ -49,7 +49,7 @@
   display: inline-block;
   vertical-align: middle;
   margin-left: calc(var(--spacer) / 3);
-  transition: 0.3s ease-out;
+  transition: var(--transition-duration) ease-out;
 }
 
 [aria-expanded='true'] .button svg {
