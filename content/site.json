@@ -1,16 +1,12 @@
 {
   "site": {
-    "siteTitle": "MVG Portal Demonstrator",
-    "siteTagline": "A platform to find, publish and consume Data Services in the Gaia-X Test Network.",
+    "siteTitle": "EuProGigant Portal",
+    "siteTagline": "The Gaia-X lighthouse project for manufacturing",
     "siteUrl": "https://portal.minimal-gaia-x.eu",
     "siteIcon": "./src/images/siteIcon.png",
     "siteImage": "../src/images/share.png",
     "copyright": "All Rights Reserved. Powered by [Ocean Protocol](https://oceanprotocol.com). Built by [deltaDAO](https://delta-dao.com).",
     "menu": [
-      {
-        "name": "Publish",
-        "link": "/publish"
-      },
       {
         "name": "Profile",
         "link": "/profile"

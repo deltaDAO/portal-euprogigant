@@ -7,6 +7,8 @@
     var(--color-primary) 50%,
     var(--brand-grey-light) 50%
   );
+  --circle-transition-duration: 0.5s;
+  --connection-transition-duration: 0.3s;
 }
 
 .stepper {
@@ -32,12 +34,12 @@
 
 .step .title {
   color: var(--brand-grey-light);
-  transition: all 0.3s ease-out;
+  transition: all var(--connection-transition-duration) ease-out;
 }
 
 .active .title {
-  color: var(--brand-black);
-  transition-delay: 0.5s;
+  color: var(--brand-pink);
+  transition-delay: var(--circle-transition-duration);
 }
 
 .step:before {
@@ -46,18 +48,18 @@
   display: block;
   width: var(--circle-size);
   height: var(--circle-size);
-  border-radius: 50%;
+  border-radius: var(--border-radius);
   background: var(--background-gradient);
   /* 202% used to fix a Firefox specific behavior not moving the background as expected */
   background-size: 202% 100%;
   background-position: bottom right;
-  transition: all 0.3s ease-out;
+  transition: all var(--connection-transition-duration) ease-out;
   margin: 0 auto 1rem;
 }
 
 .active:before {
   background-position: bottom left;
-  transition-delay: 0.5s;
+  transition-delay: var(--circle-transition-duration);
 }
 
 .step:after {
@@ -71,7 +73,8 @@
   /* 202% used to fix a Firefox specific behavior not moving the background as expected */
   background-size: 202% 100%;
   background-position: bottom right;
-  transition: all 0.5s ease-out 0.3s;
+  transition: all var(--circle-transition-duration) ease-out
+    var(--connection-transition-duration);
   order: -1;
 }
 

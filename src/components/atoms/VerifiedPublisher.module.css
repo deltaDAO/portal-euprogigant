@@ -11,7 +11,7 @@
 .verifiedBadge {
   border-radius: var(--border-radius);
 
-  background: var(--color-primary);
+  background-color: var(--brand-purple);
   color: var(--brand-white);
 
   font-weight: var(--font-weight-bold);

@@ -3,6 +3,7 @@
   max-width: 40rem;
   margin: auto;
   border-width: 0;
+  border-style: solid;
   border-left-width: 0.5rem;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;

@@ -1,0 +1,4 @@
+.container label,
+.container p {
+  color: var(--brand-white);
+}

@@ -13,7 +13,6 @@
   position: relative;
   display: block;
   margin-bottom: calc(var(--spacer) / 4);
-  color: var(--color-secondary);
 }
 
 .item::before {
@@ -21,7 +20,6 @@
   position: absolute;
   top: -1px;
   left: -1.25rem;
-  color: var(--color-secondary);
   user-select: none;
 }
 
@@ -33,7 +31,7 @@
   display: block;
   width: 1px;
   height: 110%;
-  background-color: var(--color-secondary);
+  background-color: var(--brand-purple);
 }
 
 .item:last-child::after {

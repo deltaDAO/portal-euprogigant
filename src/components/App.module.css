@@ -18,10 +18,14 @@
 }
 
 .main {
-  padding: calc(var(--spacer) * 1.5) 0 calc(var(--spacer) * 2) 0;
+  padding-bottom: calc(var(--spacer) * 2);
 
   /* sticky footer technique */
   flex: 1;
+}
+
+.home {
+  padding-bottom: var(--spacer);
 }
 
 .main > div[class*='Alert']:first-child {

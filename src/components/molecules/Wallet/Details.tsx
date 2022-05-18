@@ -102,6 +102,7 @@ export default function Details(): ReactElement {
               <Button
                 style="text"
                 size="small"
+                className={styles.action}
                 onClick={() => web3Provider._portis.showPortis()}
               >
                 Show Portis
@@ -110,6 +111,7 @@ export default function Details(): ReactElement {
             <Button
               style="text"
               size="small"
+              className={styles.action}
               onClick={async () => {
                 await web3Modal?.clearCachedProvider()
                 connect()
@@ -120,6 +122,7 @@ export default function Details(): ReactElement {
             <Button
               style="text"
               size="small"
+              className={styles.action}
               onClick={() => {
                 logout()
                 location.reload()

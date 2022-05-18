@@ -1,6 +1,31 @@
+.homeWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 20rem;
+  margin-bottom: var(--spacer);
+  background-image: url('../../images/euprogigant-home-eyecatcher-scaled.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .header {
   margin-bottom: var(--spacer);
   max-width: 50rem;
+}
+
+.homeWrapper .header {
+  margin: var(--spacer);
+  margin-top: 0;
+  padding-top: var(--spacer);
+  max-width: 30rem;
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
 }
 
 .title {
@@ -17,16 +42,21 @@
 
 .description,
 .powered {
-  font-size: var(--font-size-large);
   margin-top: calc(var(--spacer) / 4);
   margin-bottom: 0;
+}
+
+.homeWrapper .title,
+.homeWrapper .description,
+.homeWrapper .powered {
+  color: var(--brand-white);
 }
 
 .powered {
   margin-top: calc(var(--spacer) / 2);
 }
 
-.center {
+.wrapper .center {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -40,4 +70,9 @@
 .header svg {
   width: 4rem;
   height: 4rem;
+}
+
+.header svg path,
+.header svg path:hover {
+  fill: var(--brand-white) !important;
 }

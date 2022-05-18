@@ -1,7 +1,6 @@
 .selection {
   padding: 0;
   border: 1px solid var(--border-color);
-  background-color: var(--background-highlight);
   border-radius: var(--border-radius);
   margin-bottom: calc(var(--spacer) / 2);
   font-size: var(--font-size-small);
@@ -16,8 +15,7 @@
   margin: calc(var(--spacer) / 3);
 }
 
-.scroll,
-.tutorialScroll {
+.scroll {
   border-top: 1px solid var(--border-color);
   margin-top: calc(var(--spacer) / 4);
   min-height: fit-content;
@@ -26,10 +24,6 @@
   /* smooth overflow scrolling for pre-iOS 13 */
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-}
-
-.tutorialScroll {
-  max-height: 27vh;
 }
 
 .row {
@@ -117,7 +111,6 @@
   font-size: 0.63rem;
   display: block;
   text-align: left;
-  color: var(--color-secondary);
   /* makes sure DotDotDot will kick in */
   overflow-wrap: break-word;
   word-wrap: break-word;

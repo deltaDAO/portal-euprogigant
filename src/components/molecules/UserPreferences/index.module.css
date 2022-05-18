@@ -1,10 +1,9 @@
 .preferences {
-  padding: calc(var(--spacer) / 6) calc(var(--spacer) / 3);
   cursor: pointer;
-  border: var(--border-size) solid var(--border-color-menu);
   border-radius: var(--border-radius-menu);
   background-color: var(--background-content);
   white-space: nowrap;
+  vertical-align: text-bottom;
 }
 
 .preferences svg {
@@ -22,11 +21,11 @@ svg.caret {
   height: var(--font-size-small);
   fill: var(--border-color-menu);
   margin-left: calc(var(--spacer) / 4);
-  transition: transform 0.2s ease-out;
+  transition: var(--transition-duration) ease-out;
   display: none;
 }
 
-@media screen and (min-width: 42rem) {
+@media screen and (min-width: 35rem) {
   .caret,
   svg.caret {
     display: inline-block;
@@ -34,16 +33,17 @@ svg.caret {
 }
 
 .icon {
+  font-size: var(--font-size-large);
   fill: var(--border-color-menu);
-  transition: 0.2s ease-out;
+  transition: var(--transition-duration) ease-out;
   width: 1em;
   height: 1em;
 }
 
 .preferences:hover .icon,
-.preferences:focus .icon,
-.preferences:active .icon,
-.preferences[aria-expanded='true'] .icon {
+.preferences[aria-expanded='true'] .icon,
+.preferences:hover svg,
+.preferences[aria-expanded='true'] svg {
   fill: var(--color-menu-active);
 }
 
