@@ -24,6 +24,10 @@
   flex: 1;
 }
 
+.home {
+  padding-bottom: var(--spacer);
+}
+
 .main > div[class*='Alert']:first-child {
   margin-top: -2rem;
 }

@@ -6,6 +6,7 @@ import OnboardingSection from './Home/Onboarding'
 import FundedBy from '../organisms/FundedBy'
 import ProjectPartners from '../organisms/ProjectPartners'
 import FeaturedAssets from '../organisms/FeaturedAssets'
+import PoweredBy from '../organisms/PoweredBy'
 
 export default function HomePage(): ReactElement {
   return (
@@ -20,9 +21,8 @@ export default function HomePage(): ReactElement {
         <FeaturedAssets />
         <section>
           <ProjectPartners />
-        </section>
-        <section>
           <FundedBy />
+          <PoweredBy />
         </section>
       </>
     </Permission>

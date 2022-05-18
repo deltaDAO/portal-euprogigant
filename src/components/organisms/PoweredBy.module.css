@@ -1,16 +1,16 @@
 .container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   margin-top: calc(var(--spacer) * 2);
 }
 
-.container h4 {
+.container p {
   margin-bottom: 0;
+  color: var(--brand-black);
 }
 
 .logo {
-  width: 5rem;
+  width: 10rem;
 }

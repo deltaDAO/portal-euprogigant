@@ -9,6 +9,10 @@ import { useSiteMetadata } from '../hooks/useSiteMetadata'
 import { useAccountPurgatory } from '../hooks/useAccountPurgatory'
 import styles from './App.module.css'
 import PrivacyPreferenceCenter from './organisms/PrivacyPreferenceCenter'
+import classNames from 'classnames/bind'
+import { useLocation } from '@reach/router'
+
+const cx = classNames.bind(styles)
 
 const contentQuery = graphql`
   query AppQuery {
@@ -38,6 +42,12 @@ export default function App({
   const { appConfig } = useSiteMetadata()
   const { accountId } = useWeb3()
   const { isInPurgatory, purgatoryData } = useAccountPurgatory(accountId)
+  const location = useLocation()
+
+  const mainClass = cx({
+    main: true,
+    home: location.pathname === '/'
+  })
 
   return (
     <Styles>
@@ -52,7 +62,7 @@ export default function App({
             state="error"
           />
         )}
-        <main className={styles.main}>{children}</main>
+        <main className={mainClass}>{children}</main>
         <Footer />
 
         {appConfig.privacyPreferenceCenter === 'true' && (
