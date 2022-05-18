@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
@@ -7,10 +8,16 @@
 }
 
 .container p {
-  margin-bottom: 0;
-  color: var(--brand-black);
+  margin-bottom: calc(var(--spacer) / 2);
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: calc(var(--spacer) / 2);
 }
 
 .logo {
-  width: 10rem;
+  width: 5rem;
 }
