@@ -1,7 +1,7 @@
 {
   "site": {
     "siteTitle": "EuProGigant Portal",
-    "siteTagline": "The lighthouse project for Gaia-X in manufacturing",
+    "siteTagline": "The Gaia-X lighthouse project for manufacturing",
     "siteUrl": "https://portal.minimal-gaia-x.eu",
     "siteIcon": "./src/images/siteIcon.png",
     "siteImage": "../src/images/share.png",
