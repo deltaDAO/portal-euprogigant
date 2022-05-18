@@ -32,9 +32,9 @@
 
 .icon {
   position: absolute;
-  width: 2rem;
-  top: 1rem;
-  right: 2rem;
+  width: var(--spacer);
+  top: calc(var(--spacer) / 2);
+  right: var(--spacer);
   pointer-events: none;
   fill: var(--brand-white);
 }
@@ -44,9 +44,9 @@
     max-width: 25rem;
   }
   .icon {
-    width: 3rem;
-    top: 2rem;
-    right: 3rem;
+    width: calc(var(--spacer) * 1.5);
+    top: var(--spacer);
+    right: calc(var(--spacer) * 1.5);
   }
 }
 
