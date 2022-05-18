@@ -39,7 +39,6 @@ interface Logos {
 export default function FundedBy(): ReactElement {
   const data: Logos = useStaticQuery(query)
   const { fundedBy } = data
-  console.log(fundedBy)
 
   return (
     <Container className={styles.wrapper}>
