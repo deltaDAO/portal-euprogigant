@@ -19,22 +19,17 @@
 .tabs {
   margin-top: var(--spacer);
   background-color: var(--background-body);
+  box-shadow: var(--box-shadow);
 }
 
 .tabs ul[class*='tabList'] {
-  background-color: var(--background-content);
-  border: 1px solid var(--border-color);
+  background-color: var(--color-primary);
   border-bottom: 0;
   border-top-left-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
   white-space: nowrap;
   overflow-y: hidden;
   overflow-x: auto;
-}
-
-.tabs div[class*='tabContent'] {
-  border: 1px solid var(--border-color);
-  padding-bottom: 0;
 }
 
 .tabs div[class*='tab-panel--selected'] {

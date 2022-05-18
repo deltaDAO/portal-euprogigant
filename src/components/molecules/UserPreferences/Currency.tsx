@@ -2,13 +2,14 @@ import React, { ReactElement, ChangeEvent } from 'react'
 import { useSiteMetadata } from '../../../hooks/useSiteMetadata'
 import { useUserPreferences } from '../../../providers/UserPreferences'
 import Input from '../../atoms/Input'
+import styles from './Currency.module.css'
 
 export default function Currency(): ReactElement {
   const { currency, setCurrency } = useUserPreferences()
   const { appConfig } = useSiteMetadata()
 
   return (
-    <li>
+    <li className={styles.container}>
       <Input
         name="currency"
         label="Currency"

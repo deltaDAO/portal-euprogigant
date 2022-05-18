@@ -22,12 +22,6 @@ import { useSiteMetadata } from '../../../hooks/useSiteMetadata'
 import NetworkName from '../../atoms/NetworkName'
 import VerifiedPublisher from '../../atoms/VerifiedPublisher'
 
-export interface AssetContentProps {
-  path?: string
-  tutorial?: boolean
-  setShowComputeTutorial?: (value: boolean) => void
-}
-
 const contentQuery = graphql`
   query AssetContentQuery {
     purgatory: allFile(filter: { relativePath: { eq: "purgatory.json" } }) {
@@ -45,7 +39,11 @@ const contentQuery = graphql`
   }
 `
 
-export default function AssetContent(props: AssetContentProps): ReactElement {
+export default function AssetContent({
+  path
+}: {
+  path?: string
+}): ReactElement {
   const data = useStaticQuery(contentQuery)
   const content = data.purgatory.edges[0].node.childContentJson.asset
   const { debug } = useUserPreferences()
@@ -60,7 +58,6 @@ export default function AssetContent(props: AssetContentProps): ReactElement {
   const [isOwner, setIsOwner] = useState(false)
   const { ddo, price, metadata, type } = useAsset()
   const { appConfig } = useSiteMetadata()
-  const { tutorial } = props
 
   useEffect(() => {
     if (!accountId || !owner) return
@@ -73,111 +70,100 @@ export default function AssetContent(props: AssetContentProps): ReactElement {
 
   function handleEditButton() {
     // move user's focus to top of screen
-    if (!tutorial) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-    }
     setShowEdit(true)
   }
 
   function handleEditComputeButton() {
-    if (!tutorial) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-    }
     setShowEditCompute(true)
   }
 
   function handleEditAdvancedSettingsButton() {
-    if (!tutorial) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-    }
     setShowEditAdvancedSettings(true)
   }
 
-  return showEdit && !tutorial ? (
+  return showEdit ? (
     <Edit setShowEdit={setShowEdit} isComputeType={isComputeType} />
   ) : showEditCompute ? (
-    <EditComputeDataset setShowEdit={setShowEditCompute} tutorial={tutorial} />
+    <EditComputeDataset setShowEdit={setShowEditCompute} />
   ) : showEditAdvancedSettings ? (
     <EditAdvancedSettings setShowEdit={setShowEditAdvancedSettings} />
   ) : (
     <>
       <div className={styles.networkWrap}>
         <NetworkName networkId={ddo.chainId} className={styles.network} />
-        <VerifiedPublisher address={owner} className={styles.verified} />
+        <VerifiedPublisher address={owner} />
       </div>
 
-      <article className={tutorial ? styles.gridTutorial : styles.grid}>
+      <article className={styles.grid}>
         <div>
           {showPricing && <Pricing ddo={ddo} />}
           <div className={styles.content}>
             <MetaMain />
             <Bookmark did={ddo.id} />
-
-            {isInPurgatory ? (
-              <Alert
-                title={content.title}
-                badge={`Reason: ${purgatoryData?.reason}`}
-                text={content.description}
-                state="error"
-              />
-            ) : (
-              <>
-                <Markdown
-                  className={styles.description}
-                  text={metadata?.additionalInformation?.description || ''}
+            <div className={styles.contentBody}>
+              {isInPurgatory ? (
+                <Alert
+                  title={content.title}
+                  badge={`Reason: ${purgatoryData?.reason}`}
+                  text={content.description}
+                  state="error"
                 />
+              ) : (
+                <>
+                  <Markdown
+                    className={styles.description}
+                    text={metadata?.additionalInformation?.description || ''}
+                  />
 
-                <MetaSecondary />
+                  <MetaSecondary />
 
-                {isOwner && isAssetNetwork && (
-                  <div className={styles.ownerActions}>
-                    <Button
-                      style="text"
-                      size="small"
-                      onClick={handleEditButton}
-                    >
-                      Edit Metadata
-                    </Button>
-                    {accountId && appConfig.allowAdvancedSettings === 'true' && (
-                      <>
-                        <span className={styles.separator}>|</span>
-                        <Button
-                          style="text"
-                          size="small"
-                          onClick={handleEditAdvancedSettingsButton}
-                        >
-                          Edit Advanced Settings
-                        </Button>
-                      </>
-                    )}
-                    {ddo.findServiceByType('compute') && type === 'dataset' && (
-                      <>
-                        <span className={styles.separator}>|</span>
-                        <Button
-                          style="text"
-                          size="small"
-                          onClick={handleEditComputeButton}
-                        >
-                          Edit Compute Settings
-                        </Button>
-                      </>
-                    )}
-                  </div>
-                )}
-              </>
-            )}
+                  {isOwner && isAssetNetwork && (
+                    <div className={styles.ownerActions}>
+                      <Button
+                        style="text"
+                        size="small"
+                        onClick={handleEditButton}
+                      >
+                        Edit Metadata
+                      </Button>
+                      {accountId && appConfig.allowAdvancedSettings === 'true' && (
+                        <>
+                          <span className={styles.separator}>|</span>
+                          <Button
+                            style="text"
+                            size="small"
+                            onClick={handleEditAdvancedSettingsButton}
+                          >
+                            Edit Advanced Settings
+                          </Button>
+                        </>
+                      )}
+                      {ddo.findServiceByType('compute') && type === 'dataset' && (
+                        <>
+                          <span className={styles.separator}>|</span>
+                          <Button
+                            style="text"
+                            size="small"
+                            onClick={handleEditComputeButton}
+                          >
+                            Edit Compute Settings
+                          </Button>
+                        </>
+                      )}
+                    </div>
+                  )}
+                </>
+              )}
 
-            <MetaFull />
-            <EditHistory />
+              <MetaFull />
+              <EditHistory />
+            </div>
             {debug === true && <DebugOutput title="DDO" output={ddo} />}
           </div>
         </div>
-
-        {!tutorial && (
-          <div className={styles.actions}>
-            <AssetActions />
-          </div>
-        )}
+        <div className={styles.actions}>
+          <AssetActions />
+        </div>
       </article>
     </>
   )

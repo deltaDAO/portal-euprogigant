@@ -5,32 +5,41 @@
   margin-top: -1rem;
 }
 
-.grid,
-.gridTutorial {
+.grid > div {
+  overflow: hidden;
+  /* add padding to see box-shadow with hidden overflow */
+  padding: var(--spacer);
+  /* set a negative margin to fix the spacing */
+  margin: calc(var(--spacer) * -1);
+}
+
+.grid {
   display: grid;
   gap: calc(var(--spacer) * 1.5);
   position: relative;
   margin-top: -1rem;
 }
 
-.grid > div,
-.gridTutorial > div {
-  overflow: hidden;
-}
-
 .content {
   composes: box from '../../atoms/Box.module.css';
   margin-top: var(--spacer);
+  padding: 0;
   position: relative;
+  box-shadow: var(--box-shadow);
+}
+
+.contentBody {
+  composes: box from '../../atoms/Box.module.css';
+  padding-top: 0;
+  box-shadow: none;
 }
 
 @media (min-width: 60rem) {
   .grid {
     grid-template-columns: 1.5fr 1fr;
   }
-
   .actions {
-    margin-top: var(--spacer);
+    margin-top: 0 !important;
   }
 }
 

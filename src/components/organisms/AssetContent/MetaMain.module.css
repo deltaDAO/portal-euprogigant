@@ -1,30 +1,30 @@
 .meta {
   margin-bottom: calc(var(--spacer) / 1.5);
-  color: var(--color-secondary);
+  color: var(--brand-white);
   font-size: var(--font-size-small);
 }
 
 .asset {
-  margin-left: -2rem;
-  margin-right: -2rem;
-  padding-left: 2rem;
-  padding-right: 3rem;
-  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  height: calc(var(--spacer) * 2);
+  width: 100%;
   margin-bottom: calc(var(--spacer) / 1.5);
-  padding-bottom: calc(var(--spacer) / 1.75);
-}
-
-@media (min-width: 40rem) {
-  .asset {
-    margin-top: -0.65rem;
-  }
+  padding: 0 calc(var(--spacer) / 1.5);
+  background-color: var(--color-primary);
+  box-shadow: var(--box-shadow);
 }
 
 .assetType {
   display: inline-block;
-  border-right: 1px solid var(--border-color);
+  border-right: 1px solid var(--brand-white);
   padding-right: calc(var(--spacer) / 3.5);
   margin-right: calc(var(--spacer) / 4);
+}
+
+.assetType > * {
+  border-color: var(--brand-white);
 }
 
 .datatoken {
@@ -32,7 +32,19 @@
   margin-right: calc(var(--spacer) / 3);
 }
 
+.datatoken svg {
+  fill: var(--brand-white);
+}
+
+.datatoken:hover,
+.datatoken:hover svg {
+  color: var(--brand-violet);
+  fill: var(--brand-violet);
+}
+
 .byline {
+  padding: 0 calc(var(--spacer) / 1.5);
+  color: var(--color-primary);
   font-size: var(--font-size-small);
 }
 
@@ -42,10 +54,17 @@
 
 .addWrap {
   padding-left: calc(var(--spacer) / 5);
-  border-left: 1px solid var(--border-color);
+  border-left: 1px solid var(--brand-white);
   display: inline-block;
 }
 
 .add {
   font-size: var(--font-size-mini);
+}
+
+@media screen and (min-width: 40rem) {
+  .asset,
+  .byline {
+    padding: 0 var(--spacer);
+  }
 }

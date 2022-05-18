@@ -1,8 +1,4 @@
 .network {
-  border: var(--border-size) solid var(--border-color-menu);
-  border-right: none;
-  border-top-left-radius: var(--border-radius-menu);
-  border-bottom-left-radius: var(--border-radius-menu);
   padding: calc(var(--spacer) / 6) calc(var(--spacer) / 3);
   white-space: nowrap;
   margin-right: -3px;
@@ -16,8 +12,8 @@
 
 .badge {
   margin-left: calc(var(--spacer) / 8);
-  background-color: var(--border-color);
-  color: var(--font-color-text);
+  background-color: var(--color-primary);
+  color: var(--brand-white);
 }
 
 .warning {

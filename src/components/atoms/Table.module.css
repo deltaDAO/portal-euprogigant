@@ -20,7 +20,7 @@
 
 .table [role='columnheader'] > span,
 .table [role='columnheader'] > div {
-  color: var(--color-secondary);
+  color: var(--brand-purple);
 }
 
 .table [role='gridcell'] {

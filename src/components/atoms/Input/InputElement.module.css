@@ -2,7 +2,7 @@
   font-size: var(--font-size-base);
   font-family: var(--font-family-base);
   font-weight: var(--font-weight-bold);
-  color: var(--font-color-heading);
+  color: var(--color-primary);
   border: 1px solid var(--border-color);
   box-shadow: none;
   width: 100%;
@@ -128,7 +128,7 @@
   top: 0;
   position: absolute;
   opacity: 0;
-  transition: transform 0.3s ease-out, opacity 0.2s;
+  transition: transform var(--transition-duration) ease-out, opacity 0.2s;
 }
 
 .radio:checked,

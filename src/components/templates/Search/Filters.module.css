@@ -20,11 +20,11 @@ button.filter,
 .filter:hover,
 .filter:active,
 .filter:focus {
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-primary);
   border-radius: var(--border-radius);
   margin-right: calc(var(--spacer) / 6);
   margin-bottom: calc(var(--spacer) / 6);
-  color: var(--color-secondary);
+  color: var(--color-primary);
   background: var(--background-content);
 
   /* the only thing not possible to overwrite button style="text" with more specifity of selectors, so sledgehammer */
@@ -32,16 +32,11 @@ button.filter,
 }
 
 .filter:hover,
-.filter:focus {
-  color: var(--font-color-text);
-  background: inherit;
-  transform: none;
-}
-
+.filter:focus,
 .filter.selected {
   color: var(--background-body);
   background: var(--font-color-text);
-  border-color: var(--background-body);
+  border: 1px solid var(--color-primary);
 }
 
 .filter.selected::after {
