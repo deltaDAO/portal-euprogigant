@@ -9,6 +9,7 @@ import axios from 'axios'
 import Add from './Add'
 import { useWeb3 } from '../../../providers/Web3'
 import { getEnsName } from '../../../utils/ens'
+import Button from '../Button'
 
 const cx = classNames.bind(styles)
 
