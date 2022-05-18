@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import styles from './FundedBy.module.css'
 import Container from '../atoms/Container'
+import Img, { FluidObject } from 'gatsby-image'
 
 const query = graphql`
   {
@@ -12,8 +13,8 @@ const query = graphql`
         node {
           childImageSharp {
             id
-            original {
-              src
+            fluid(maxWidth: 600) {
+              ...GatsbyImageSharpFluid
             }
           }
         }
@@ -28,9 +29,7 @@ interface Logos {
       node: {
         childImageSharp: {
           id: string
-          original: {
-            src: string
-          }
+          fluid: FluidObject
         }
       }
     }[]
@@ -40,15 +39,18 @@ interface Logos {
 export default function FundedBy(): ReactElement {
   const data: Logos = useStaticQuery(query)
   const { fundedBy } = data
+  console.log(fundedBy)
 
   return (
     <Container className={styles.wrapper}>
       <h3>Funded By</h3>
       <div className={styles.container}>
         {fundedBy?.edges.map((logo) => (
-          <div key={logo.node.childImageSharp.id} className={styles.logo}>
-            <img src={logo.node.childImageSharp.original.src} />
-          </div>
+          <Img
+            key={logo.node.childImageSharp.id}
+            className={styles.logo}
+            fluid={logo.node.childImageSharp.fluid}
+          />
         ))}
       </div>
     </Container>
