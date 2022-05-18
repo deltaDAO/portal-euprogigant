@@ -26,7 +26,7 @@
 }
 
 .row:hover {
-  background-color: var(--background-content);
+  background-color: var(--background-highlight);
 }
 
 .info {
@@ -36,10 +36,6 @@
 
 .title {
   composes: title from './FormFields/AssetSelection.module.css';
-}
-
-.hover:hover {
-  color: var(--color-primary);
 }
 
 .price {

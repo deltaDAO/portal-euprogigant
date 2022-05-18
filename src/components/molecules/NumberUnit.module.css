@@ -31,11 +31,9 @@
 
 .unit {
   font-size: var(--font-size-small);
-  color: var(--color-secondary);
 }
 
 .unit a {
-  color: var(--color-secondary);
   display: block;
   padding: 0.5rem 1rem;
   border: 0.1rem solid transparent;

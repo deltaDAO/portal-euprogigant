@@ -1,6 +1,6 @@
 .disclaimer {
   margin-top: calc(var(--spacer) / 3);
-  transition: all 0.3s ease-in;
+  transition: all var(--transition-duration) ease-in;
   max-height: 100px;
   max-width: 100%;
   overflow-y: hidden;

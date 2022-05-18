@@ -7,4 +7,5 @@
 .title,
 .subtitle {
   text-align: center;
+  color: var(--brand-pink);
 }
