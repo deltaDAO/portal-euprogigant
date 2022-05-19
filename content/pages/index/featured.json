@@ -3,7 +3,7 @@
     {
       "key": "data",
       "title": "Datasets",
-      "body": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias aut, repellat ipsum facere voluptate dicta obcaecati deserunt nobis suscipit eaque?",
+      "body": "Access the federated Gaia-X catalogue to browse, filter and consume data service offerings published by EuProGigant partners.",
       "cta": {
         "label": "Go to Datasets",
         "link": "/search?sort=_score&sortOrder=desc&text=&serviceType=dataset"
@@ -12,7 +12,7 @@
     {
       "key": "algo",
       "title": "Algorithms",
-      "body": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias aut, repellat ipsum facere voluptate dicta obcaecati deserunt nobis suscipit eaque?",
+      "body": "Access the federated Gaia-X catalogue to browse, filter and consume algorithm service offerings published by EuProGigant partners.",
       "cta": {
         "label": "Go to Algorithms",
         "link": "/search?sort=_score&sortOrder=desc&text=&serviceType=algorithm"
