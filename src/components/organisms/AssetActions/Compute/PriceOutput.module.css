@@ -8,7 +8,6 @@
   border-bottom: 1px solid var(--border-color);
   padding-bottom: calc(var(--spacer) / 3);
   text-align: center;
-  color: var(--color-secondary);
   font-size: var(--font-size-small);
 }
 
@@ -28,16 +27,17 @@
   display: block;
   text-align: right;
   font-size: var(--font-size-mini);
-  color: var(--color-secondary);
+  color: var(--brand-white);
 }
 
 .calculation .price {
+  color: var(--brand-white);
   font-size: var(--font-size-small) !important;
 }
 
 .priceRow {
   width: 100%;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--brand-white);
   padding-top: calc(var(--spacer) / 7);
   padding-bottom: calc(var(--spacer) / 7);
   display: flex;
@@ -46,13 +46,12 @@
 
 .priceRow:last-child {
   border-bottom: none;
-  border-top: 1px solid var(--border-color);
 }
 
 .sign {
   display: inline-block;
   width: 5%;
   text-align: left;
-  color: var(--color-secondary);
+  color: var(--brand-white);
   font-size: var(--font-size-base);
 }
