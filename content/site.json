@@ -5,7 +5,7 @@
     "siteUrl": "https://portal.minimal-gaia-x.eu",
     "siteIcon": "./src/images/siteIcon.png",
     "siteImage": "../src/images/share.png",
-    "copyright": "All Rights Reserved. Powered by [Ocean Protocol](https://oceanprotocol.com). Built by [deltaDAO](https://delta-dao.com).",
+    "copyright": "All Rights Reserved. Powered by [deltaDAO](https://delta-dao.com) and [Ocean Protocol](https://oceanprotocol.com).",
     "menu": [
       {
         "name": "Profile",
