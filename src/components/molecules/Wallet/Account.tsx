@@ -1,4 +1,5 @@
-import React, { FormEvent } from 'react'
+import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import MetaMaskOnboarding from '@metamask/onboarding'
 import { ReactComponent as Caret } from '../../../images/caret.svg'
 import { accountTruncate } from '../../../utils/web3'
 import Loader from '../../atoms/Loader'
@@ -11,12 +12,38 @@ import Blockies from '../../atoms/Blockies'
 const Account = React.forwardRef((props, ref: any) => {
   const { accountId, accountEns, web3Modal, connect } = useWeb3()
 
+  const [isMetaMaskInstalled, setIsMetaMaskInstalled] = useState<boolean>()
+  const onboarding = useRef<MetaMaskOnboarding>()
+
+  useEffect(() => {
+    if (!onboarding.current) {
+      onboarding.current = new MetaMaskOnboarding()
+    }
+    setIsMetaMaskInstalled(MetaMaskOnboarding.isMetaMaskInstalled())
+  }, [])
+
   async function handleActivation(e: FormEvent<HTMLButtonElement>) {
     // prevent accidentially submitting a form the button might be in
     e.preventDefault()
 
-    await connect()
+    if (isMetaMaskInstalled && MetaMaskOnboarding.isMetaMaskInstalled()) {
+      await connect()
+      return
+    }
+
+    onboarding.current.startOnboarding()
+    setIsMetaMaskInstalled(true)
   }
+
+  const buttonText = isMetaMaskInstalled ? (
+    <>
+      Connect&nbsp;<span>Wallet</span>
+    </>
+  ) : (
+    <>
+      Download&nbsp;<span>MetaMask</span>
+    </>
+  )
 
   return !accountId && web3Modal?.cachedProvider ? (
     // Improve user experience for cached provider when connecting takes some time
@@ -44,7 +71,7 @@ const Account = React.forwardRef((props, ref: any) => {
       // the Tippy to show in this state.
       ref={ref}
     >
-      Connect&nbsp;<span>Wallet</span>
+      {buttonText}
     </button>
   )
 })
