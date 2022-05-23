@@ -81,7 +81,7 @@ const providerOptions = isBrowser
 
 export const web3ModalOpts = {
   cacheProvider: true,
-  providerOptions,
+  providerOptions: {},
   theme: web3ModalTheme
 }
 
