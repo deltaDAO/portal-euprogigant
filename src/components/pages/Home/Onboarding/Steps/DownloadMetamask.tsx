@@ -1,8 +1,10 @@
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect, useRef } from 'react'
+import MetaMaskOnboarding from '@metamask/onboarding'
 import { OnboardingStep } from '..'
 import StepBody from '../../../../organisms/Onboarding/StepBody'
 import StepHeader from '../../../../organisms/Onboarding/StepHeader'
+import { toast } from 'react-toastify'
 
 const query = graphql`
   query DownloadMetaMaskQuery {
@@ -31,17 +33,29 @@ export default function DownloadMetamask(): ReactElement {
   const { title, subtitle, body, image, buttonLabel }: OnboardingStep =
     data.file.childStepsJson
 
-  const downloadMetamask = () =>
-    window.open(
-      'https://metamask.io/download/',
-      '_blank',
-      'noopener noreferrer'
-    )
+  const onboarding = useRef<MetaMaskOnboarding>()
+
+  useEffect(() => {
+    if (!onboarding.current) {
+      onboarding.current = new MetaMaskOnboarding()
+    }
+  }, [])
+
+  const downloadMetaMask = () => {
+    if (MetaMaskOnboarding.isMetaMaskInstalled()) {
+      onboarding.current.stopOnboarding()
+      toast.success(
+        'MetaMask is already installed, you can move to the next step.'
+      )
+      return
+    }
+    onboarding.current.startOnboarding()
+  }
 
   const actions = [
     {
       buttonLabel,
-      buttonAction: () => downloadMetamask(),
+      buttonAction: () => downloadMetaMask(),
       loading: false,
       completed: false
     }
