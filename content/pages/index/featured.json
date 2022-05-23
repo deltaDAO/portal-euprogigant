@@ -2,7 +2,7 @@
   "featured": [
     {
       "key": "data",
-      "title": "Datasets",
+      "title": "Data Sets",
       "body": "Access the federated Gaia-X catalogue to browse, filter and consume data service offerings published by EuProGigant partners.",
       "cta": {
         "label": "Go to Data Sets",
