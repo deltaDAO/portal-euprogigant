@@ -32,7 +32,6 @@ button.filter,
 }
 
 .filter:hover,
-.filter:focus,
 .filter.selected {
   color: var(--background-body);
   background: var(--font-color-text);
