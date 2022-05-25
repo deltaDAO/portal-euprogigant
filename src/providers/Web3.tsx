@@ -23,6 +23,7 @@ import { getEnsName } from '../utils/ens'
 import { UserBalance } from '../@types/TokenBalance'
 import { getOceanBalance } from '../utils/ocean'
 import useNetworkMetadata from '../hooks/useNetworkMetadata'
+import MetaMaskOnboarding from '@metamask/onboarding'
 
 interface Web3ProviderValue {
   web3: Web3
@@ -42,6 +43,7 @@ interface Web3ProviderValue {
   connect: () => Promise<void>
   logout: () => Promise<void>
   getUserBalance: () => Promise<void>
+  startMetaMaskOnboarding: () => void
 }
 
 const web3ModalTheme = {
@@ -111,6 +113,32 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
   })
   const balanceRef = useRef(balance)
   balanceRef.current = balance
+  const metaMaskOnboardingRef = useRef<MetaMaskOnboarding>()
+
+  // -----------------------------------
+  // Create a MetaMask onboarding instance
+  // -----------------------------------
+  useEffect(() => {
+    if (!metaMaskOnboardingRef.current) {
+      metaMaskOnboardingRef.current = new MetaMaskOnboarding()
+    }
+  }, [])
+
+  // -----------------------------------
+  // Helper: start the MetaMask onboarding process
+  // -----------------------------------
+  const startMetaMaskOnboarding = () =>
+    metaMaskOnboardingRef.current.startOnboarding()
+
+  // -----------------------------------
+  // Stop the MetaMask onboarding session if an account
+  // is detected and MetaMask is installed
+  // -----------------------------------
+  useEffect(() => {
+    if (MetaMaskOnboarding.isMetaMaskInstalled()) {
+      metaMaskOnboardingRef.current.stopOnboarding()
+    }
+  }, [accountId])
 
   // -----------------------------------
   // Helper: connect to web3
@@ -361,7 +389,8 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
         web3Loading,
         connect,
         logout,
-        getUserBalance
+        getUserBalance,
+        startMetaMaskOnboarding
       }}
     >
       {children}

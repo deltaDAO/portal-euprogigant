@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import React, { FormEvent } from 'react'
 import MetaMaskOnboarding from '@metamask/onboarding'
 import { ReactComponent as Caret } from '../../../images/caret.svg'
 import { accountTruncate } from '../../../utils/web3'
@@ -10,32 +10,23 @@ import Blockies from '../../atoms/Blockies'
 // Forward ref for Tippy.js
 // eslint-disable-next-line
 const Account = React.forwardRef((props, ref: any) => {
-  const { accountId, accountEns, web3Modal, connect } = useWeb3()
-
-  const [isMetaMaskInstalled, setIsMetaMaskInstalled] = useState<boolean>()
-  const onboarding = useRef<MetaMaskOnboarding>()
-
-  useEffect(() => {
-    if (!onboarding.current) {
-      onboarding.current = new MetaMaskOnboarding()
-    }
-    setIsMetaMaskInstalled(MetaMaskOnboarding.isMetaMaskInstalled())
-  }, [])
+  const { accountId, accountEns, connect, startMetaMaskOnboarding, web3Modal } =
+    useWeb3()
 
   async function handleActivation(e: FormEvent<HTMLButtonElement>) {
     // prevent accidentially submitting a form the button might be in
     e.preventDefault()
 
-    if (isMetaMaskInstalled && MetaMaskOnboarding.isMetaMaskInstalled()) {
+    if (MetaMaskOnboarding.isMetaMaskInstalled()) {
       await connect()
       return
     }
 
-    onboarding.current.startOnboarding()
-    setIsMetaMaskInstalled(true)
+    startMetaMaskOnboarding()
   }
 
-  const buttonText = isMetaMaskInstalled ? (
+  // const buttonText = isMetaMaskInstalled ? (
+  const buttonText = MetaMaskOnboarding.isMetaMaskInstalled() ? (
     <>
       Connect&nbsp;<span>Wallet</span>
     </>
