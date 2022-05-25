@@ -27,6 +27,7 @@
   "dependencies": {
     "@coingecko/cryptoformat": "^0.4.4",
     "@loadable/component": "^5.15.0",
+    "@metamask/onboarding": "^1.0.1",
     "@n8tb1t/use-scroll-position": "^2.0.3",
     "@oceanprotocol/art": "^3.2.0",
     "@oceanprotocol/lib": "^0.20.0",
