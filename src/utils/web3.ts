@@ -143,7 +143,11 @@ export async function addCustomNetwork(
       params: [{ chainId: newNetworkData.chainId }]
     })
   } catch (switchError) {
-    if (switchError.code === 4902) {
+    if (
+      switchError.code === 4902 ||
+      // check for the error on MetaMask mobile
+      switchError.data?.originalError?.code === 4902
+    ) {
       await web3Provider.request(
         {
           method: 'wallet_addEthereumChain',

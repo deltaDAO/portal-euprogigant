@@ -1,4 +1,5 @@
 import React, { FormEvent } from 'react'
+import MetaMaskOnboarding from '@metamask/onboarding'
 import { ReactComponent as Caret } from '../../../images/caret.svg'
 import { accountTruncate } from '../../../utils/web3'
 import Loader from '../../atoms/Loader'
@@ -9,14 +10,31 @@ import Blockies from '../../atoms/Blockies'
 // Forward ref for Tippy.js
 // eslint-disable-next-line
 const Account = React.forwardRef((props, ref: any) => {
-  const { accountId, accountEns, web3Modal, connect } = useWeb3()
+  const { accountId, accountEns, connect, startMetaMaskOnboarding, web3Modal } =
+    useWeb3()
 
   async function handleActivation(e: FormEvent<HTMLButtonElement>) {
     // prevent accidentially submitting a form the button might be in
     e.preventDefault()
 
-    await connect()
+    if (MetaMaskOnboarding.isMetaMaskInstalled()) {
+      await connect()
+      return
+    }
+
+    startMetaMaskOnboarding()
   }
+
+  // const buttonText = isMetaMaskInstalled ? (
+  const buttonText = MetaMaskOnboarding.isMetaMaskInstalled() ? (
+    <>
+      Connect&nbsp;<span>Wallet</span>
+    </>
+  ) : (
+    <>
+      Download&nbsp;<span>MetaMask</span>
+    </>
+  )
 
   return !accountId && web3Modal?.cachedProvider ? (
     // Improve user experience for cached provider when connecting takes some time
@@ -44,7 +62,7 @@ const Account = React.forwardRef((props, ref: any) => {
       // the Tippy to show in this state.
       ref={ref}
     >
-      Connect&nbsp;<span>Wallet</span>
+      {buttonText}
     </button>
   )
 })
