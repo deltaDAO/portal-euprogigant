@@ -61,13 +61,13 @@ const providerOptions = isBrowser
       walletconnect: {
         package: WalletConnectProvider,
         options: { infuraId }
-      },
-      portis: {
-        package: require('@portis/web3'),
-        options: {
-          id: portisId
-        }
       }
+      // portis: {
+      //   package: require('@portis/web3'),
+      //   options: {
+      //     id: portisId
+      //   }
+      // }
       // torus: {
       //   package: require('@toruslabs/torus-embed')
       //   // options: {
@@ -83,7 +83,7 @@ const providerOptions = isBrowser
 
 export const web3ModalOpts = {
   cacheProvider: true,
-  providerOptions: {},
+  providerOptions,
   theme: web3ModalTheme
 }
 
