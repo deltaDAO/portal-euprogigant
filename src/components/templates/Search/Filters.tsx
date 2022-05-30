@@ -38,8 +38,13 @@ export default function FilterPrice({
   addFiltersToUrl?: boolean
   className?: string
 }): ReactElement {
+  const queryParams = new URLSearchParams(window.location.search)
+  const initialServiceFilter = queryParams.get('serviceType')
+
   const navigate = useNavigate()
-  const [serviceSelections, setServiceSelections] = useState<string[]>([])
+  const [serviceSelections, setServiceSelections] = useState<string[]>([
+    initialServiceFilter // TODO this will fail when no serviceType parameter is available
+  ])
   const [accessSelections, setAccessSelections] = useState<string[]>([])
 
   async function applyFilter(filter: string, filterType: string) {
