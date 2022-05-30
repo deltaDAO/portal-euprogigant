@@ -110,9 +110,9 @@ export function getSearchQuery(
   }
 
   const filters: FilterTerm[] = []
-  accessType !== undefined &&
+  if (accessType !== undefined && accessType !== '')
     filters.push(getFilterTerm('service.type', accessType))
-  serviceType !== undefined &&
+  if (serviceType !== undefined && serviceType !== '')
     filters.push(getFilterTerm('service.attributes.main.type', serviceType))
 
   const baseQueryParams = {
