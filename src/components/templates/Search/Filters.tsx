@@ -39,8 +39,12 @@ export default function FilterPrice({
   className?: string
 }): ReactElement {
   const navigate = useNavigate()
-  const [serviceSelections, setServiceSelections] = useState<string[]>([])
-  const [accessSelections, setAccessSelections] = useState<string[]>([])
+  const [serviceSelections, setServiceSelections] = useState<string[]>([
+    serviceType
+  ])
+  const [accessSelections, setAccessSelections] = useState<string[]>([
+    accessType
+  ])
 
   async function applyFilter(filter: string, filterType: string) {
     filterType === 'accessType' ? setAccessType(filter) : setServiceType(filter)
