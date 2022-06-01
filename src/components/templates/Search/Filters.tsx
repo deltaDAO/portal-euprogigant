@@ -38,12 +38,16 @@ export default function FilterPrice({
   addFiltersToUrl?: boolean
   className?: string
 }): ReactElement {
+  const queryParams = new URLSearchParams(window.location.search)
+  const initialServiceFilter = queryParams.get('serviceType')
+  const initialAccessFilter = queryParams.get('accessType')
+
   const navigate = useNavigate()
   const [serviceSelections, setServiceSelections] = useState<string[]>([
-    serviceType
+    initialServiceFilter
   ])
   const [accessSelections, setAccessSelections] = useState<string[]>([
-    accessType
+    initialAccessFilter
   ])
 
   async function applyFilter(filter: string, filterType: string) {
@@ -85,7 +89,7 @@ export default function FilterPrice({
           setAccessSelections([])
         }
       } else {
-        if (accessSelections.length) {
+        if (accessSelections.length && accessSelections[0]) {
           // one already selected -> both selected
           await applyFilter(undefined, 'accessType')
           setAccessSelections(accessFilterItems.map((p) => p.value))
@@ -108,7 +112,7 @@ export default function FilterPrice({
           setServiceSelections([])
         }
       } else {
-        if (serviceSelections.length) {
+        if (serviceSelections.length && serviceSelections[0]) {
           await applyFilter(undefined, 'serviceType')
           setServiceSelections(serviceFilterItems.map((p) => p.value))
         } else {
