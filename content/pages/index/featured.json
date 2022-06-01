@@ -6,7 +6,7 @@
       "body": "Access the federated Gaia-X catalogue to browse, filter and consume data service offerings published by EuProGigant partners.",
       "cta": {
         "label": "Go to Data Sets",
-        "link": "/search?sort=_score&sortOrder=desc&text=&serviceType=dataset"
+        "link": "/search?sort=created&sortOrder=desc&text=&serviceType=dataset"
       }
     },
     {
@@ -15,7 +15,7 @@
       "body": "Access the federated Gaia-X catalogue to browse, filter and consume algorithm service offerings published by EuProGigant partners.",
       "cta": {
         "label": "Go to Algorithms",
-        "link": "/search?sort=_score&sortOrder=desc&text=&serviceType=algorithm"
+        "link": "/search?sort=created&sortOrder=desc&text=&serviceType=algorithm"
       }
     }
   ]
