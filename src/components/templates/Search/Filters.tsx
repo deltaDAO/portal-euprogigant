@@ -26,17 +26,9 @@ const accessFilterItems = [
 ]
 
 export default function FilterPrice({
-  serviceType,
-  accessType,
-  setServiceType,
-  setAccessType,
   addFiltersToUrl,
   className
 }: {
-  serviceType: string
-  accessType: string
-  setServiceType: React.Dispatch<React.SetStateAction<string>>
-  setAccessType: React.Dispatch<React.SetStateAction<string>>
   addFiltersToUrl?: boolean
   className?: string
 }): ReactElement {
@@ -45,17 +37,12 @@ export default function FilterPrice({
   const initialAccessFilter = queryParams.get(FilterOptions.AccessType)
 
   const navigate = useNavigate()
-  const [serviceSelections, setServiceSelections] = useState<string[]>([
-    initialServiceFilter
-  ])
-  const [accessSelections, setAccessSelections] = useState<string[]>([
-    initialAccessFilter
-  ])
+  const [serviceSelection, setServiceSelection] =
+    useState<string>(initialServiceFilter)
+  const [accessSelection, setAccessSelection] =
+    useState<string>(initialAccessFilter)
 
   async function applyFilter(filter: Filters, filterType: FilterOptions) {
-    filterType === FilterOptions.AccessType
-      ? setAccessType(filter)
-      : setServiceType(filter)
     if (addFiltersToUrl) {
       let urlLocation = ''
       if (filterType.localeCompare(FilterOptions.AccessType) === 0) {
@@ -68,7 +55,7 @@ export default function FilterPrice({
         ])
       }
 
-      if (filter && location.search.indexOf(filterType) === -1) {
+      if (filter && urlLocation.indexOf(filterType) === -1) {
         filterType === FilterOptions.AccessType
           ? (urlLocation = `${urlLocation}&accessType=${filter}`)
           : (urlLocation = `${urlLocation}&serviceType=${filter}`)
@@ -78,64 +65,21 @@ export default function FilterPrice({
     }
   }
 
-  async function handleSelectedFilter(isSelected: boolean, value: Filters) {
-    if (
-      value === FilterByAccessOptions.Download ||
-      value === FilterByAccessOptions.Compute
-    ) {
-      if (isSelected) {
-        if (accessSelections.length > 1) {
-          // both selected -> select the other one
-          const otherValue = accessFilterItems.find(
-            (p) => p.value !== value
-          ).value
-          await applyFilter(otherValue, FilterOptions.AccessType)
-          setAccessSelections([otherValue])
-        } else {
-          // only the current one selected -> deselect it
-          await applyFilter(undefined, FilterOptions.AccessType)
-          setAccessSelections([])
-        }
-      } else {
-        if (accessSelections.length && accessSelections[0]) {
-          // one already selected -> both selected
-          await applyFilter(undefined, FilterOptions.AccessType)
-          setAccessSelections(accessFilterItems.map((p) => p.value))
-        } else {
-          // none selected -> select
-          await applyFilter(value, FilterOptions.AccessType)
-          setAccessSelections([value])
-        }
-      }
-    } else {
-      if (isSelected) {
-        if (serviceSelections.length > 1) {
-          const otherValue = serviceFilterItems.find(
-            (p) => p.value !== value
-          ).value
-          await applyFilter(otherValue, FilterOptions.ServiceType)
-          setServiceSelections([otherValue])
-        } else {
-          await applyFilter(undefined, FilterOptions.ServiceType)
-          setServiceSelections([])
-        }
-      } else {
-        if (serviceSelections.length && serviceSelections[0]) {
-          await applyFilter(undefined, FilterOptions.ServiceType)
-          setServiceSelections(serviceFilterItems.map((p) => p.value))
-        } else {
-          await applyFilter(value, FilterOptions.ServiceType)
-          setServiceSelections([value])
-        }
-      }
-    }
+  async function handleSelectedFilter(
+    isSelected: boolean,
+    value: Filters,
+    filterType: FilterOptions
+  ) {
+    const updatedValue = isSelected ? undefined : value
+    await applyFilter(updatedValue, filterType)
+    filterType === FilterOptions.AccessType
+      ? setAccessSelection(updatedValue)
+      : setServiceSelection(updatedValue)
   }
 
   async function applyClearFilter(addFiltersToUrl: boolean) {
-    setServiceSelections([])
-    setAccessSelections([])
-    setServiceType(undefined)
-    setAccessType(undefined)
+    setServiceSelection(undefined)
+    setAccessSelection(undefined)
     if (addFiltersToUrl) {
       let urlLocation = await addExistingParamsToUrl(location, [
         FilterOptions.AccessType,
@@ -154,8 +98,7 @@ export default function FilterPrice({
   return (
     <div className={styleClasses}>
       {serviceFilterItems.map((e, index) => {
-        const isServiceSelected =
-          e.value === serviceType || serviceSelections.includes(e.value)
+        const isServiceSelected = e.value === serviceSelection
         const selectFilter = cx({
           [styles.selected]: isServiceSelected,
           [styles.filter]: true
@@ -167,7 +110,11 @@ export default function FilterPrice({
             key={index}
             className={selectFilter}
             onClick={async () => {
-              handleSelectedFilter(isServiceSelected, e.value)
+              handleSelectedFilter(
+                isServiceSelected,
+                e.value,
+                FilterOptions.ServiceType
+              )
             }}
           >
             {e.display}
@@ -176,8 +123,7 @@ export default function FilterPrice({
       })}
       <div className={styles.separator} />
       {accessFilterItems.map((e, index) => {
-        const isAccessSelected =
-          e.value === accessType || accessSelections.includes(e.value)
+        const isAccessSelected = e.value === accessSelection
         const selectFilter = cx({
           [styles.selected]: isAccessSelected,
           [styles.filter]: true
@@ -189,7 +135,11 @@ export default function FilterPrice({
             key={index}
             className={selectFilter}
             onClick={async () => {
-              handleSelectedFilter(isAccessSelected, e.value)
+              handleSelectedFilter(
+                isAccessSelected,
+                e.value,
+                FilterOptions.AccessType
+              )
             }}
           >
             {e.display}
@@ -197,8 +147,7 @@ export default function FilterPrice({
         )
       })}
       {clearFilters.map((e, index) => {
-        const showClear =
-          accessSelections.length > 0 || serviceSelections.length > 0
+        const showClear = accessSelection || serviceSelection
         return (
           <Button
             size="small"
