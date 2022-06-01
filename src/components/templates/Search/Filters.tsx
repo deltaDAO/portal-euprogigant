@@ -6,7 +6,9 @@ import Button from '../../atoms/Button'
 import styles from './Filters.module.css'
 import {
   FilterByAccessOptions,
-  FilterByTypeOptions
+  FilterByTypeOptions,
+  FilterOptions,
+  Filters
 } from '../../../models/SortAndFilters'
 
 const cx = classNames.bind(styles)
@@ -39,8 +41,8 @@ export default function FilterPrice({
   className?: string
 }): ReactElement {
   const queryParams = new URLSearchParams(window.location.search)
-  const initialServiceFilter = queryParams.get('serviceType')
-  const initialAccessFilter = queryParams.get('accessType')
+  const initialServiceFilter = queryParams.get(FilterOptions.ServiceType)
+  const initialAccessFilter = queryParams.get(FilterOptions.AccessType)
 
   const navigate = useNavigate()
   const [serviceSelections, setServiceSelections] = useState<string[]>([
@@ -50,18 +52,24 @@ export default function FilterPrice({
     initialAccessFilter
   ])
 
-  async function applyFilter(filter: string, filterType: string) {
-    filterType === 'accessType' ? setAccessType(filter) : setServiceType(filter)
+  async function applyFilter(filter: Filters, filterType: FilterOptions) {
+    filterType === FilterOptions.AccessType
+      ? setAccessType(filter)
+      : setServiceType(filter)
     if (addFiltersToUrl) {
       let urlLocation = ''
-      if (filterType.localeCompare('accessType') === 0) {
-        urlLocation = await addExistingParamsToUrl(location, ['accessType'])
+      if (filterType.localeCompare(FilterOptions.AccessType) === 0) {
+        urlLocation = await addExistingParamsToUrl(location, [
+          FilterOptions.AccessType
+        ])
       } else {
-        urlLocation = await addExistingParamsToUrl(location, ['serviceType'])
+        urlLocation = await addExistingParamsToUrl(location, [
+          FilterOptions.ServiceType
+        ])
       }
 
       if (filter && location.search.indexOf(filterType) === -1) {
-        filterType === 'accessType'
+        filterType === FilterOptions.AccessType
           ? (urlLocation = `${urlLocation}&accessType=${filter}`)
           : (urlLocation = `${urlLocation}&serviceType=${filter}`)
       }
@@ -70,7 +78,7 @@ export default function FilterPrice({
     }
   }
 
-  async function handleSelectedFilter(isSelected: boolean, value: string) {
+  async function handleSelectedFilter(isSelected: boolean, value: Filters) {
     if (
       value === FilterByAccessOptions.Download ||
       value === FilterByAccessOptions.Compute
@@ -81,21 +89,21 @@ export default function FilterPrice({
           const otherValue = accessFilterItems.find(
             (p) => p.value !== value
           ).value
-          await applyFilter(otherValue, 'accessType')
+          await applyFilter(otherValue, FilterOptions.AccessType)
           setAccessSelections([otherValue])
         } else {
           // only the current one selected -> deselect it
-          await applyFilter(undefined, 'accessType')
+          await applyFilter(undefined, FilterOptions.AccessType)
           setAccessSelections([])
         }
       } else {
         if (accessSelections.length && accessSelections[0]) {
           // one already selected -> both selected
-          await applyFilter(undefined, 'accessType')
+          await applyFilter(undefined, FilterOptions.AccessType)
           setAccessSelections(accessFilterItems.map((p) => p.value))
         } else {
           // none selected -> select
-          await applyFilter(value, 'accessType')
+          await applyFilter(value, FilterOptions.AccessType)
           setAccessSelections([value])
         }
       }
@@ -105,18 +113,18 @@ export default function FilterPrice({
           const otherValue = serviceFilterItems.find(
             (p) => p.value !== value
           ).value
-          await applyFilter(otherValue, 'serviceType')
+          await applyFilter(otherValue, FilterOptions.ServiceType)
           setServiceSelections([otherValue])
         } else {
-          await applyFilter(undefined, 'serviceType')
+          await applyFilter(undefined, FilterOptions.ServiceType)
           setServiceSelections([])
         }
       } else {
         if (serviceSelections.length && serviceSelections[0]) {
-          await applyFilter(undefined, 'serviceType')
+          await applyFilter(undefined, FilterOptions.ServiceType)
           setServiceSelections(serviceFilterItems.map((p) => p.value))
         } else {
-          await applyFilter(value, 'serviceType')
+          await applyFilter(value, FilterOptions.ServiceType)
           setServiceSelections([value])
         }
       }
@@ -130,8 +138,8 @@ export default function FilterPrice({
     setAccessType(undefined)
     if (addFiltersToUrl) {
       let urlLocation = await addExistingParamsToUrl(location, [
-        'accessType',
-        'serviceType'
+        FilterOptions.AccessType,
+        FilterOptions.ServiceType
       ])
       urlLocation = `${urlLocation}`
       navigate(urlLocation)
