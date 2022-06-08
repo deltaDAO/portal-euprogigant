@@ -9,6 +9,10 @@ import styles from './PublishedList.module.css'
 import { useCancelToken } from '../../../../hooks/useCancelToken'
 import { PagedAssets } from '../../../../models/PagedAssets'
 import VerifiedPublisher from '../../../atoms/VerifiedPublisher'
+import {
+  FilterByAccessOptions,
+  FilterByTypeOptions
+} from '../../../../models/SortAndFilters'
 
 export default function PublishedList({
   accountId
@@ -21,8 +25,8 @@ export default function PublishedList({
   const [queryResult, setQueryResult] = useState<PagedAssets>()
   const [isLoading, setIsLoading] = useState(false)
   const [page, setPage] = useState<number>(1)
-  const [service, setServiceType] = useState()
-  const [access, setAccsesType] = useState()
+  const [access, setAccessType] = useState<FilterByAccessOptions>()
+  const [service, setServiceType] = useState<FilterByTypeOptions>()
   const newCancelToken = useCancelToken()
 
   const getPublished = useCallback(
@@ -70,11 +74,9 @@ export default function PublishedList({
     <>
       <div className={styles.header}>
         <Filters
-          serviceType={service}
-          setServiceType={setServiceType}
-          accessType={access}
-          setAccessType={setAccsesType}
           className={styles.filters}
+          setAccessType={setAccessType}
+          setServiceType={setServiceType}
         />
         <VerifiedPublisher address={accountId} verifyOption />
       </div>

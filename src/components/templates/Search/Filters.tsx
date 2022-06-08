@@ -26,11 +26,15 @@ const accessFilterItems = [
 ]
 
 export default function FilterPrice({
+  setServiceType,
+  setAccessType,
   addFiltersToUrl,
   className
 }: {
   addFiltersToUrl?: boolean
   className?: string
+  setAccessType?: (accessType: FilterByAccessOptions) => void
+  setServiceType?: (serviceType: FilterByTypeOptions) => void
 }): ReactElement {
   const queryParams = new URLSearchParams(window.location.search)
   const initialServiceFilter = queryParams.get(FilterOptions.ServiceType)
@@ -72,14 +76,21 @@ export default function FilterPrice({
   ) {
     const updatedValue = isSelected ? undefined : value
     await applyFilter(updatedValue, filterType)
-    filterType === FilterOptions.AccessType
-      ? setAccessSelection(updatedValue)
-      : setServiceSelection(updatedValue)
+
+    if (filterType === FilterOptions.AccessType) {
+      setAccessSelection(updatedValue)
+      setAccessType(updatedValue as FilterByAccessOptions)
+    } else {
+      setServiceSelection(updatedValue)
+      setServiceType(updatedValue as FilterByTypeOptions)
+    }
   }
 
   async function applyClearFilter(addFiltersToUrl: boolean) {
-    setServiceSelection(undefined)
     setAccessSelection(undefined)
+    setServiceSelection(undefined)
+    setAccessType(undefined)
+    setServiceType(undefined)
     if (addFiltersToUrl) {
       let urlLocation = await addExistingParamsToUrl(location, [
         FilterOptions.AccessType,
