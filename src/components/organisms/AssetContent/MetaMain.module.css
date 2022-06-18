@@ -27,6 +27,12 @@
   border-color: var(--brand-white);
 }
 
+.publisherInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .datatoken {
   white-space: pre;
   margin-right: calc(var(--spacer) / 3);
@@ -66,5 +72,8 @@
   .asset,
   .byline {
     padding: 0 var(--spacer);
+  }
+  .publisherInfo {
+    flex-direction: row;
   }
 }
