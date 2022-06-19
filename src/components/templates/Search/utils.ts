@@ -110,9 +110,9 @@ export function getSearchQuery(
   }
 
   const filters: FilterTerm[] = []
-  accessType !== undefined &&
+  if (accessType !== undefined && accessType !== '')
     filters.push(getFilterTerm('service.type', accessType))
-  serviceType !== undefined &&
+  if (serviceType !== undefined && serviceType !== '')
     filters.push(getFilterTerm('service.attributes.main.type', serviceType))
 
   const baseQueryParams = {
@@ -197,7 +197,7 @@ export async function addExistingParamsToUrl(
   } else {
     // sort should be relevance when fixed in aqua
     urlLocation = `${urlLocation}sort=${encodeURIComponent(
-      SortTermOptions.Relevance
+      SortTermOptions.Created
     )}&sortOrder=${SortDirectionOptions.Descending}&`
   }
   urlLocation = urlLocation.slice(0, -1)
