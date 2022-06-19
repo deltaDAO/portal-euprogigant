@@ -1,4 +1,7 @@
-import { MetadataPublishFormAlgorithm } from '../@types/MetaData'
+import {
+  MetadataPublishFormAlgorithm,
+  ServiceSelfDescription
+} from '../@types/MetaData'
 import { File as FileMetadata } from '@oceanprotocol/lib'
 import * as Yup from 'yup'
 
@@ -31,7 +34,8 @@ export const validationSchema: Yup.SchemaOf<MetadataPublishFormAlgorithm> =
       // ---- optional fields ----
       algorithmPrivacy: Yup.boolean().nullable(),
       tags: Yup.string().nullable(),
-      links: Yup.array<FileMetadata[]>().nullable()
+      links: Yup.array<FileMetadata[]>().nullable(),
+      serviceSelfDescription: Yup.array<ServiceSelfDescription[]>().nullable()
     })
     .defined()
 
@@ -48,6 +52,7 @@ export const initialValues: Partial<MetadataPublishFormAlgorithm> = {
   entrypoint: 'node $ALGO',
   files: '',
   description: '',
+  serviceSelfDescription: '',
   algorithmPrivacy: false,
   termsAndConditions: false,
   tags: '',
