@@ -21,10 +21,6 @@ import EditAdvancedSettings from '../AssetActions/Edit/EditAdvancedSettings'
 import { useSiteMetadata } from '../../../hooks/useSiteMetadata'
 import NetworkName from '../../atoms/NetworkName'
 import VerifiedPublisher from '../../atoms/VerifiedPublisher'
-import {
-  getFormattedCodeString,
-  getServiceSelfDescription
-} from '../../../utils/metadata'
 
 const contentQuery = graphql`
   query AssetContentQuery {
@@ -52,17 +48,7 @@ export default function AssetContent({
   const content = data.purgatory.edges[0].node.childContentJson.asset
   const { debug } = useUserPreferences()
   const { accountId } = useWeb3()
-  const {
-    ddo,
-    isAssetNetwork,
-    isInPurgatory,
-    isServiceSelfDescriptionVerified,
-    metadata,
-    owner,
-    price,
-    purgatoryData,
-    type
-  } = useAsset()
+  const { owner, isInPurgatory, purgatoryData, isAssetNetwork } = useAsset()
   const [showPricing, setShowPricing] = useState(false)
   const [showEdit, setShowEdit] = useState<boolean>()
   const [isComputeType, setIsComputeType] = useState<boolean>(false)
@@ -70,7 +56,7 @@ export default function AssetContent({
   const [showEditAdvancedSettings, setShowEditAdvancedSettings] =
     useState<boolean>()
   const [isOwner, setIsOwner] = useState(false)
-  const [serviceSelfDescription, setServiceSelfDescription] = useState<string>()
+  const { ddo, price, metadata, type } = useAsset()
   const { appConfig } = useSiteMetadata()
 
   useEffect(() => {
@@ -94,28 +80,6 @@ export default function AssetContent({
   function handleEditAdvancedSettingsButton() {
     setShowEditAdvancedSettings(true)
   }
-
-  useEffect(() => {
-    if (!isServiceSelfDescriptionVerified) return
-    const { raw, url } = metadata?.additionalInformation?.serviceSelfDescription
-    if (raw) {
-      const formattedServiceSelfDescription = `## Service Self-Description\n${getFormattedCodeString(
-        { body: raw, raw: true }
-      )}`
-      setServiceSelfDescription(formattedServiceSelfDescription)
-    }
-    if (url) {
-      getServiceSelfDescription(url).then((serviceSelfDescription) => {
-        const formattedServiceSelfDescription = `## Service Self-Description\n${getFormattedCodeString(
-          { body: serviceSelfDescription }
-        )}`
-        setServiceSelfDescription(formattedServiceSelfDescription)
-      })
-    }
-  }, [
-    isServiceSelfDescriptionVerified,
-    metadata?.additionalInformation?.serviceSelfDescription
-  ])
 
   return showEdit ? (
     <Edit setShowEdit={setShowEdit} isComputeType={isComputeType} />
@@ -150,12 +114,6 @@ export default function AssetContent({
                     className={styles.description}
                     text={metadata?.additionalInformation?.description || ''}
                   />
-                  {isServiceSelfDescriptionVerified && (
-                    <Markdown
-                      className={styles.description}
-                      text={serviceSelfDescription || ''}
-                    />
-                  )}
 
                   <MetaSecondary />
 
