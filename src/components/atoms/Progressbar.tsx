@@ -1,7 +1,5 @@
 import classNames from 'classnames/bind'
-import React, { ReactElement, useState } from 'react'
-
-import ReactMarkdown from 'react-markdown'
+import React, { ReactElement } from 'react'
 import styles from './Progressbar.module.css'
 
 const cx = classNames.bind(styles)
