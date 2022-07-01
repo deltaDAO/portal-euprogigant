@@ -1,0 +1,10 @@
+{
+  "previewBanner": {
+    "title": "Developer Preview",
+    "description": "Have a sneak peak into the newest available features currently in development",
+    "cta": {
+      "label": "Preview",
+      "previewUrl": "https://preview.portal.euprogigant.minimal-gaia-x.eu"
+    }
+  }
+}
