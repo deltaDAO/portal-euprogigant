@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, PageProps, useStaticQuery } from 'gatsby'
 import Alert from './atoms/Alert'
 import Footer from './organisms/Footer'
 import Header from './organisms/Header'
@@ -11,6 +11,7 @@ import styles from './App.module.css'
 import PrivacyPreferenceCenter from './organisms/PrivacyPreferenceCenter'
 import classNames from 'classnames/bind'
 import { useLocation } from '@reach/router'
+import AnnouncementBanner from './atoms/AnnouncementBanner'
 
 const cx = classNames.bind(styles)
 
@@ -32,14 +33,15 @@ const contentQuery = graphql`
 `
 
 export default function App({
-  children
+  children,
+  ...props
 }: {
   children: ReactElement
 }): ReactElement {
   const data = useStaticQuery(contentQuery)
   const purgatory = data.purgatory.edges[0].node.childContentJson.account
 
-  const { appConfig } = useSiteMetadata()
+  const { appConfig, warning } = useSiteMetadata()
   const { accountId } = useWeb3()
   const { isInPurgatory, purgatoryData } = useAccountPurgatory(accountId)
   const location = useLocation()
@@ -52,6 +54,9 @@ export default function App({
   return (
     <Styles>
       <div className={styles.app}>
+        {(props as PageProps).uri === '/' && (
+          <AnnouncementBanner text={warning.main} showBuild />
+        )}
         <Header />
 
         {isInPurgatory && (
