@@ -1,8 +1,4 @@
-import {
-  MetadataMarket,
-  MetadataEditForm,
-  ServiceSelfDescription
-} from '../@types/MetaData'
+import { MetadataMarket, MetadataEditForm } from '../@types/MetaData'
 import { secondsToString } from '../utils/metadata'
 import { EditableMetadataLinks } from '@oceanprotocol/lib'
 import * as Yup from 'yup'
@@ -14,7 +10,6 @@ export const validationSchema = Yup.object().shape({
   description: Yup.string().required('Required').min(10),
   price: Yup.number().required('Required'),
   links: Yup.array<EditableMetadataLinks[]>().nullable(),
-  serviceSelfDescription: Yup.array<ServiceSelfDescription[]>().nullable(),
   timeout: Yup.string().required('Required'),
   author: Yup.string().nullable()
 })
@@ -24,14 +19,12 @@ export function getInitialValues(
   timeout: number,
   price: number
 ): Partial<MetadataEditForm> {
-  const { additionalInformation, main } = metadata
   return {
-    name: main.name,
-    description: additionalInformation.description,
+    name: metadata.main.name,
+    description: metadata.additionalInformation.description,
     price,
-    links: additionalInformation.links,
-    serviceSelfDescription: undefined,
+    links: metadata.additionalInformation.links,
     timeout: secondsToString(timeout),
-    author: main.author
+    author: metadata.main.author
   }
 }

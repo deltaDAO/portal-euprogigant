@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect, useState } from 'react'
 import styles from './VerifiedPublisher.module.css'
+import { ReactComponent as VerifiedPatch } from '../../images/patch_check.svg'
 import axios, { AxiosResponse } from 'axios'
 import Loader from './Loader'
 import { Logger } from '@oceanprotocol/lib'
@@ -7,7 +8,6 @@ import { useSiteMetadata } from '../../hooks/useSiteMetadata'
 import Button from './Button'
 import queryString from 'query-string'
 import { useLocation } from '@reach/router'
-import VerifiedBadge from './VerifiedBadge'
 
 export default function VerifiedPublisher({
   address,
@@ -53,7 +53,9 @@ export default function VerifiedPublisher({
       <span>verifying...</span>
     </div>
   ) : verified ? (
-    <VerifiedBadge text="Verified Publisher" />
+    <div className={styles.verifiedBadge}>
+      <VerifiedPatch /> <span>Verified Publisher</span>
+    </div>
   ) : verifyOption ? (
     <div className={styles.verifyButton}>
       <Button
