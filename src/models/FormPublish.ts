@@ -1,7 +1,4 @@
-import {
-  MetadataPublishFormDataset,
-  ServiceSelfDescription
-} from '../@types/MetaData'
+import { MetadataPublishFormDataset } from '../@types/MetaData'
 import { File as FileMetadata } from '@oceanprotocol/lib'
 import * as Yup from 'yup'
 
@@ -31,8 +28,7 @@ export const validationSchema: Yup.SchemaOf<MetadataPublishFormDataset> =
       // ---- optional fields ----
       tags: Yup.string().nullable(),
       links: Yup.array<FileMetadata[]>().nullable(),
-      providerUri: Yup.string().url().nullable(),
-      serviceSelfDescription: Yup.array<ServiceSelfDescription[]>().nullable()
+      providerUri: Yup.string().url().nullable()
     })
     .defined()
 
@@ -44,7 +40,6 @@ export const initialValues: Partial<MetadataPublishFormDataset> = {
     symbol: ''
   },
   files: '',
-  serviceSelfDescription: '',
   description: '',
   timeout: 'Forever',
   access: '',
