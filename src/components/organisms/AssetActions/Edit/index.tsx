@@ -11,10 +11,7 @@ import { MetadataPreview } from '../../../molecules/MetadataPreview'
 import Debug from './DebugEditMetadata'
 import Web3Feedback from '../../../molecules/Web3Feedback'
 import FormEditMetadata from './FormEditMetadata'
-import {
-  mapTimeoutStringToSeconds,
-  updateServiceSelfDescription
-} from '../../../../utils/metadata'
+import { mapTimeoutStringToSeconds } from '../../../../utils/metadata'
 import styles from './index.module.css'
 import { Logger } from '@oceanprotocol/lib'
 import MetadataFeedback from '../../../molecules/MetadataFeedback'
@@ -123,35 +120,29 @@ export default function Edit({
         Logger.error(content.form.error)
         return
       }
-
-      // Manually add service self-description since the value is not
-      // updated in ocean.assets.editMetadata()
-      let ddoEdited = values?.serviceSelfDescription
-        ? updateServiceSelfDescription(
-            ddoEditedMetdata,
-            values.serviceSelfDescription[0]
-          )
-        : ddoEditedMetdata
-
+      let ddoEditedTimeout = ddoEditedMetdata
       if (timeoutStringValue !== values.timeout) {
         const service =
           ddoEditedMetdata.findServiceByType('access') ||
           ddoEditedMetdata.findServiceByType('compute')
         const timeout = mapTimeoutStringToSeconds(values.timeout)
-        ddoEdited = await ocean.assets.editServiceTimeout(
+        ddoEditedTimeout = await ocean.assets.editServiceTimeout(
           ddoEditedMetdata,
           service.index,
           timeout
         )
       }
 
-      if (!ddoEdited) {
+      if (!ddoEditedTimeout) {
         setError(content.form.error)
         Logger.error(content.form.error)
         return
       }
 
-      const storedddo = await ocean.assets.updateMetadata(ddoEdited, accountId)
+      const storedddo = await ocean.assets.updateMetadata(
+        ddoEditedTimeout,
+        accountId
+      )
       if (!storedddo) {
         setError(content.form.error)
         Logger.error(content.form.error)
