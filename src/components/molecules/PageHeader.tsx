@@ -59,7 +59,8 @@ export default function PageHeader({
 
   const styleClasses = cx({
     header: true,
-    center: center
+    center: center,
+    homeHeader: isHome
   })
 
   return (
