@@ -66,12 +66,20 @@
   margin-bottom: 0;
 }
 
+.homeHeader .title,
+.homeHeader .description,
+.homeHeader .powered,
+.homeHeader .previewTitle,
+.homeHeader .previewSubTitle {
+  color: var(--brand-white);
+}
+
 .title,
 .description,
 .powered,
 .previewTitle,
 .previewSubTitle {
-  color: var(--brand-white);
+  color: var(--color-primary);
 }
 
 .powered {
