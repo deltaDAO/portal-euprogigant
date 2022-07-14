@@ -8,6 +8,11 @@ export enum SortTermOptions {
   Relevance = '_score'
 }
 
+export enum FilterOptions {
+  AccessType = 'accessType',
+  ServiceType = 'serviceType'
+}
+
 export enum FilterByTypeOptions {
   Data = 'dataset',
   Algorithm = 'algorithm'
