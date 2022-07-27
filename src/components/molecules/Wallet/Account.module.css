@@ -73,7 +73,7 @@ svg.caret {
   fill: var(--color-menu-active);
 }
 
-@media screen and (min-width: 35rem) {
+@media screen and (min-width: 45rem) {
   .button.initial span {
     display: inline;
   }
