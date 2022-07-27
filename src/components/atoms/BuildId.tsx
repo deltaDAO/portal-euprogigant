@@ -10,14 +10,12 @@ export default function BuildId(): ReactElement {
   return (
     <a
       className={styles.buildId}
-      href={`https://github.com/oceanprotocol/market/tree/${
-        isMainBranch ? commitId : commitBranch
-      }`}
+      href={`https://github.com/deltaDAO/portal-euprogigant/tree/${commitId}`}
       target="_blank"
       rel="noreferrer"
       title="Build ID referring to the linked commit hash."
     >
-      {isMainBranch ? commitId.substring(0, 7) : commitBranch}
+      {commitId.substring(0, 7)}
     </a>
   )
 }
