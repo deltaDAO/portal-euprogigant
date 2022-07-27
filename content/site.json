@@ -10,10 +10,6 @@
       {
         "name": "Profile",
         "link": "/profile"
-      },
-      {
-        "name": "Verify",
-        "link": "/verify"
       }
     ],
     "warning": {

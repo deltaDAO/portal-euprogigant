@@ -27,7 +27,7 @@ export default function URLInput({
   useEffect(() => {
     if (!field?.value || field?.value?.length === 0) return
 
-    const isValueValid = isSanitizedUrl(field.value)
+    const isValueValid = isSanitizedUrl(field.value) && !meta.error
 
     setButtonDisabled(!isValueValid)
   }, [field?.value, meta?.error])

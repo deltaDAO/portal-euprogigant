@@ -21,16 +21,19 @@ export default function PageHeader({
 }): ReactElement {
   const styleClasses = cx({
     header: true,
-    center: center
+    center: center,
+    homeHeader: isHome
   })
 
   return (
     <div className={isHome ? styles.homeWrapper : styles.wrapper}>
       <header className={styleClasses}>
-        <h1 className={styles.title}>{title}</h1>
-        {description && (
-          <Markdown text={description} className={styles.description} />
-        )}
+        <div>
+          <h1 className={styles.title}>{title}</h1>
+          {description && (
+            <Markdown text={description} className={styles.description} />
+          )}
+        </div>
         {powered && (
           <div className={styles.logoContainer}>
             <p className={styles.powered}>powered by</p>
