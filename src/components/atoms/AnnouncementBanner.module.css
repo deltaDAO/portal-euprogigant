@@ -28,15 +28,23 @@
   font-size: calc(var(--font-size-small) / 1.1);
 }
 
-.text {
-  font-size: var(--font-size-small);
+.build {
+  display: flex;
+  flex-direction: row;
+}
+
+.text,
+.build > * {
+  font-size: var(--font-size-small) !important;
   font-weight: var(--font-weight-bold);
   margin: 0;
   margin-right: calc(var(--spacer) / 4);
   text-align: center;
 }
 
-.text a {
+.text a,
+.build a {
+  margin: 0;
   color: inherit;
   text-decoration: underline;
 }

@@ -7,9 +7,18 @@ import AddToken from '../../atoms/AddToken'
 import Time from '../../atoms/Time'
 import AssetType from '../../atoms/AssetType'
 import styles from './MetaMain.module.css'
+import VerifiedBadge from '../../atoms/VerifiedBadge'
 
 export default function MetaMain(): ReactElement {
-  const { ddo, owner, type, isAssetNetwork } = useAsset()
+  const {
+    ddo,
+    owner,
+    type,
+    isAssetNetwork,
+    isServiceSelfDescriptionVerified,
+    isVerifyingSD,
+    verifiedServiceProviderName
+  } = useAsset()
   const { web3ProviderInfo } = useWeb3()
 
   const isCompute = Boolean(ddo?.findServiceByType('compute'))
@@ -51,19 +60,32 @@ export default function MetaMain(): ReactElement {
         )}
       </header>
 
-      <div className={styles.byline}>
-        Published By <Publisher account={owner} />
-        <p>
-          <Time date={ddo?.created} relative />
-          {ddo?.created !== ddo?.updated && (
-            <>
-              {' — '}
-              <span className={styles.updated}>
-                updated <Time date={ddo?.updated} relative />
-              </span>
-            </>
-          )}
-        </p>
+      <div className={styles.publisherInfo}>
+        <div className={styles.byline}>
+          Published By{' '}
+          <Publisher
+            account={owner}
+            verifiedServiceProviderName={verifiedServiceProviderName}
+          />
+          <p>
+            <Time date={ddo?.created} relative />
+            {ddo?.created !== ddo?.updated && (
+              <>
+                {' — '}
+                <span className={styles.updated}>
+                  updated <Time date={ddo?.updated} relative />
+                </span>
+              </>
+            )}
+          </p>
+        </div>
+        {(isVerifyingSD || isServiceSelfDescriptionVerified) && (
+          <VerifiedBadge
+            text="Service Self-Description"
+            isLoading={isVerifyingSD}
+            timestamp={isServiceSelfDescriptionVerified}
+          />
+        )}
       </div>
     </aside>
   )
