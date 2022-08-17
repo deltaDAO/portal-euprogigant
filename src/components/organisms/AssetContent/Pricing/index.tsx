@@ -145,7 +145,7 @@ export default function Pricing({
           />
         ) : (
           <Alert
-            state="info"
+            state="warning"
             title={content.empty.title}
             text={content.empty.info}
             action={{

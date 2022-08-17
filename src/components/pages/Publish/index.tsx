@@ -16,7 +16,8 @@ import {
   transformPublishFormToMetadata,
   transformPublishAlgorithmFormToMetadata,
   mapTimeoutStringToSeconds,
-  validateDockerImage
+  validateDockerImage,
+  getInitialPublishFormDatasetsValues
 } from '../../../utils/metadata'
 import {
   MetadataPreview,
@@ -36,8 +37,10 @@ import { useWeb3 } from '../../../providers/Web3'
 import Loader from '../../atoms/Loader'
 import feedbackStyles from '../../molecules/MetadataFeedback.module.css'
 
-const formNameDatasets = 'ocean-publish-form-datasets'
-const formNameAlgorithms = 'ocean-publish-form-algorithms'
+export enum publishFormKeys {
+  FORM_NAME_DATASETS = 'ocean-publish-form-datasets',
+  FORM_NAME_ALGORITHMS = 'ocean-publish-form-algorithms'
+}
 
 function TabContent({
   publishType,
@@ -84,21 +87,11 @@ export default function PublishPage({
   const [title, setTitle] = useState<string>()
   const [did, setDid] = useState<string>()
   const [algoInitialValues, setAlgoInitialValues] = useState<
-    Partial<MetadataPublishFormAlgorithm>
-  >(
-    (localStorage.getItem('ocean-publish-form-algorithms') &&
-      (JSON.parse(localStorage.getItem('ocean-publish-form-algorithms'))
-        .initialValues as MetadataPublishFormAlgorithm)) ||
-      initialValuesAlgorithm
-  )
+    Partial<MetadataPublishFormDataset>
+  >(getInitialPublishFormDatasetsValues(publishFormKeys.FORM_NAME_ALGORITHMS))
   const [datasetInitialValues, setdatasetInitialValues] = useState<
     Partial<MetadataPublishFormDataset>
-  >(
-    (localStorage.getItem('ocean-publish-form-datasets') &&
-      (JSON.parse(localStorage.getItem('ocean-publish-form-datasets'))
-        .initialValues as MetadataPublishFormDataset)) ||
-      initialValues
-  )
+  >(getInitialPublishFormDatasetsValues(publishFormKeys.FORM_NAME_DATASETS))
   const [publishType, setPublishType] =
     useState<MetadataMain['type']>('dataset')
   const hasFeedback = isLoading || error || success
@@ -265,10 +258,14 @@ export default function PublishPage({
               <Persist
                 name={
                   publishType === 'dataset'
-                    ? formNameDatasets
-                    : formNameAlgorithms
+                    ? publishFormKeys.FORM_NAME_DATASETS
+                    : publishFormKeys.FORM_NAME_ALGORITHMS
                 }
-                ignoreFields={['isSubmitting']}
+                ignoreFields={[
+                  'isSubmitting',
+                  'noPersonalData',
+                  'termsAndConditions'
+                ]}
               />
 
               {hasFeedback && loading ? (
