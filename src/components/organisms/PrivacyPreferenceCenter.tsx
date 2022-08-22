@@ -47,7 +47,7 @@ export default function CookieBanner({
         <div className={styles.container}>
           <div className={styles.cookieInfo}>
             <Markdown text={cookies.title} className={styles.header} />
-            <Markdown text={cookies.text} />
+            <Markdown text={cookies.text} className={styles.cookieInfoText} />
           </div>
           {cookies.optionalCookies && (
             <>

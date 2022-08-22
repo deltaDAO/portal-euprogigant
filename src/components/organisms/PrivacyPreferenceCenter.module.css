@@ -36,6 +36,15 @@
   margin-bottom: calc(var(--spacer) / 2);
 }
 
+.cookieInfoText a {
+  text-decoration: underline;
+}
+
+.cookieInfoText a:hover {
+  font-weight: var(--font-weight-bold);
+  text-decoration: underline;
+}
+
 .wrapper {
   max-width: 90vw;
   position: fixed;
