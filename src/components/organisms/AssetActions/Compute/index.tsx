@@ -149,7 +149,7 @@ export default function Compute({
       sort: { sortBy: SortTermOptions.Created },
       filters: [
         getFilterTerm('service.attributes.main.type', 'algorithm'),
-        getFilterTerm('id', algorithmDidList)
+        getFilterTerm('_id', algorithmDidList)
       ]
     } as BaseQueryParams
 
