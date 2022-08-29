@@ -16,8 +16,38 @@ import { getFileInfo } from '../../../utils/provider'
 import { getOceanConfig } from '../../../utils/ocean'
 import { useCancelToken } from '../../../hooks/useCancelToken'
 import { useIsMounted } from '../../../hooks/useIsMounted'
+import { graphql, useStaticQuery } from 'gatsby'
+
+const query = graphql`
+  query {
+    content: allFile(filter: { relativePath: { eq: "assetDisclaimer.json" } }) {
+      edges {
+        node {
+          childContentJson {
+            message
+          }
+        }
+      }
+    }
+  }
+`
+
+interface DisclaimerData {
+  content: {
+    edges: {
+      node: {
+        childContentJson: {
+          message: string
+        }
+      }
+    }[]
+  }
+}
 
 export default function AssetActions(): ReactElement {
+  const data: DisclaimerData = useStaticQuery(query)
+  const { message } = data.content.edges[0].node.childContentJson
+
   const { accountId, balance } = useWeb3()
   const { ocean, account } = useOcean()
   const { price, ddo, isAssetNetwork } = useAsset()
@@ -106,6 +136,7 @@ export default function AssetActions(): ReactElement {
       fileIsLoading={fileIsLoading}
       isConsumable={isConsumable}
       consumableFeedback={consumableFeedback}
+      computeDisclaimerMessage={message}
     />
   ) : (
     <Consume
@@ -116,6 +147,7 @@ export default function AssetActions(): ReactElement {
       fileIsLoading={fileIsLoading}
       isConsumable={isConsumable}
       consumableFeedback={consumableFeedback}
+      consumeDisclaimerMessage={message}
     />
   )
 
