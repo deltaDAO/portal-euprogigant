@@ -10,6 +10,7 @@ const chains = [
     networkId: GX_NETWORK_ID,
     nodeUri: 'https://rpc.gaiaxtestnet.oceanprotocol.com/',
     providerUri: 'https://ctd.ptw.tu-darmstadt.euprogigant.io',
+    metadataCacheUri: 'https://aquarius.euprogigant.io',
     explorerUri: 'https://blockscout.gaiaxtestnet.oceanprotocol.com/',
     isDefault: true
   }
