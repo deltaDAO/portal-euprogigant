@@ -10,10 +10,6 @@ module.exports = {
   metadataCacheUri:
     process.env.GATSBY_METADATACACHE_URI || 'https://aquarius.euprogigant.io',
 
-  vpRegistryUri:
-    process.env.GATSBY_VP_REGISTRY_URI ||
-    'https://vp-registry.gaiax.delta-dao.com',
-
   complianceUri:
     process.env.GATSBY_COMPLIANCE_URI || 'https://compliance.gaia-x.eu',
 

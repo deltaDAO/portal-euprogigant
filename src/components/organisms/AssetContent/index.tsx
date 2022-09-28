@@ -20,7 +20,6 @@ import styles from './index.module.css'
 import EditAdvancedSettings from '../AssetActions/Edit/EditAdvancedSettings'
 import { useSiteMetadata } from '../../../hooks/useSiteMetadata'
 import NetworkName from '../../atoms/NetworkName'
-import VerifiedPublisher from '../../atoms/VerifiedPublisher'
 import { getFormattedCodeString, getServiceSD } from '../../../utils/metadata'
 
 const contentQuery = graphql`
@@ -123,7 +122,6 @@ export default function AssetContent({ path }: { path: string }): ReactElement {
     <>
       <div className={styles.networkWrap}>
         <NetworkName networkId={ddo.chainId} className={styles.network} />
-        <VerifiedPublisher address={owner} />
       </div>
 
       <article className={styles.grid}>
