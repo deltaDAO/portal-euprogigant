@@ -27,6 +27,7 @@ module.exports = {
   infuraProjectId: process.env.GATSBY_INFURA_PROJECT_ID || 'xxx',
 
   // The ETH address the marketplace fee will be sent to.
+
   marketFeeAddress:
     process.env.GATSBY_MARKET_FEE_ADDRESS ||
     '0x9984b2453eC7D99a73A5B3a46Da81f197B753C8d',
@@ -63,7 +64,7 @@ module.exports = {
   // tab to publishers during the price creation.
   allowFixedPricing: process.env.GATSBY_ALLOW_FIXED_PRICING || 'true',
   allowDynamicPricing: process.env.GATSBY_ALLOW_DYNAMIC_PRICING || 'false',
-  allowFreePricing: process.env.GATSBY_ALLOW_FREE_PRICING || 'false',
+  allowFreePricing: process.env.GATSBY_ALLOW_FREE_PRICING || 'true',
 
   // Used to show or hide advanced settings button in asset details page
   allowAdvancedSettings: process.env.GATSBY_ALLOW_ADVANCED_SETTINGS || 'true',
