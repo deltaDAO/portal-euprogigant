@@ -27,7 +27,6 @@ module.exports = {
   infuraProjectId: process.env.GATSBY_INFURA_PROJECT_ID || 'xxx',
 
   // The ETH address the marketplace fee will be sent to.
-
   marketFeeAddress:
     process.env.GATSBY_MARKET_FEE_ADDRESS ||
     '0x9984b2453eC7D99a73A5B3a46Da81f197B753C8d',
