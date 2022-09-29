@@ -21,10 +21,7 @@ import EditAdvancedSettings from '../AssetActions/Edit/EditAdvancedSettings'
 import { useSiteMetadata } from '../../../hooks/useSiteMetadata'
 import NetworkName from '../../atoms/NetworkName'
 import VerifiedPublisher from '../../atoms/VerifiedPublisher'
-import {
-  getFormattedCodeString,
-  getServiceSelfDescription
-} from '../../../utils/metadata'
+import { getFormattedCodeString, getServiceSD } from '../../../utils/metadata'
 
 const contentQuery = graphql`
   query AssetContentQuery {
@@ -96,17 +93,17 @@ export default function AssetContent({ path }: { path: string }): ReactElement {
 
   useEffect(() => {
     if (!isServiceSelfDescriptionVerified) return
-    const { raw, url } = metadata?.additionalInformation?.serviceSelfDescription
-    if (raw) {
+    const serviceSD = metadata?.additionalInformation?.serviceSelfDescription
+    if (serviceSD?.raw) {
       const formattedServiceSelfDescription = `## Service Self-Description\n${getFormattedCodeString(
-        { body: raw, raw: true }
+        JSON.parse(serviceSD?.raw)
       )}`
       setServiceSelfDescription(formattedServiceSelfDescription)
     }
-    if (url) {
-      getServiceSelfDescription(url).then((serviceSelfDescription) => {
+    if (serviceSD?.url) {
+      getServiceSD(serviceSD?.url).then((serviceSelfDescription) => {
         const formattedServiceSelfDescription = `## Service Self-Description\n${getFormattedCodeString(
-          { body: serviceSelfDescription }
+          JSON.parse(serviceSelfDescription)
         )}`
         setServiceSelfDescription(formattedServiceSelfDescription)
       })

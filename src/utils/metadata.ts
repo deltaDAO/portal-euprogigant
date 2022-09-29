@@ -17,7 +17,7 @@ import {
   Logger,
   EditableMetadataLinks
 } from '@oceanprotocol/lib'
-import { complianceUri } from '../../app.config'
+import { complianceUri, complianceApiVersion } from '../../app.config'
 import { isSanitizedUrl } from '../components/molecules/FormFields/URLInput/Input'
 import { initialValues as initialValuesDataset } from '../models/FormPublish'
 import { initialValues as initialValuesAlgorithm } from '../models/FormAlgoPublish'
@@ -134,40 +134,92 @@ function getValidUrlArrayContent<T extends File | EditableMetadataLinks>(
   )
 }
 
-export async function signServiceSelfDescription(body: any): Promise<any> {
-  if (!body) return
+export function getComplianceApiVersion(context?: string[]): string {
+  const latest = complianceApiVersion
+
+  const allowedRegistryDomains = [
+    'https://registry.gaia-x.eu/v2206',
+    'https://registry.lab.gaia-x.eu/v2206'
+  ]
+  if (
+    !context ||
+    !context.length ||
+    context.some(
+      (e) => allowedRegistryDomains.findIndex((x) => e.startsWith(x)) !== -1
+    )
+  )
+    return latest
+
+  return '2204'
+}
+
+export async function signServiceSD(rawServiceSD: any): Promise<any> {
+  if (!rawServiceSD) return
   try {
-    const response = await axios.post(`${complianceUri}/sign`, body)
-    const signedServiceSelfDescription = {
-      selfDescriptionCredential: { ...body },
+    const response = await axios.post(
+      `${complianceUri}/v${getComplianceApiVersion()}/api/sign`,
+      rawServiceSD
+    )
+    const signedServiceSD = {
+      selfDescriptionCredential: { ...rawServiceSD },
       ...response.data
     }
 
-    return signedServiceSelfDescription
+    return signedServiceSD
   } catch (error) {
     Logger.error(error.message)
   }
 }
 
-export async function verifyServiceSelfDescription({
-  body,
-  raw
-}: {
-  body: string
-  raw?: boolean
+export async function storeRawServiceSD(signedSD: {
+  complianceCredentials: any
+  selfDescriptionCredential: any
 }): Promise<{
   verified: boolean
+  storedSdUrl: string | undefined
+}> {
+  if (!signedSD) return { verified: false, storedSdUrl: undefined }
+
+  const baseUrl = `${complianceUri}/v${getComplianceApiVersion()}/api/service-offering/verify/raw?store=true`
+  try {
+    const response = await axios.post(baseUrl, signedSD)
+    if (response?.status === 409) {
+      return {
+        verified: false,
+        storedSdUrl: undefined
+      }
+    }
+    if (response?.status === 200) {
+      return { verified: true, storedSdUrl: response.data.storedSdUrl }
+    }
+
+    return { verified: false, storedSdUrl: undefined }
+  } catch (error) {
+    Logger.error(error.message)
+    return { verified: false, storedSdUrl: undefined }
+  }
+}
+
+export async function verifyRawServiceSD(rawServiceSD: string): Promise<{
+  verified: boolean
+  complianceApiVersion?: string
   responseBody?: any
 }> {
-  if (!body) return { verified: false }
+  if (!rawServiceSD) return { verified: false }
 
-  const baseUrl = raw
-    ? `${complianceUri}/service-offering/verify/raw`
-    : `${complianceUri}/service-offering/verify`
-  const requestBody = raw ? body : { url: body }
+  const parsedServiceSD = JSON.parse(rawServiceSD)
+  const complianceApiVersion = getComplianceApiVersion(
+    parsedServiceSD?.selfDescriptionCredential?.['@context']
+  )
+
+  const versionedComplianceUri = `${complianceUri}/v${complianceApiVersion}/api`
+
+  // skip participant verification for 22.04 service SDs
+  const verifyParticipantOption = complianceApiVersion !== '2204'
+  const baseUrl = `${versionedComplianceUri}/service-offering/verify/raw?verifyParticipant=${verifyParticipantOption}`
 
   try {
-    const response = await axios.post(baseUrl, requestBody)
+    const response = await axios.post(baseUrl, parsedServiceSD)
     if (response?.status === 409) {
       return {
         verified: false,
@@ -175,7 +227,7 @@ export async function verifyServiceSelfDescription({
       }
     }
     if (response?.status === 200) {
-      return { verified: true }
+      return { verified: true, complianceApiVersion }
     }
 
     return { verified: false }
@@ -185,25 +237,19 @@ export async function verifyServiceSelfDescription({
   }
 }
 
-export async function getServiceSelfDescription(url: string): Promise<string> {
+export async function getServiceSD(url: string): Promise<string> {
   if (!url) return
 
   try {
-    const serviceSelfDescription = await axios.get(url)
-    return JSON.stringify(serviceSelfDescription.data, null, 2)
+    const serviceSD = await axios.get(url)
+    return JSON.stringify(serviceSD.data, null, 2)
   } catch (error) {
     Logger.error(error.message)
   }
 }
 
-export function getFormattedCodeString({
-  body,
-  raw
-}: {
-  body: string
-  raw?: boolean
-}): string {
-  const formattedString = raw ? JSON.stringify(body, null, 2) : body
+export function getFormattedCodeString(parsedCodeBlock: any): string {
+  const formattedString = JSON.stringify(parsedCodeBlock, null, 2)
   return `\`\`\`\n${formattedString}\n\`\`\``
 }
 
@@ -228,19 +274,26 @@ export async function getPublisherFromServiceSD(
   try {
     const parsedServiceSD =
       typeof serviceSD === 'string' ? JSON.parse(serviceSD) : serviceSD
-    const providedByUrl =
+    const providedBy =
       parsedServiceSD?.selfDescriptionCredential?.credentialSubject?.[
         'gx-service-offering:providedBy'
-      ]?.['@value']
+      ]
+    const providedByUrl =
+      typeof providedBy === 'string' ? providedBy : providedBy?.['@value']
 
     if (!isSanitizedUrl(providedByUrl)) return
 
     const response = await axios.get(providedByUrl)
     if (!response || response.status !== 200 || !response?.data) return
 
-    return response.data?.selfDescriptionCredential?.credentialSubject?.[
-      'gx-participant:name'
-    ]?.['@value']
+    const legalName =
+      response.data?.selfDescriptionCredential?.credentialSubject?.[
+        'gx-participant:legalName'
+      ]
+    const publisher =
+      typeof legalName === 'string' ? legalName : legalName?.['@value']
+
+    return publisher
   } catch (error) {
     Logger.error(error.message)
   }
