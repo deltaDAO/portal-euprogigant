@@ -10,10 +10,6 @@ module.exports = {
   metadataCacheUri:
     process.env.GATSBY_METADATACACHE_URI || 'https://aquarius.euprogigant.io',
 
-  vpRegistryUri:
-    process.env.GATSBY_VP_REGISTRY_URI ||
-    'https://vp-registry.gaiax.delta-dao.com',
-
   complianceUri:
     process.env.GATSBY_COMPLIANCE_URI || 'https://compliance.gaia-x.eu',
 
@@ -67,7 +63,7 @@ module.exports = {
   // tab to publishers during the price creation.
   allowFixedPricing: process.env.GATSBY_ALLOW_FIXED_PRICING || 'true',
   allowDynamicPricing: process.env.GATSBY_ALLOW_DYNAMIC_PRICING || 'false',
-  allowFreePricing: process.env.GATSBY_ALLOW_FREE_PRICING || 'false',
+  allowFreePricing: process.env.GATSBY_ALLOW_FREE_PRICING || 'true',
 
   // Used to show or hide advanced settings button in asset details page
   allowAdvancedSettings: process.env.GATSBY_ALLOW_ADVANCED_SETTINGS || 'true',
