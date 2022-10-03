@@ -32,11 +32,6 @@ export default function FormActions({
         )}
       </div>
       <Alert state="info" text={walletDisclaimer} />
-      {status !== 'empty' && (
-        <Button style="text" size="small" onClick={resetFormAndClearStorage}>
-          Reset Form
-        </Button>
-      )}
     </footer>
   )
 }
