@@ -27,7 +27,9 @@ export const validationSchema: Yup.SchemaOf<MetadataPublishFormDataset> =
       access: Yup.string()
         .matches(/Compute|Download/g, { excludeEmptyString: true })
         .required('Required'),
-      noPersonalData: Yup.boolean().required('Required'),
+      noPersonalData: Yup.boolean()
+        .oneOf([true], 'Field must be checked')
+        .required('Required'),
       // ---- optional fields ----
       termsAndConditions: Yup.boolean(),
       tags: Yup.string().nullable(),
