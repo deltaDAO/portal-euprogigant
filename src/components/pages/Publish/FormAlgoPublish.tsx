@@ -184,6 +184,7 @@ export default function FormPublish(): ReactElement {
         handleFieldChange={handleFieldChange}
       />
       <FormActions
+        status={status}
         isValid={isValid}
         resetFormAndClearStorage={resetFormAndClearStorage}
         walletDisclaimer={content.walletDisclaimer}

@@ -162,6 +162,7 @@ export default function FormPublish(): ReactElement {
       />
 
       <FormActions
+        status={status}
         isValid={isValid}
         resetFormAndClearStorage={resetFormAndClearStorage}
         walletDisclaimer={content.walletDisclaimer}
