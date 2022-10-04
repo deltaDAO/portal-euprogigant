@@ -102,7 +102,9 @@ export default function FormPublish(): ReactElement {
     field: FormFieldProps
   ) {
     const value =
-      field.type === 'terms' ? !JSON.parse(e.target.value) : e.target.value
+      field.type === 'checkbox' || field.type === 'terms'
+        ? !JSON.parse(e.target.value)
+        : e.target.value
 
     if (field.name === 'access' && value === 'Compute') {
       setComputeTypeSelected(true)
