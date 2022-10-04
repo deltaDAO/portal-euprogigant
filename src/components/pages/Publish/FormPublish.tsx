@@ -150,13 +150,7 @@ export default function FormPublish(): ReactElement {
               {...field}
               options={
                 field.type === 'boxSelection'
-                  ? accessTypeOptions.map((option) => {
-                      const value = values[field.name as keyof typeof values]
-                      return {
-                        ...option,
-                        checked: value && value === option.name
-                      }
-                    })
+                  ? accessTypeOptions
                   : field.options
               }
               component={Input}

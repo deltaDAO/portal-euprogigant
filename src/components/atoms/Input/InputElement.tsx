@@ -144,7 +144,12 @@ export default function InputElement({
       return (
         <BoxSelection
           name={name}
-          options={options as unknown as BoxSelectionOption[]}
+          options={(options as unknown as BoxSelectionOption[]).map(
+            (option) => ({
+              ...option,
+              checked: field?.value === option.name
+            })
+          )}
           {...field}
           {...props}
         />
