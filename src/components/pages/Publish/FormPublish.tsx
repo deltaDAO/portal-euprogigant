@@ -81,11 +81,13 @@ export default function FormPublish(): ReactElement {
   const accessTypeOptions = [
     {
       name: 'Download',
+      checked: false,
       title: 'Download',
       icon: <Download />
     },
     {
       name: 'Compute',
+      checked: false,
       title: 'Compute',
       icon: <Compute />
     }
@@ -148,7 +150,13 @@ export default function FormPublish(): ReactElement {
               {...field}
               options={
                 field.type === 'boxSelection'
-                  ? accessTypeOptions
+                  ? accessTypeOptions.map((option) => {
+                      const value = values[field.name as keyof typeof values]
+                      return {
+                        ...option,
+                        checked: value && value === option.name
+                      }
+                    })
                   : field.options
               }
               component={Input}

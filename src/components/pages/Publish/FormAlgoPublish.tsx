@@ -169,7 +169,13 @@ export default function FormPublish(): ReactElement {
               {...field}
               options={
                 field.type === 'boxSelection'
-                  ? dockerImageOptions
+                  ? dockerImageOptions.map((option) => {
+                      const value = values[field.name as keyof typeof values]
+                      return {
+                        ...option,
+                        checked: value && value === option.name
+                      }
+                    })
                   : field.options
               }
               component={Input}
