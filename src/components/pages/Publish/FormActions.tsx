@@ -23,7 +23,13 @@ export default function FormActions({
         <Button
           style="primary"
           type="submit"
-          disabled={!ocean || !account || !isValid || status === 'empty'}
+          disabled={
+            !ocean ||
+            !account ||
+            !isValid ||
+            status === 'empty' ||
+            status === 'loading'
+          }
         >
           Submit
         </Button>

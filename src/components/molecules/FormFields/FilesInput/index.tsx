@@ -26,6 +26,8 @@ export default function FilesInput(props: InputProps): ReactElement {
         setIsLoading(true)
 
         if (field.name === 'serviceSelfDescription') {
+          props?.setStatus && props.setStatus('loading')
+
           const serviceSelfDescription = await getServiceSD(fileUrl)
           const { verified } = await verifyRawServiceSD(serviceSelfDescription)
 
@@ -48,6 +50,7 @@ export default function FilesInput(props: InputProps): ReactElement {
         console.error(error.message)
       } finally {
         setIsLoading(false)
+        props?.setStatus && props.setStatus(null)
       }
     }
 
