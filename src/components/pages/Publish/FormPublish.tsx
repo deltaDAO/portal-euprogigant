@@ -157,6 +157,7 @@ export default function FormPublish(): ReactElement {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleFieldChange(e, field)
               }
+              setStatus={setStatus}
             />
           )
       )}

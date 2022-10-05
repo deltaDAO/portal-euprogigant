@@ -59,7 +59,8 @@ export default function FormEditMetadata({
   const { config } = useOcean()
   const {
     validateField,
-    setFieldValue
+    setFieldValue,
+    setStatus
   }: FormikContextType<Partial<MetadataPublishFormDataset>> = useFormikContext()
 
   // Manually handle change events instead of using `handleChange` from Formik.
@@ -105,6 +106,7 @@ export default function FormEditMetadata({
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleFieldChange(e, field)
               }
+              setStatus={setStatus}
             />
           )
       )}

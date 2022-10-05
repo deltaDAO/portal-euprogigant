@@ -38,6 +38,7 @@ export default function ServiceSelfDescription(
   const verifyRawBody = async (rawServiceSD: string) => {
     try {
       setIsLoading(true)
+      props.setStatus('loading')
 
       const parsedServiceSD = JSON.parse(rawServiceSD)
       const signedServiceSD = parsedServiceSD?.complianceCredential
@@ -66,6 +67,7 @@ export default function ServiceSelfDescription(
       console.error(error.message)
     } finally {
       setIsLoading(false)
+      props.setStatus(null)
     }
   }
 
@@ -106,7 +108,9 @@ export default function ServiceSelfDescription(
       </div>
       {field.value !== '' && (
         <div>
-          {userSelection === 'url' && <Input type="files" {...props} />}
+          {userSelection === 'url' && (
+            <Input type="files" setStatus={props.setStatus} {...props} />
+          )}
           {userSelection === 'raw' &&
             (!isVerified ? (
               <div className={styles.inputContainer}>
