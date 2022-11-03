@@ -8,7 +8,7 @@ module.exports = {
   // const { appConfig } = useSiteMetadata()
   // return appConfig.metadataCacheUri
   metadataCacheUri:
-    process.env.GATSBY_METADATACACHE_URI || 'https://aquarius.euprogigant.io',
+    process.env.GATSBY_METADATACACHE_URI || 'https://aquarius.delta-dao.com',
 
   complianceUri:
     process.env.GATSBY_COMPLIANCE_URI || 'https://compliance.gaia-x.eu',
