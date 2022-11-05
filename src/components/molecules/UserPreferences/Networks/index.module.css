@@ -1,5 +1,12 @@
+.container label,
+.container p {
+  color: var(--brand-white);
+}
+
 .networks {
-  margin-right: calc(var(--spacer) / 3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   overflow: hidden;
 }
@@ -7,7 +14,7 @@
 .chainsSelected {
   text-align: center;
   position: absolute;
-  bottom: -8px;
+  bottom: -6px;
   left: 0;
   width: 100%;
 }

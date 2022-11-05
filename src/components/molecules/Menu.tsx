@@ -9,6 +9,7 @@ import Logo from '../atoms/Logo'
 import SearchBar from './SearchBar'
 import Container from '../atoms/Container'
 import Network from './Wallet/Network'
+import Networks from './UserPreferences/Networks'
 
 const Wallet = loadable(() => import('./Wallet'))
 
@@ -45,6 +46,7 @@ export default function Menu(): ReactElement {
           <div className={styles.navigationContainer}>
             <div className={styles.actions}>
               <SearchBar />
+              <Networks />
               <Network />
             </div>
             <ul className={styles.navigation}>

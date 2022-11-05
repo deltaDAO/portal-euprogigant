@@ -50,7 +50,7 @@ export default function Networks(): ReactElement {
       <Tooltip
         content={
           <ul className={stylesIndex.preferencesDetails}>
-            <li>
+            <li className={styles.container}>
               <Label htmlFor="chains">Networks</Label>
               <FormHelp>Switch the data source for the interface.</FormHelp>
 
