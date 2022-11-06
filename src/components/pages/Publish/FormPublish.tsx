@@ -10,7 +10,7 @@ import { useFormikContext, Field, Form, FormikContextType } from 'formik'
 import Input from '../../atoms/Input'
 import { FormContent, FormFieldProps } from '../../../@types/Form'
 import { MetadataPublishFormDataset } from '../../../@types/MetaData'
-import { initialValues as initialValuesDataset } from '../../../models/FormAlgoPublish'
+import { initialValues as initialValuesDataset } from '../../../models/FormPublish'
 import { ReactComponent as Download } from '../../../images/download.svg'
 import { ReactComponent as Compute } from '../../../images/compute.svg'
 import FormTitle from './FormTitle'
@@ -157,6 +157,7 @@ export default function FormPublish(): ReactElement {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleFieldChange(e, field)
               }
+              setStatus={setStatus}
             />
           )
       )}

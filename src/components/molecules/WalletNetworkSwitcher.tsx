@@ -8,25 +8,24 @@ import {
 import Button from '../atoms/Button'
 import styles from './WalletNetworkSwitcher.module.css'
 import useNetworkMetadata from '../../hooks/useNetworkMetadata'
-import { useAsset } from '../../providers/Asset'
 
-export default function WalletNetworkSwitcher(): ReactElement {
-  const { networkId, web3Provider } = useWeb3()
-  const { ddo } = useAsset()
+export default function WalletNetworkSwitcher({
+  chainId
+}: {
+  chainId: number
+}): ReactElement {
+  const { web3Provider } = useWeb3()
+
   const { networksList } = useNetworkMetadata()
-  const ddoNetworkData = getNetworkDataById(networksList, ddo.chainId)
-  const walletNetworkData = getNetworkDataById(networksList, networkId)
+  const targetNetworkData = getNetworkDataById(networksList, chainId)
 
-  const ddoNetworkName = (
-    <strong>{getNetworkDisplayName(ddoNetworkData, ddo.chainId)}</strong>
-  )
-  const walletNetworkName = (
-    <strong>{getNetworkDisplayName(walletNetworkData, networkId)}</strong>
+  const targetNetworkName = (
+    <strong>{getNetworkDisplayName(targetNetworkData, chainId)}</strong>
   )
 
   async function switchWalletNetwork() {
     const networkNode = await networksList.find(
-      (data) => data.node.chainId === ddo.chainId
+      (data) => data.node.chainId === chainId
     ).node
     addCustomNetwork(web3Provider, networkNode)
   }
@@ -34,16 +33,15 @@ export default function WalletNetworkSwitcher(): ReactElement {
   return (
     <>
       <p className={styles.text}>
-        This asset is published on {ddoNetworkName} but your wallet is connected
-        to {walletNetworkName}. Connect to {ddoNetworkName} to interact with
-        this asset.
+        The portal does not support your currently selected network. Please
+        connect to {targetNetworkName} to interact with this portal.
       </p>
       <Button
         style="primary"
         size="small"
         onClick={() => switchWalletNetwork()}
       >
-        Switch to {ddoNetworkName}
+        Switch to {targetNetworkName}
       </Button>
     </>
   )

@@ -51,6 +51,7 @@ export default function InputElement({
   additionalComponent,
   disclaimer,
   disclaimerValues,
+  setStatus,
   ...props
 }: InputProps): ReactElement {
   const styleClasses = cx({ select: true, [size]: size })
@@ -133,9 +134,18 @@ export default function InputElement({
         />
       )
     case 'files':
-      return <FilesInput name={name} {...field} {...props} />
+      return (
+        <FilesInput name={name} setStatus={setStatus} {...field} {...props} />
+      )
     case 'serviceSelfDescription':
-      return <ServiceSelfDescription name={name} {...field} {...props} />
+      return (
+        <ServiceSelfDescription
+          name={name}
+          setStatus={setStatus}
+          {...field}
+          {...props}
+        />
+      )
     case 'providerUri':
       return <CustomProvider name={name} {...field} {...props} />
     case 'datatoken':
