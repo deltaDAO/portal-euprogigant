@@ -41,9 +41,6 @@ export default function PoweredBy(): ReactElement {
         >
           <img src={deltaDao.childImageSharp.original.src} />
         </LinkOpener>
-        <LinkOpener uri="https://oceanprotocol.com" openNewTab>
-          <Logo />
-        </LinkOpener>
       </div>
     </div>
   )
