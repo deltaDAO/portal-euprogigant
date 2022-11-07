@@ -16,7 +16,12 @@ import { SearchQuery } from '../models/aquarius/SearchQuery'
 import { SearchResponse } from '../models/aquarius/SearchResponse'
 import { BaseQueryParams } from '../models/aquarius/BaseQueryParams'
 import { FilterTerm } from '../models/aquarius/FilterTerm'
-import { SortDirectionOptions, SortTermOptions } from '../models/SortAndFilters'
+import {
+  FilterByAccessOptions,
+  FilterByTypeOptions,
+  SortDirectionOptions,
+  SortTermOptions
+} from '../models/SortAndFilters'
 
 export interface DownloadedAsset {
   dtSymbol: string
@@ -365,16 +370,16 @@ export async function getPublishedAssets(
   chainIds: number[],
   cancelToken: CancelToken,
   page?: number,
-  type?: string,
-  accesType?: string
+  type?: FilterByTypeOptions[],
+  accessType?: FilterByAccessOptions[]
 ): Promise<PagedAssets> {
   if (!accountId) return
 
   const filters: FilterTerm[] = []
 
   filters.push(getFilterTerm('publicKey.owner', accountId.toLowerCase()))
-  accesType !== undefined &&
-    filters.push(getFilterTerm('service.type', accesType))
+  accessType !== undefined &&
+    filters.push(getFilterTerm('service.type', accessType))
   type !== undefined &&
     filters.push(getFilterTerm('service.attributes.main.type', type))
 

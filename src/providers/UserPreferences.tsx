@@ -29,6 +29,8 @@ interface UserPreferencesValue {
   onboardingStep: number
   setOnboardingStep: (step: number) => void
   locale: string
+  showOnboardingModule: boolean
+  setShowOnboardingModule: (value: boolean) => void
 }
 
 const UserPreferencesContext = createContext(null)
@@ -82,6 +84,12 @@ function UserPreferencesProvider({
     localStorage?.onboardingStep || 0
   )
 
+  const [showOnboardingModule, setShowOnboardingModule] = useState<boolean>(
+    localStorage?.showOnboardingModule === undefined
+      ? true
+      : localStorage?.showOnboardingModule
+  )
+
   // Write values to localStorage on change
   useEffect(() => {
     setLocalStorage({
@@ -92,7 +100,8 @@ function UserPreferencesProvider({
       privacyPolicySlug,
       showPPC,
       infiniteApproval,
-      onboardingStep
+      onboardingStep,
+      showOnboardingModule
     })
   }, [
     chainIds,
@@ -102,7 +111,8 @@ function UserPreferencesProvider({
     privacyPolicySlug,
     showPPC,
     infiniteApproval,
-    onboardingStep
+    onboardingStep,
+    showOnboardingModule
   ])
 
   // Set ocean.js log levels, default: Error
@@ -161,7 +171,9 @@ function UserPreferencesProvider({
           setPrivacyPolicySlug,
           setShowPPC,
           onboardingStep,
-          setOnboardingStep
+          setOnboardingStep,
+          showOnboardingModule,
+          setShowOnboardingModule
         } as UserPreferencesValue
       }
     >

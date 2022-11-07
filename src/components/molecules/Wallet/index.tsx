@@ -12,7 +12,7 @@ export default function Wallet(): ReactElement {
     <div className={styles.wallet}>
       <Tooltip
         content={<Details />}
-        trigger="click focus"
+        trigger="click focus mouseenter"
         disabled={!accountId}
       >
         <Account />
