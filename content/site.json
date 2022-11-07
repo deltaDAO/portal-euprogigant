@@ -8,6 +8,10 @@
     "copyright": "Built by [deltaDAO](https://delta-dao.com)",
     "menu": [
       {
+        "name": "Catalogue",
+        "link": "/search?sort=_score&sortOrder=desc&text="
+      },
+      {
         "name": "Publish",
         "link": "/publish"
       },
