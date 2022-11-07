@@ -10,26 +10,45 @@ import SearchBar from './SearchBar'
 import Container from '../atoms/Container'
 import Network from './Wallet/Network'
 import Networks from './UserPreferences/Networks'
+import classNames from 'classnames/bind'
 
 const Wallet = loadable(() => import('./Wallet'))
 
-declare type MenuItem = {
+const cx = classNames.bind(styles)
+
+export function MenuLink({
+  name,
+  link,
+  className
+}: {
   name: string
   link: string
-}
-
-function MenuLink({ item }: { item: MenuItem }) {
+  className?: string
+}): ReactElement {
   const location = useLocation()
 
-  const classes =
-    location?.pathname === item.link
-      ? `${styles.link} ${styles.active}`
-      : styles.link
+  const basePath = location?.pathname.split(/[/?]/)[1]
+  const baseLink = link.split(/[/?]/)[1]
 
-  return (
-    <Link key={item.name} to={item.link} className={classes}>
-      {item.name}
+  const classes = cx({
+    link: true,
+    active: link.startsWith('/') && basePath === baseLink,
+    [className]: className
+  })
+
+  return link.startsWith('/') ? (
+    <Link key={name} to={link} className={classes}>
+      {name}
     </Link>
+  ) : (
+    <a
+      href={link}
+      className={classes}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {name} &#8599;
+    </a>
   )
 }
 
@@ -50,16 +69,13 @@ export default function Menu(): ReactElement {
               <Network />
             </div>
             <ul className={styles.navigation}>
-              {menu.map((item: MenuItem) => (
+              {menu.map((item) => (
                 <li key={item.name}>
-                  <MenuLink item={item} />
+                  <MenuLink name={item.name} link={item.link} />
                 </li>
               ))}
               <li>
                 <Wallet />
-              </li>
-              <li>
-                <UserPreferences />
               </li>
             </ul>
           </div>

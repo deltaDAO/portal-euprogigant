@@ -18,7 +18,9 @@ const useUserPreferences: UserPreferencesValue = {
   removeBookmark: jest.fn(),
   setInfiniteApproval: jest.fn(),
   onboardingStep: 0,
-  setOnboardingStep: jest.fn()
+  setOnboardingStep: jest.fn(),
+  showOnboardingModule: false,
+  setShowOnboardingModule: jest.fn()
 }
 
 export default useUserPreferences

@@ -18,10 +18,6 @@
       {
         "name": "Verify",
         "link": "/verify"
-      },
-      {
-        "name": "Profile",
-        "link": "/profile"
       }
     ],
     "warning": {
