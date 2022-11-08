@@ -54,22 +54,6 @@ export default function AccountHeader({
           <PublisherLinks className={styles.publisherLinks} />
         )}
       </div>
-      <div className={styles.meta}>
-        Profile data from{' '}
-        {profile?.accountEns && (
-          <>
-            <LinkExternal
-              url={`https://app.ens.domains/name/${profile.accountEns}`}
-              text="ENS"
-            />{' '}
-            &{' '}
-          </>
-        )}
-        <LinkExternal
-          url={`https://www.3box.io/${accountId}`}
-          text="3Box Hub"
-        />
-      </div>
     </div>
   )
 }

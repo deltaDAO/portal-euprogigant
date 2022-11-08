@@ -1,53 +1,58 @@
 .details {
+  --sub-section-spacing: calc(var(--spacer) / 2);
+
   padding: calc(var(--spacer) / 4);
-  padding-right: calc(var(--spacer) / 2);
+  padding-right: var(--sub-section-spacing);
   min-width: 17rem;
   color: var(--brand-white);
 }
 
 @media (min-width: 40rem) {
   .details {
-    padding: calc(var(--spacer) / 2);
+    padding: var(--sub-section-spacing);
     margin-right: calc(var(--spacer) / 3);
     min-width: 20rem;
   }
 }
 
 .details > section[class*='feedback'] {
-  margin-top: calc(var(--spacer) / 2);
+  margin-top: var(--sub-section-spacing);
 }
 
-.action,
-.action:hover,
-.addToken,
-.addToken:hover {
+.profileLink,
+.bookmarksLink {
+  display: flex;
+  align-items: center;
+  padding-top: var(--sub-section-spacing);
+}
+
+.profileLink img,
+.bookmarksLink svg {
+  margin: 0;
+  margin-right: calc(var(--spacer) / 8);
+}
+
+.bookmarksLink svg {
+  width: var(--font-size-large);
+  height: var(--font-size-large);
+  fill: var(--brand-violet);
+}
+
+.profileButton,
+.profileButton:hover,
+.bookmarksButton,
+.bookmarksButton:hover {
+  padding: 0;
   color: var(--brand-white);
-}
-
-.balance {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-bold);
-  white-space: nowrap;
-}
-
-.balance span {
-  color: var(--brand-white) !important;
-}
-
-.symbol {
-  width: 22%;
-  text-align: right;
-  font-weight: var(--font-weight-base);
-  font-size: var(--font-size-small);
-  display: inline-block;
-  margin-right: 0.4rem;
 }
 
 .actions {
   border-top: 1px solid var(--border-color);
-  margin-top: calc(var(--spacer) / 2);
-  padding-top: calc(var(--spacer) / 2);
+  border-bottom: 1px solid var(--border-color);
+  margin: var(--sub-section-spacing) 0;
+  padding: var(--sub-section-spacing) 0;
   font-size: var(--font-size-small);
+  color: var(--brand-white);
   display: flex;
   justify-content: space-between;
 }
@@ -66,6 +71,7 @@
   font-size: var(--font-size-mini);
   margin-top: calc(var(--spacer) / 3);
   text-align: left;
+  color: var(--brand-white);
 }
 
 .actions button:first-child {
@@ -97,4 +103,14 @@
 
 .addToken {
   margin-left: 0.3rem;
+}
+
+.debug *,
+.onboarding * {
+  margin-bottom: 0;
+  color: var(--brand-white);
+}
+
+.debug {
+  margin-top: var(--sub-section-spacing);
 }

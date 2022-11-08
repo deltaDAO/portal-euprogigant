@@ -7,14 +7,19 @@ import FundedBy from '../organisms/FundedBy'
 import ProjectPartners from '../organisms/ProjectPartners'
 import FeaturedAssets from '../organisms/FeaturedAssets'
 import PoweredBy from '../organisms/PoweredBy'
+import { useUserPreferences } from '../../providers/UserPreferences'
 
 export default function HomePage(): ReactElement {
+  const { showOnboardingModule } = useUserPreferences()
+
   return (
     <Permission eventType="browse">
       <>
-        <section className={styles.content}>
-          <OnboardingSection />
-        </section>
+        {showOnboardingModule && (
+          <section className={styles.content}>
+            <OnboardingSection />
+          </section>
+        )}
         <section className={styles.content}>
           <HomeContent />
         </section>
