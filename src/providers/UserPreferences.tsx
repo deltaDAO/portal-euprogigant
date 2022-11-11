@@ -84,11 +84,8 @@ function UserPreferencesProvider({
     localStorage?.onboardingStep || 0
   )
 
-  const [showOnboardingModule, setShowOnboardingModule] = useState<boolean>(
-    localStorage?.showOnboardingModule === undefined
-      ? true
-      : localStorage?.showOnboardingModule
-  )
+  const [showOnboardingModule, setShowOnboardingModule] =
+    useState<boolean>(false)
 
   // Write values to localStorage on change
   useEffect(() => {
@@ -100,8 +97,7 @@ function UserPreferencesProvider({
       privacyPolicySlug,
       showPPC,
       infiniteApproval,
-      onboardingStep,
-      showOnboardingModule
+      onboardingStep
     })
   }, [
     chainIds,
@@ -111,8 +107,7 @@ function UserPreferencesProvider({
     privacyPolicySlug,
     showPPC,
     infiniteApproval,
-    onboardingStep,
-    showOnboardingModule
+    onboardingStep
   ])
 
   // Set ocean.js log levels, default: Error
