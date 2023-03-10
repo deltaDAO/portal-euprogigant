@@ -1,5 +1,10 @@
 {
   "content": {
+    "banner": {
+      "image": "../../../src/images/banner_EuProGigant.png",
+      "cta": "Try Now",
+      "ctaTo": "https://partmatching.euprogigant.io/"
+    },
     "teaser": {
       "title": "EuProGigant and Gaia-X",
       "text": "EuProGigant is the first funded binational industrial project with the practical implementation of the Gaia-X principles. It aims to illustrate the technological and economic benefits of the open, European multi-cloud infrastructure Gaia-X"
