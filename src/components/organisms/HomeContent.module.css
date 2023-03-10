@@ -1,6 +1,10 @@
+.banner {
+  display: none;
+}
+
 .container {
   margin: var(--spacer);
-  margin-top: calc(var(--spacer) * 5);
+  margin-top: calc(var(--spacer) * 2);
 }
 
 .teaser {
@@ -51,5 +55,18 @@
     margin: var(--spacer) 0;
     margin-right: auto;
     margin-left: 0;
+  }
+}
+
+@media screen and (min-width: 40rem) {
+  .banner {
+    display: block;
+    position: relative;
+    margin-top: calc(var(--spacer) * 2);
+  }
+  .bannerButton {
+    position: absolute;
+    bottom: 8%;
+    left: 3%;
   }
 }
