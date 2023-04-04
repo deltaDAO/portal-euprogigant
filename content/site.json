@@ -7,7 +7,7 @@
   "menu": [
     {
       "name": "Catalogue",
-      "link": "/search?sort=_score&sortOrder=desc&text="
+      "link": "/search?sortOrder=desc&text=&sort=nft.created"
     },
     {
       "name": "Publish",
@@ -49,7 +49,7 @@
           },
           {
             "name": "Catalogue",
-            "link": "/search?sort=nft.created&sortOrder=desc"
+            "link": "/search?sortOrder=desc&text=&sort=nft.created"
           },
           {
             "name": "Profile",
