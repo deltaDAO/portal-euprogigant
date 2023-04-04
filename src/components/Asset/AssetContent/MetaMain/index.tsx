@@ -26,7 +26,9 @@ export default function MetaMain({
   return (
     <aside className={styles.meta}>
       <header className={styles.asset}>
-        <Nft isBlockscoutExplorer={isBlockscoutExplorer} />
+        <div className={styles.nftContainer}>
+          <Nft isBlockscoutExplorer={isBlockscoutExplorer} />
+        </div>
         <MetaAsset asset={asset} isBlockscoutExplorer={isBlockscoutExplorer} />
       </header>
       <div className={styles.publisherInfo}>

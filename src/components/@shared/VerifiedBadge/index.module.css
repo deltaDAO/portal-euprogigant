@@ -33,7 +33,7 @@
 .apiVersion,
 .lastVerified {
   font-weight: var(--font-weight-base);
-  color: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 .isInvalid {

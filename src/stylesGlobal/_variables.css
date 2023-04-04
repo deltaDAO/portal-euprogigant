@@ -137,6 +137,10 @@
   --filter-clear-font-color: var(--color-primary);
   --filter-clear-hover-font-color: var(--brand-blue);
 
+  /* Asset content view */
+  --asset-content-border-size: var(--border-size-sm);
+  --asset-content-border-color: var(--color-secondary);
+
   /* Confetti */
   --confetti-color-one: var(--brand-blue-dark);
   --confetti-color-two: var(--brand-yellow);
