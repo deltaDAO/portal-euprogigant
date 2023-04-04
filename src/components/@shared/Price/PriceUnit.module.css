@@ -3,7 +3,7 @@
   font-weight: var(--font-weight-bold);
   font-family: var(--font-family-base);
 
-  color: var(--font-color-text);
+  color: var(--teaser-price-unit-font-color);
   line-height: 1.2;
 }
 
@@ -13,7 +13,7 @@
 
 .symbol {
   font-weight: var(--font-weight-base);
-  color: var(--color-secondary);
+  color: var(--teaser-datatoken-font-color);
   font-size: var(--font-size-base);
 }
 

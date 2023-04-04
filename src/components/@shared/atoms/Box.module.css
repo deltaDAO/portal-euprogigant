@@ -17,6 +17,6 @@
 a.box:hover,
 a.box:focus {
   outline: 0;
-  transform: translate3d(0, -0.1rem, 0);
+  transform: var(--box-template-transform-hover);
   box-shadow: var(--box-template-hover-box-shadow);
 }

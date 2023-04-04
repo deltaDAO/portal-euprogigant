@@ -25,12 +25,12 @@
 }
 
 .viewSelector svg path {
-  fill: var(--teaser-border-color);
+  fill: var(--asset-view-icon-fill);
   transition: 0.2s ease-in-out;
 }
 
 .viewSelector:hover svg path,
 .selected svg path {
-  fill: var(--teaser-title-font-color);
+  fill: var(--asset-view-icon-selected-fill);
   transition: 0.2s ease-in-out;
 }

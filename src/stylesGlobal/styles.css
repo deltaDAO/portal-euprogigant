@@ -37,7 +37,7 @@ body {
 }
 
 a {
-  text-decoration: underline;
+  text-decoration: none;
   color: var(--link-font-color);
   transition: 0.2s ease-out;
 }
