@@ -85,7 +85,7 @@ export default function TagsAutoComplete({
       placeholder={placeholder}
       theme={(theme) => ({
         ...theme,
-        colors: { ...theme.colors, primary25: 'var(--border-color)' }
+        colors: { ...theme.colors, primary25: 'var(--input-border-color)' }
       })}
     />
   )

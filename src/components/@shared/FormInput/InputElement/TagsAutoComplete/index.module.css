@@ -15,7 +15,7 @@
 }
 
 .select [class$='control']:focus-within {
-  border-color: var(--input-border-color);
+  border-color: var(--input-selectedborder-color);
 }
 
 .select [class$='ValueContainer'] {
@@ -81,7 +81,7 @@
 .select [class$='menu'] {
   background-color: var(--input-background);
   margin-top: -2px;
-  border: var(--input-border-size) solid var(--input-border-color);
+  border: var(--input-border-size) solid var(--input-selected-border-color);
   border-top-color: var(--input-border-color);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
