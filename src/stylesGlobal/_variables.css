@@ -91,7 +91,7 @@
   --button-text-font-color-hover: var(--brand-blue-dark);
 
   /* Loading spinner */
-  --loader-border-color: var(--brand-blue);
+  --loader-border-color: var(--brand-blue-dark);
   --loader-top-border-color: transparent;
   --loader-border-size: var(--border-size);
   --loader-message-color: var(--color-secondary);
