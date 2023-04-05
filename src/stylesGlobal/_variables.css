@@ -99,7 +99,7 @@
   /* Box template */
   --box-template-background: var(--background-content);
   --box-template-border-radius: var(--border-radius);
-  --box-template-border-size: var(--border-size-sm);
+  --box-template-border-size: 0;
   --box-template-border-color: var(--border-color);
   --box-template-box-shadow: 0 6px 17px 0 var(--box-shadow-color);
   --box-template-hover-box-shadow: 0 10px 25px 0 var(--box-shadow-color);
