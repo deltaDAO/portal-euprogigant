@@ -10,14 +10,12 @@ export default function PageHeader({
   title,
   center,
   description,
-  isHome,
-  showSearch
+  isHome
 }: {
   title: string | ReactElement
   center?: boolean
   description?: string
   isHome?: boolean
-  showSearch?: boolean
 }): ReactElement {
   const styleClasses = cx({
     header: true,
@@ -25,28 +23,29 @@ export default function PageHeader({
   })
 
   return (
-    <header className={styleClasses}>
-      {isHome ? (
-        <div className={styles.homeTitleContainer}>
-          <h1>
-            {(title as string).split(' - ').map((text, i) => (
-              <span key={i} className={styles.title}>
-                {text}
-              </span>
-            ))}
-          </h1>
-        </div>
-      ) : (
-        <h1 className={styles.title}>{title}</h1>
-      )}
-      {description && (
-        <Markdown text={description} className={styles.description} />
-      )}
-      {showSearch && (
+    <div className={isHome ? styles.homeWrapper : styles.wrapper}>
+      <header className={styleClasses}>
+        {isHome ? (
+          <div className={styles.homeTitleContainer}>
+            <h1>
+              {(title as string).split(' - ').map((text, i) => (
+                <span key={i} className={styles.title}>
+                  {text}
+                </span>
+              ))}
+            </h1>
+          </div>
+        ) : (
+          <h1 className={styles.title}>{title}</h1>
+        )}
+        {description && (
+          <Markdown text={description} className={styles.description} />
+        )}
+
         <div className={styles.search}>
           <SearchBar placeholder="Search for service offerings" />
         </div>
-      )}
-    </header>
+      </header>
+    </div>
   )
 }

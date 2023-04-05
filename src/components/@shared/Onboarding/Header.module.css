@@ -35,9 +35,6 @@
 }
 
 @media screen and (min-width: 40rem) {
-  .container {
-    width: calc(100% - var(--spacer) * 2);
-  }
   .container svg {
     width: 8rem;
     display: inline;
