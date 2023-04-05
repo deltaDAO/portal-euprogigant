@@ -5,6 +5,7 @@ import FeaturedAssets from './FeaturedAssets'
 import Container from '@components/@shared/atoms/Container'
 import { ProjectPartners } from './ProjectPartners'
 import FundedBy from './FundedBy'
+import PoweredBy from './PoweredBy'
 
 export default function HomePage(): ReactElement {
   return (
@@ -19,6 +20,7 @@ export default function HomePage(): ReactElement {
 
       <Container>
         <FundedBy />
+        <PoweredBy />
       </Container>
     </>
   )

@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: calc(var(--spacer) * 2);
+}
+
+.container p {
+  margin-bottom: calc(var(--spacer) / 8);
+  color: var(--font-color-heading);
+  font-weight: var(--font-weight-bold);
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: calc(var(--spacer) / 2);
+}
+
+.logo svg {
+  width: 15rem;
+  height: 5rem;
+}
