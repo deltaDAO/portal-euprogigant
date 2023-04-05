@@ -25,6 +25,7 @@
   --badge-background-color: var(--color-primary);
   --asset-view-icon-fill: var(--brand-grey-light);
   --asset-view-icon-selected-fill: var(--color-primary);
+  --transition-duration: 0.3s;
 
   /* Menubar */
   --menu-logo-color: unset;

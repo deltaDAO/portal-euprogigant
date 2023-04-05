@@ -3,6 +3,7 @@ import HomeContent from './Content'
 import OnboardingSection from '@components/@shared/Onboarding'
 import FeaturedAssets from './FeaturedAssets'
 import Container from '@components/@shared/atoms/Container'
+import { ProjectPartners } from './ProjectPartners'
 
 export default function HomePage(): ReactElement {
   return (
@@ -12,6 +13,7 @@ export default function HomePage(): ReactElement {
         <HomeContent />
         <FeaturedAssets />
       </Container>
+      <ProjectPartners />
     </>
   )
 }
