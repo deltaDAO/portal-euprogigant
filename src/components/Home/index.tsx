@@ -4,6 +4,7 @@ import OnboardingSection from '@components/@shared/Onboarding'
 import FeaturedAssets from './FeaturedAssets'
 import Container from '@components/@shared/atoms/Container'
 import { ProjectPartners } from './ProjectPartners'
+import FundedBy from './FundedBy'
 
 export default function HomePage(): ReactElement {
   return (
@@ -13,7 +14,12 @@ export default function HomePage(): ReactElement {
         <HomeContent />
         <FeaturedAssets />
       </Container>
+
       <ProjectPartners />
+
+      <Container>
+        <FundedBy />
+      </Container>
     </>
   )
 }
