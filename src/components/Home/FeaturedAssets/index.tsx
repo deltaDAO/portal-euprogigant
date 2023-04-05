@@ -4,7 +4,6 @@ import BlobShape from '@images/blobShape.svg'
 import Compute from '@images/compute.svg'
 import Lock from '@images/lock.svg'
 import content from '../../../../content/pages/home/featured.json'
-import Container from '@components/@shared/atoms/Container'
 import Markdown from '@components/@shared/Markdown'
 import Button from '@components/@shared/atoms/Button'
 
@@ -24,7 +23,7 @@ export default function FeaturedAssets(): ReactElement {
   const { featured }: Featured = content
 
   return (
-    <Container className={styles.container}>
+    <div className={styles.container}>
       <h3>Featured Assets</h3>
       <div className={styles.section}>
         {featured.map((type) => (
@@ -43,6 +42,6 @@ export default function FeaturedAssets(): ReactElement {
           </div>
         ))}
       </div>
-    </Container>
+    </div>
   )
 }

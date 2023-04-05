@@ -48,8 +48,8 @@ export default function Page({
             isHome={isHome}
           />
         )}
-        {children}
       </Container>
+      {isHome ? <>{children}</> : <Container>{children}</Container>}
     </>
   )
 }
