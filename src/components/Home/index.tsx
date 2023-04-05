@@ -79,9 +79,7 @@ export default function HomePage(): ReactElement {
 
   return (
     <>
-      <section className={styles.content}>
-        <OnboardingSection />
-      </section>
+      <OnboardingSection />
       {hasFeaturedAssets() && (
         <>
           {queryFeatured.map((section, i) => (
