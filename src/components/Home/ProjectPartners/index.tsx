@@ -33,7 +33,7 @@ export const ProjectPartners = (): ReactElement => {
         <div className={styles.footer}>
           <Button
             style="text"
-            href="https://euprogigant.com/partner/projektpartner/"
+            href="https://euprogigant.com/en/partners/project-partners/"
             target="_blank"
             rel="noopener noreferrer"
           >
