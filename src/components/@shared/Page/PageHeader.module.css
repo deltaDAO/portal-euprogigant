@@ -23,7 +23,6 @@
 }
 
 .title {
-  color: var(--brand-white);
   font-size: var(--font-size-h3);
   margin-top: 0;
   margin-bottom: 0;
@@ -52,6 +51,10 @@
 .description {
   margin-top: calc(var(--spacer) / 4);
   margin-bottom: 0;
+}
+
+.homeWrapper .title,
+.homeWrapper .description {
   color: var(--brand-white);
 }
 

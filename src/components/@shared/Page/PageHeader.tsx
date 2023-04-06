@@ -42,9 +42,11 @@ export default function PageHeader({
           <Markdown text={description} className={styles.description} />
         )}
 
-        <div className={styles.search}>
-          <SearchBar placeholder="Search for service offerings" />
-        </div>
+        {isHome && (
+          <div className={styles.search}>
+            <SearchBar placeholder="Search for service offerings" />
+          </div>
+        )}
       </header>
     </div>
   )
