@@ -16,6 +16,14 @@
     {
       "name": "Verify",
       "link": "/verify"
+    },
+    {
+      "name": "BTM",
+      "link": "https://partmatching.euprogigant.io/"
+    },
+    {
+      "name": "Log",
+      "link": "https://explorer.genx.minimal-gaia-x.eu/"
     }
   ],
   "announcement": "",
@@ -37,6 +45,10 @@
           {
             "name": "GEN-X Faucet",
             "link": "https://faucet.genx.minimal-gaia-x.eu/"
+          },
+          {
+            "name": "BTM",
+            "link": "https://partmatching.euprogigant.io/"
           }
         ]
       },
