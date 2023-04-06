@@ -103,10 +103,12 @@
 }
 
 .debug *,
-.externalContent * {
+.externalContent *,
+.onboarding * {
   margin-bottom: 0;
 }
 
-.debug {
+.debug,
+.onboarding {
   margin-top: var(--sub-section-spacing);
 }

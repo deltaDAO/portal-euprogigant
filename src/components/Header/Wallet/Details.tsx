@@ -8,6 +8,7 @@ import Bookmark from '@images/bookmark.svg'
 import { MenuLink } from '../Menu'
 import AddTokenList from './AddTokenList'
 import ExternalContent from '../UserPreferences/ExternalContent'
+import Onboarding from '../UserPreferences/Onboarding'
 
 export default function Details(): ReactElement {
   const { accountId, web3ProviderInfo, web3Modal, connect, logout } = useWeb3()
@@ -64,6 +65,9 @@ export default function Details(): ReactElement {
         </li>
         <li className={styles.externalContent}>
           <ExternalContent />
+        </li>
+        <li className={styles.onboarding}>
+          <Onboarding />
         </li>
         <li className={styles.debug}>
           <Debug />

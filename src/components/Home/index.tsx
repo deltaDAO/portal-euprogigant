@@ -6,12 +6,15 @@ import Container from '@components/@shared/atoms/Container'
 import { ProjectPartners } from './ProjectPartners'
 import FundedBy from './FundedBy'
 import PoweredBy from './PoweredBy'
+import { useUserPreferences } from '@context/UserPreferences'
 
 export default function HomePage(): ReactElement {
+  const { showOnboardingModule } = useUserPreferences()
+
   return (
     <>
       <Container>
-        <OnboardingSection />
+        {showOnboardingModule && <OnboardingSection />}
         <HomeContent />
         <FeaturedAssets />
       </Container>
