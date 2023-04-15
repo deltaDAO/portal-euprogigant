@@ -175,7 +175,7 @@ function AssetProvider({
         verified && !!serviceSelfDescriptionContent
       )
       setServiceSDVersion(complianceApiVersion)
-      const serviceProviderName = await getPublisherFromServiceSD(
+      const serviceProviderName = getPublisherFromServiceSD(
         serviceSelfDescriptionContent
       )
       setVerifiedServiceProviderName(serviceProviderName)

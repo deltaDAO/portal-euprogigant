@@ -11,8 +11,7 @@ module.exports = {
     process.env.GATSBY_METADATACACHE_URI || 'https://aquarius.euprogigant.io',
 
   complianceUri:
-    process.env.GATSBY_COMPLIANCE_URI ||
-    'https://compliance.lab.gaia-x.eu/development',
+    process.env.GATSBY_COMPLIANCE_URI || 'https://compliance.lab.gaia-x.eu',
 
   // TODO: revert to 22.06
   complianceApiVersion: process.env.GATSBY_COMPLIANCE_API_VERSION || '2210',
