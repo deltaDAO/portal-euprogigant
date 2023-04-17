@@ -5,6 +5,11 @@
   height: calc(var(--spacer) * 2);
   display: flex;
   align-items: center;
+  border-right: var(--border-size-sm) solid var(--brand-white);
+}
+
+.darkBackground {
+  background-color: var(--color-primary);
 }
 
 .nftImage > svg:first-of-type {

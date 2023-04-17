@@ -8,6 +8,10 @@
   fill: var(--ocean-black);
 }
 
+.white path {
+  fill: var(--ocean-white);
+}
+
 a > .logo:hover path {
   fill: var(--ocean-pink);
 }
