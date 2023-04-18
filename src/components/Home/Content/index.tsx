@@ -27,7 +27,7 @@ export default function HomeContent(): ReactElement {
   const { paragraphs, teaser }: HomeContentData = content
 
   return (
-    <Container>
+    <div>
       <div className={styles.container}>
         <div className={styles.teaser}>
           <h2>{teaser.title}</h2>
@@ -60,6 +60,6 @@ export default function HomeContent(): ReactElement {
           ))}
         </div>
       </div>
-    </Container>
+    </div>
   )
 }

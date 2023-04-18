@@ -1,0 +1,28 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: calc(var(--spacer) * 2);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacer);
+}
+
+.logo {
+  width: 100%;
+  max-width: 35rem;
+}
+
+@media screen and (min-width: 45rem) {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: calc(var(--spacer) / 2);
+  }
+  .logo {
+    max-width: none;
+  }
+}

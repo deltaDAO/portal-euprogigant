@@ -26,6 +26,10 @@ interface UserPreferencesValue {
   setShowPPC: (value: boolean) => void
   allowExternalContent: boolean
   setAllowExternalContent: (value: boolean) => void
+  onboardingStep: number
+  setOnboardingStep: (step: number) => void
+  showOnboardingModule: boolean
+  setShowOnboardingModule: (value: boolean) => void
   locale: string
 }
 
@@ -77,6 +81,16 @@ function UserPreferencesProvider({
     localStorage?.allowExternalContent || false
   )
 
+  const [onboardingStep, setOnboardingStep] = useState<number>(
+    localStorage?.onboardingStep || 0
+  )
+
+  const [showOnboardingModule, setShowOnboardingModule] = useState<boolean>(
+    localStorage?.showOnboardingModule === undefined
+      ? true
+      : localStorage?.showOnboardingModule
+  )
+
   // Write values to localStorage on change
   useEffect(() => {
     setLocalStorage({
@@ -86,7 +100,9 @@ function UserPreferencesProvider({
       bookmarks,
       privacyPolicySlug,
       showPPC,
-      allowExternalContent
+      allowExternalContent,
+      onboardingStep,
+      showOnboardingModule
     })
   }, [
     chainIds,
@@ -95,7 +111,9 @@ function UserPreferencesProvider({
     bookmarks,
     privacyPolicySlug,
     showPPC,
-    allowExternalContent
+    allowExternalContent,
+    onboardingStep,
+    showOnboardingModule
   ])
 
   // Set ocean.js log levels, default: Error
@@ -160,7 +178,11 @@ function UserPreferencesProvider({
           setPrivacyPolicySlug,
           setShowPPC,
           allowExternalContent,
-          setAllowExternalContent
+          setAllowExternalContent,
+          onboardingStep,
+          setOnboardingStep,
+          showOnboardingModule,
+          setShowOnboardingModule
         } as UserPreferencesValue
       }
     >

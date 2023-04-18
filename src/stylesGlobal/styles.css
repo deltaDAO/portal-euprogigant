@@ -42,6 +42,11 @@ a {
   transition: 0.2s ease-out;
 }
 
+a:hover,
+a:focus {
+  color: var(--link-font-color-hover);
+}
+
 p {
   margin: 0;
   margin-bottom: calc(var(--spacer) / var(--line-height));

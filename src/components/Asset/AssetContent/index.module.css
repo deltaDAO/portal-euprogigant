@@ -12,13 +12,23 @@
 
 .grid > div {
   overflow: hidden;
+  /* add padding to see box-shadow with hidden overflow */
+  padding: var(--spacer);
+  /* set a negative margin to fix the spacing */
+  margin: calc(var(--spacer) * -1);
 }
 
 .content {
   composes: box from '@shared/atoms/Box.module.css';
   padding-top: 0;
   margin-top: var(--spacer);
+  box-shadow: var(--teaser-box-shadow);
+  border: none;
   position: relative;
+}
+
+.actions > div {
+  margin-top: var(--spacer);
 }
 
 @media (min-width: 60rem) {

@@ -22,6 +22,7 @@
 
 a.link:hover,
 a.link:focus {
+  color: var(--teaser-font-color);
   box-shadow: var(--teaser-hover-box-shadow);
 }
 
@@ -60,7 +61,7 @@ a.link:focus {
 .typeLabel {
   font-size: var(--font-size-mini);
   display: inline-block;
-  border-left: 1px solid var(--border-color);
+  border-left: 1px solid var(--teaser-border-color);
   padding-left: calc(var(--spacer) / 4);
   margin-left: calc(var(--spacer) / 4);
 }

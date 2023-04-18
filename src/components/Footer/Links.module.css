@@ -35,11 +35,13 @@
   text-transform: none;
   color: var(--footer-font-color);
   font-weight: var(--font-weight-normal);
+  text-decoration: var(--footer-link-text-decoration);
   transform: none;
 }
 
 .link:hover {
   color: var(--footer-font-color-highlight);
+  text-decoration: var(--footer-link-text-decoration-hover);
   transform: none;
 }
 

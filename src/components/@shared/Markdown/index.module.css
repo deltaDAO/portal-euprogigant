@@ -5,6 +5,10 @@
   word-break: break-word;
 }
 
+.markdown a {
+  text-decoration: underline;
+}
+
 .markdown h1,
 .markdown h2,
 .markdown h3,

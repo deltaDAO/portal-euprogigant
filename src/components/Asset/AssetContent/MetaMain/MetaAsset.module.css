@@ -4,6 +4,7 @@
   height: 100%;
   padding-left: calc(var(--spacer) / 2);
   justify-content: center;
+  color: var(--brand-white);
 }
 
 .datatoken {
@@ -13,6 +14,15 @@
 
 .owner {
   display: block;
+}
+
+.datatoken:hover > *,
+.owner:hover * {
+  color: var(--brand-yellow) !important;
+}
+
+.datatoken svg path {
+  fill: var(--brand-white);
 }
 
 .addWrap {

@@ -4,7 +4,7 @@ import { useWeb3 } from '@context/Web3'
 import EUROeLogo from '@images/EUROe_Symbol_Black.svg'
 import OceanLogo from '@images/logo.svg'
 
-const tokenLogos = {
+export const tokenLogos = {
   EUROe: {
     image: <EUROeLogo />,
     url: 'https://dev.euroe.com/img/EUROe_Symbol_Black.svg'

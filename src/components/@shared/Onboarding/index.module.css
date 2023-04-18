@@ -1,0 +1,11 @@
+.cardWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.cardContainer {
+  composes: box from '../atoms/Box.module.css';
+  width: 100%;
+}

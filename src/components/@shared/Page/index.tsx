@@ -46,11 +46,10 @@ export default function Page({
             center={headerCenter}
             description={description}
             isHome={isHome}
-            showSearch={isHome}
           />
         )}
-        {children}
       </Container>
+      {isHome ? <>{children}</> : <Container>{children}</Container>}
     </>
   )
 }

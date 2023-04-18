@@ -7,6 +7,9 @@ import { FormPublishData } from '@components/Publish/_types'
 import OceanLogo from '@shared/atoms/OceanLogo'
 import NftTooltip from './NftTooltip'
 import styles from './index.module.css'
+import classNames from 'classnames/bind'
+
+const cx = classNames.bind(styles)
 
 export default function Nft({
   isBlockscoutExplorer
@@ -35,11 +38,11 @@ export default function Nft({
     : null
 
   return (
-    <div className={styles.nftImage}>
+    <div className={cx({ nftImage: true, darkBackground: !nftImage })}>
       {nftImage ? (
         <img src={nftImage} alt={asset?.nft?.name} />
       ) : (
-        <OceanLogo noWordmark />
+        <OceanLogo noWordmark white />
       )}
 
       {(nftMetadata || asset?.nftAddress) && (

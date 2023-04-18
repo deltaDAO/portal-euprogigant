@@ -142,8 +142,10 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
   // Helper: Get approved base tokens list
   // -----------------------------------
   const getApprovedBaseTokens = useCallback(async (chainId: number) => {
+    console.log(chainId)
     try {
       const approvedTokensList = await getOpcsApprovedTokens(chainId)
+      console.log(approvedBaseTokens)
       setApprovedBaseTokens(approvedTokensList)
       LoggerInstance.log('[web3] Approved baseTokens', approvedTokensList)
     } catch (error) {
@@ -228,7 +230,7 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
   // -----------------------------------
   useEffect(() => {
     if (web3Loading) return
-    getApprovedBaseTokens(chainId || 1)
+    getApprovedBaseTokens(chainId || 100)
   }, [chainId, getApprovedBaseTokens, web3Loading])
 
   // -----------------------------------

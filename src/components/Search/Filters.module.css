@@ -30,7 +30,7 @@ button.filter,
 .filter:hover,
 .filter:focus {
   color: var(--filter-hover-font-color);
-  background: inherit;
+  background: var(--filter-background-hover);
   transform: none;
 }
 

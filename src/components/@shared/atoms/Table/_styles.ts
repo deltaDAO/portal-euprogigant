@@ -39,7 +39,7 @@ export const customStyles: TableStyles = {
   headCells: {
     style: {
       textTransform: 'uppercase',
-      color: 'var(--color-secondary)',
+      color: 'var(--color-primary)',
       fontSize: 'var(--font-size-small)'
     }
   },

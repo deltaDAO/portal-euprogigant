@@ -1,8 +1,9 @@
 .tabListContainer {
   margin-left: auto;
   margin-right: auto;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--color-primary);
   max-width: 100%;
+  background-color: var(--color-primary);
 }
 
 .tabList {
@@ -19,10 +20,11 @@
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-small);
   text-transform: uppercase;
-  color: var(--color-secondary);
+  color: var(--color-primary);
   background-color: var(--background-body);
-  border: 1px solid var(--border-color);
-  margin-right: -1px;
+  border: 1px solid var(--background-body);
+  border-radius: var(--border-radius);
+  margin: 0 calc(var(--spacer) / 8);
 }
 
 .tab,
@@ -43,9 +45,9 @@
 }
 
 .tab[aria-selected='true'] {
-  background-color: var(--font-color-heading);
-  color: var(--background-body);
-  border-color: var(--font-color-heading);
+  background-color: var(--brand-yellow);
+  color: var(--color-primary);
+  border-color: var(--brand-yellow);
 }
 
 .tab[aria-disabled='true'] {

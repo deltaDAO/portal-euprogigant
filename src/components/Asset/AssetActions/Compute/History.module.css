@@ -45,7 +45,6 @@
 .title {
   font-size: var(--font-size-base);
   margin-bottom: calc(var(--spacer) / 3);
-  color: var(--color-secondary);
   margin-bottom: 0;
   display: flex;
   align-items: center;
@@ -55,6 +54,13 @@
 
 .title + div {
   margin-top: calc(var(--spacer) / 3);
+}
+
+.toggle,
+.toggle:hover,
+.toggle:focus,
+.toggle:active {
+  color: var(--brand-blue-light);
 }
 
 .toggle svg {
