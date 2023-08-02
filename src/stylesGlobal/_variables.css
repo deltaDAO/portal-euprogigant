@@ -22,6 +22,11 @@
   --link-font-color: var(--color-primary);
   --link-font-color-hover: var(--color-highlight);
   --nft-refresh-icon-fill: var(--brand-white);
+  --nft-placeholder-background: linear-gradient(
+    to left top,
+    var(--brand-blue-dark),
+    var(--brand-yellow)
+  );
   --badge-background-color: var(--color-primary);
   --asset-view-icon-fill: var(--brand-grey-light);
   --asset-view-icon-selected-fill: var(--color-primary);
