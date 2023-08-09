@@ -2,12 +2,7 @@ import {
   SortDirectionOptions,
   SortTermOptions
 } from '../../@types/aquarius/SearchQuery'
-import {
-  escapeEsReservedCharacters,
-  getFilterTerm,
-  generateBaseQuery,
-  getWhitelistShould
-} from '.'
+import { escapeEsReservedCharacters, getFilterTerm, generateBaseQuery } from '.'
 
 const defaultBaseQueryReturn = {
   from: 0,
@@ -15,20 +10,17 @@ const defaultBaseQueryReturn = {
     bool: {
       filter: [
         { terms: { chainId: [1, 3] } },
-        { term: { _index: 'oceanv4' } },
+        { term: { _index: 'v510' } },
         { term: { 'purgatory.state': false } },
-        [
-          {
-            bool: {
-              must_not: [
-                { term: { 'nft.state': 5 } },
-                { term: { 'price.type': 'pool' } }
-              ]
-            }
+        {
+          bool: {
+            must_not: [
+              { term: { 'nft.state': 5 } },
+              { term: { 'price.type': 'pool' } }
+            ]
           }
-        ]
-      ],
-      ...getWhitelistShould()
+        }
+      ]
     }
   },
   size: 1000
