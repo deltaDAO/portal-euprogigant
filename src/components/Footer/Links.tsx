@@ -7,7 +7,7 @@ import { useMarketMetadata } from '@context/MarketMetadata'
 
 export default function Links(): ReactElement {
   const { appConfig, siteContent } = useMarketMetadata()
-  const { setShowPPC, privacyPolicySlug } = useUserPreferences()
+  const { setShowPPC } = useUserPreferences()
   const cookies = useGdprMetadata()
 
   const { content, privacyTitle } = siteContent.footer
@@ -38,10 +38,7 @@ export default function Links(): ReactElement {
           <Button to="/imprint" className={styles.link}>
             Imprint
           </Button>
-          <Button
-            href="https://www.minimal-gaia-x.eu/privacy/en"
-            className={styles.link}
-          >
+          <Button href="https://pontus-x.eu/privacy/en" className={styles.link}>
             Privacy
           </Button>
           {appConfig.privacyPreferenceCenter === 'true' && (
