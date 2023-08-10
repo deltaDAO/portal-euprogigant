@@ -44,7 +44,7 @@
 
 .actions {
   border-top: var(--menu-mobile-navigation-border-size) solid
-    var(--menu-mobile-navigation-border-color);
+    var(--menu-border-color);
   margin-top: var(--sub-section-spacing);
   padding-top: var(--sub-section-spacing);
   padding-bottom: calc(var(--sub-section-spacing) / 2);
