@@ -5,4 +5,5 @@
   margin: auto;
   box-shadow: 0 0 15px #0000001a;
   border: none;
+  padding: var(--spacer) calc(var(--spacer) / 1.5);
 }

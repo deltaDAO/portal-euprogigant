@@ -17,12 +17,14 @@ import { useIsMounted } from '@hooks/useIsMounted'
 import { useMarketMetadata } from '@context/MarketMetadata'
 import Alert from '@shared/atoms/Alert'
 import Loader from '@shared/atoms/Loader'
+import WhitelistIndicator from './Compute/WhitelistIndicator'
 
 export default function Download({
   asset,
   file,
   isBalanceSufficient,
   dtBalance,
+  isAccountIdWhitelisted,
   fileIsLoading,
   consumableFeedback
 }: {
@@ -30,6 +32,7 @@ export default function Download({
   file: FileInfo
   isBalanceSufficient: boolean
   dtBalance: string
+  isAccountIdWhitelisted: boolean
   fileIsLoading?: boolean
   consumableFeedback?: string
 }): ReactElement {
@@ -113,23 +116,28 @@ export default function Download({
      * - if the user is on the wrong network
      * - if user balance is not sufficient
      * - if user has no datatokens
+     * - if user is not whitelisted or blacklisted
      */
     const isDisabled =
       !asset?.accessDetails.isPurchasable ||
       !isAssetNetwork ||
-      ((!isBalanceSufficient || !isAssetNetwork) && !isOwned && !hasDatatoken)
+      ((!isBalanceSufficient || !isAssetNetwork) &&
+        !isOwned &&
+        !hasDatatoken) ||
+      !isAccountIdWhitelisted
 
     setIsDisabled(isDisabled)
   }, [
     isMounted,
-    asset?.accessDetails,
+    asset,
     isBalanceSufficient,
     isAssetNetwork,
     hasDatatoken,
     accountId,
     isOwned,
     isUnsupportedPricing,
-    orderPriceAndFees
+    orderPriceAndFees,
+    isAccountIdWhitelisted
   ])
 
   async function handleOrderOrDownload() {
@@ -211,7 +219,7 @@ export default function Download({
                 text={`No pricing schema available for this asset.`}
               />
             ) : (
-              <>
+              <div className={styles.priceWrapper}>
                 {isPriceLoading ? (
                   <Loader message="Calculating full price (including fees)" />
                 ) : (
@@ -223,7 +231,7 @@ export default function Download({
                 )}
 
                 {!isInPurgatory && <PurchaseButton />}
-              </>
+              </div>
             )}
           </>
         )}
@@ -244,6 +252,12 @@ export default function Download({
         <AlgorithmDatasetsListForCompute
           algorithmDid={asset.id}
           asset={asset}
+        />
+      )}
+      {accountId && (
+        <WhitelistIndicator
+          accountId={accountId}
+          isAccountIdWhitelisted={isAccountIdWhitelisted}
         />
       )}
     </aside>
