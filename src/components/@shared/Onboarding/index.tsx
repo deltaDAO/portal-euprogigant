@@ -29,7 +29,7 @@ const steps = [
   { shortLabel: 'Connect', component: <ConnectAccount /> },
   { shortLabel: 'Network', component: <ConnectNetwork /> },
   { shortLabel: 'Tokens', component: <ImportCustomTokens /> },
-  { shortLabel: 'Faucet', component: <ClaimTokens /> },
+  // { shortLabel: 'Faucet', component: <ClaimTokens /> },
   { shortLabel: 'Ready', component: <Ready /> }
 ]
 
