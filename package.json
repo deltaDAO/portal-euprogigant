@@ -36,7 +36,7 @@
     "@orbisclub/orbis-sdk": "^0.4.40",
     "@tippyjs/react": "^4.2.6",
     "@uiw/react-codemirror": "^4.19.5",
-    "@urql/exchange-refocus": "^1.0.0",
+    "@urql/exchange-refocus": "^1.0.2",
     "@walletconnect/web3-provider": "^1.8.0",
     "axios": "^1.2.0",
     "classnames": "^2.3.2",
