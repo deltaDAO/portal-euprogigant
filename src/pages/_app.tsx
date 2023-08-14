@@ -7,7 +7,7 @@ import UrqlProvider from '@context/UrqlProvider'
 import ConsentProvider from '@context/CookieConsent'
 import MarketMetadataProvider from '@context/MarketMetadata'
 import { SearchBarStatusProvider } from '@context/SearchBarStatus'
-import App from '../../src/components/App'
+import App from 'src/components/App'
 
 import '@oceanprotocol/typographies/css/ocean-typo.css'
 import '../stylesGlobal/styles.css'

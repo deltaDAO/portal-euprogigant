@@ -143,8 +143,12 @@ export async function getComputeEnviroment(
     const computeEnvs = await ProviderInstance.getComputeEnvironments(
       asset.services[0].serviceEndpoint
     )
-    if (!computeEnvs[0]) return null
-    return computeEnvs[0]
+    const computeEnv = Array.isArray(computeEnvs)
+      ? computeEnvs[0]
+      : computeEnvs[asset.chainId][0]
+
+    if (!computeEnv) return null
+    return computeEnv
   } catch (e) {
     LoggerInstance.error('[compute] Fetch compute enviroment: ', e.message)
   }
@@ -165,7 +169,12 @@ export function getQueryString(
   algorithmDidList?.length > 0 &&
     baseParams.filters.push(getFilterTerm('_id', algorithmDidList))
   trustedPublishersList?.length > 0 &&
-    baseParams.filters.push(getFilterTerm('nft.owner', trustedPublishersList))
+    baseParams.filters.push(
+      getFilterTerm(
+        'nft.owner',
+        trustedPublishersList.map((address) => address.toLowerCase())
+      )
+    )
   const query = generateBaseQuery(baseParams)
 
   return query
@@ -200,7 +209,8 @@ export async function getAlgorithmsForAsset(
 
 export async function getAlgorithmAssetSelectionList(
   asset: Asset,
-  algorithms: Asset[]
+  algorithms: Asset[],
+  accountId: string
 ): Promise<AssetSelectionAsset[]> {
   if (!algorithms || algorithms?.length === 0) return []
 
@@ -212,6 +222,7 @@ export async function getAlgorithmAssetSelectionList(
     algorithmSelectionList = await transformAssetToAssetSelection(
       computeService?.serviceEndpoint,
       algorithms,
+      accountId,
       []
     )
   }

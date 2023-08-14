@@ -13,7 +13,7 @@ import {
   Service,
   ZERO_ADDRESS
 } from '@oceanprotocol/lib'
-import { mapTimeoutStringToSeconds } from '@utils/ddo'
+import { mapTimeoutStringToSeconds, normalizeFile } from '@utils/ddo'
 import { generateNftCreateData } from '@utils/nft'
 import { getEncryptedFiles } from '@utils/provider'
 import slugify from 'slugify'
@@ -32,7 +32,7 @@ import {
 import { sanitizeUrl } from '@utils/url'
 import { getContainerChecksum } from '@utils/docker'
 import axios from 'axios'
-import { ServiceSD } from 'src/@types/gaia-x/2210/ServiceSD'
+import { ServiceCredential } from 'src/@types/gaia-x/2210/ServiceCredential'
 
 function getUrlFileExtension(fileUrl: string): string {
   const splittedFileUrl = fileUrl.split('.')
@@ -159,30 +159,17 @@ export async function transformPublishFormToDdo(
       })
   }
 
-  // this is the default format hardcoded
-
   const file = {
     nftAddress,
     datatokenAddress,
-    files: [
-      {
-        type: files[0].type,
-        index: 0,
-        [files[0].type === 'ipfs'
-          ? 'hash'
-          : files[0].type === 'arweave'
-          ? 'transactionId'
-          : 'url']: files[0].url,
-        method: 'GET'
-      }
-    ]
+    files: [normalizeFile(files[0].type, files[0], chainId)]
   }
 
   const filesEncrypted =
     !isPreview &&
     files?.length &&
     files[0].valid &&
-    (await getEncryptedFiles(file, providerUrl.url))
+    (await getEncryptedFiles(file, chainId, providerUrl.url))
 
   const newService: Service = {
     id: getHash(datatokenAddress + filesEncrypted),
@@ -344,16 +331,21 @@ export function getComplianceApiVersion(context?: string[]): string {
   return '2204'
 }
 
-export async function signServiceSD(rawServiceSD: any): Promise<any> {
-  if (!rawServiceSD) return
+export async function signServiceCredential(
+  rawServiceCredential: any
+): Promise<any> {
+  if (!rawServiceCredential) return
   try {
-    const response = await axios.post(`${complianceUri}/api/sign`, rawServiceSD)
-    const signedServiceSD = {
-      selfDescriptionCredential: { ...rawServiceSD },
+    const response = await axios.post(
+      `${complianceUri}/api/sign`,
+      rawServiceCredential
+    )
+    const signedServiceCredential = {
+      selfDescriptionCredential: { ...rawServiceCredential },
       ...response.data
     }
 
-    return signedServiceSD
+    return signedServiceCredential
   } catch (error) {
     LoggerInstance.error(error.message)
   }
@@ -388,14 +380,18 @@ export async function storeRawServiceSD(signedSD: {
   }
 }
 
-export async function verifyRawServiceSD(rawServiceSD: string): Promise<{
+export async function verifyRawServiceCredential(
+  rawServiceCredential: string,
+  did?: string
+): Promise<{
   verified: boolean
   complianceApiVersion?: string
+  idMatch?: boolean
   responseBody?: any
 }> {
-  if (!rawServiceSD) return { verified: false }
+  if (!rawServiceCredential) return { verified: false }
 
-  const parsedServiceSD = JSON.parse(rawServiceSD)
+  const parsedServiceCredential = JSON.parse(rawServiceCredential)
   // TODO: put back the compliance API version check
   // const complianceApiVersion = getComplianceApiVersion(
   //   parsedServiceSD?.selfDescriptionCredential?.['@context']
@@ -404,7 +400,7 @@ export async function verifyRawServiceSD(rawServiceSD: string): Promise<{
   const baseUrl = `${complianceUri}/v1/api/credential-offers`
 
   try {
-    const response = await axios.post(baseUrl, parsedServiceSD)
+    const response = await axios.post(baseUrl, parsedServiceCredential)
     if (response?.status === 409) {
       return {
         verified: false,
@@ -412,7 +408,14 @@ export async function verifyRawServiceSD(rawServiceSD: string): Promise<{
       }
     }
     if (response?.status === 201) {
-      return { verified: true, complianceApiVersion }
+      const credentialId =
+        parsedServiceCredential.verifiableCredential[0].credentialSubject.id
+
+      return {
+        verified: true,
+        complianceApiVersion,
+        idMatch: did && did?.toLowerCase() === credentialId?.toLowerCase()
+      }
     }
 
     return { verified: false }
@@ -422,12 +425,12 @@ export async function verifyRawServiceSD(rawServiceSD: string): Promise<{
   }
 }
 
-export async function getServiceSD(url: string): Promise<string> {
+export async function getServiceCredential(url: string): Promise<string> {
   if (!url) return
 
   try {
-    const serviceSD = await axios.get(url)
-    return JSON.stringify(serviceSD.data, null, 2)
+    const serviceCredential = await axios.get(url)
+    return JSON.stringify(serviceCredential.data, null, 2)
   } catch (error) {
     LoggerInstance.error(error.message)
   }
@@ -438,11 +441,11 @@ export function getFormattedCodeString(parsedCodeBlock: any): string {
   return `\`\`\`\n${formattedString}\n\`\`\``
 }
 
-export function updateServiceSelfDescription(
+export function updateServiceCredential(
   ddo: DDO,
-  serviceSelfDescription: ServiceSD
+  serviceCredential: ServiceCredential
 ): DDO {
-  const { raw, url } = serviceSelfDescription
+  const { raw, url } = serviceCredential
   ddo.metadata.additionalInformation.gaiaXInformation.serviceSelfDescription = {
     raw,
     url
@@ -451,14 +454,17 @@ export function updateServiceSelfDescription(
   return ddo
 }
 
-export function getPublisherFromServiceSD(serviceSD: any): string {
-  if (!serviceSD) return
-
-  const parsedServiceSD =
-    typeof serviceSD === 'string' ? JSON.parse(serviceSD) : serviceSD
+export function getPublisherFromServiceCredential(
+  serviceCredential: any
+): string {
+  if (!serviceCredential) return
+  const parsedServiceCredential =
+    typeof serviceCredential === 'string'
+      ? JSON.parse(serviceCredential)
+      : serviceCredential
 
   const legalName =
-    parsedServiceSD?.verifiableCredential?.[0]?.credentialSubject?.[
+    parsedServiceCredential?.verifiableCredential?.[0]?.credentialSubject?.[
       'gx:legalName'
     ]
   const publisher =

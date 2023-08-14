@@ -1,12 +1,10 @@
 import React, { ReactElement, useState, useEffect } from 'react'
 import Compute from './Compute'
-import Consume from './Download'
+import Download from './Download'
 import { FileInfo, LoggerInstance, Datatoken } from '@oceanprotocol/lib'
-import Tabs, { TabsItem } from '@shared/atoms/Tabs'
 import { compareAsBN } from '@utils/numbers'
 import { useAsset } from '@context/Asset'
 import { useWeb3 } from '@context/Web3'
-import Web3Feedback from '@shared/Web3Feedback'
 import { getFileDidInfo, getFileInfo } from '@utils/provider'
 import { getOceanConfig } from '@utils/ocean'
 import { useCancelToken } from '@hooks/useCancelToken'
@@ -16,13 +14,14 @@ import { useFormikContext } from 'formik'
 import { FormPublishData } from '@components/Publish/_types'
 import { getTokenBalanceFromSymbol } from '@utils/web3'
 import AssetStats from './AssetStats'
+import { isAddressWhitelisted } from '@utils/ddo'
 
 export default function AssetActions({
   asset
 }: {
   asset: AssetExtended
 }): ReactElement {
-  const { accountId, balance, web3 } = useWeb3()
+  const { accountId, balance, web3, chainId } = useWeb3()
   const { isAssetNetwork } = useAsset()
   const newCancelToken = useCancelToken()
   const isMounted = useIsMounted()
@@ -37,6 +36,9 @@ export default function AssetActions({
   const [dtBalance, setDtBalance] = useState<string>()
   const [fileMetadata, setFileMetadata] = useState<FileInfo>()
   const [fileIsLoading, setFileIsLoading] = useState<boolean>(false)
+  const [isAccountIdWhitelisted, setIsAccountIdWhitelisted] =
+    useState<boolean>()
+
   const isCompute = Boolean(
     asset?.services.filter((service) => service.type === 'compute')[0]
   )
@@ -56,13 +58,25 @@ export default function AssetActions({
         ? formikState?.values?.services[0].files[0].type
         : null
 
+      // TODO: replace 'any' with correct typing
+      const file = formikState?.values?.services[0].files[0] as any
+      const query = file?.query || undefined
+      const abi = file?.abi || undefined
+      const headers = file?.headers || undefined
+      const method = file?.method || undefined
+
       try {
         const fileInfoResponse = formikState?.values?.services?.[0].files?.[0]
           .url
           ? await getFileInfo(
               formikState?.values?.services?.[0].files?.[0].url,
               providerUrl,
-              storageType
+              storageType,
+              query,
+              headers,
+              abi,
+              chainId,
+              method
             )
           : await getFileDidInfo(asset?.id, asset?.services[0]?.id, providerUrl)
 
@@ -132,37 +146,34 @@ export default function AssetActions({
     }
   }, [balance, accountId, asset?.accessDetails, dtBalance])
 
-  const UseContent = (
-    <>
+  // check for if user is whitelisted or blacklisted
+  useEffect(() => {
+    if (!asset || !accountId) return
+
+    setIsAccountIdWhitelisted(isAddressWhitelisted(asset, accountId))
+  }, [accountId, asset])
+
+  return (
+    <div className={styles.actions}>
       {isCompute ? (
         <Compute
           asset={asset}
           dtBalance={dtBalance}
+          isAccountIdWhitelisted={isAccountIdWhitelisted}
           file={fileMetadata}
           fileIsLoading={fileIsLoading}
         />
       ) : (
-        <Consume
+        <Download
           asset={asset}
           dtBalance={dtBalance}
           isBalanceSufficient={isBalanceSufficient}
+          isAccountIdWhitelisted={isAccountIdWhitelisted}
           file={fileMetadata}
           fileIsLoading={fileIsLoading}
         />
       )}
-    </>
-  )
-
-  const tabs: TabsItem[] = [{ title: 'Use', content: UseContent }]
-
-  return (
-    <>
-      <Tabs items={tabs} className={styles.actions} />
-      <Web3Feedback
-        networkId={asset?.chainId}
-        accountId={accountId}
-        isAssetNetwork={isAssetNetwork}
-      />
-    </>
+      <AssetStats />
+    </div>
   )
 }

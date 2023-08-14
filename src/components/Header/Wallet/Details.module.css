@@ -44,11 +44,10 @@
 
 .actions {
   border-top: var(--menu-mobile-navigation-border-size) solid
-    var(--menu-mobile-navigation-border-color);
-  border-bottom: var(--menu-mobile-navigation-border-size) solid
-    var(--menu-mobile-navigation-border-color);
-  margin: var(--sub-section-spacing) 0;
-  padding: var(--sub-section-spacing) 0;
+    var(--menu-border-color);
+  margin-top: var(--sub-section-spacing);
+  padding-top: var(--sub-section-spacing);
+  padding-bottom: calc(var(--sub-section-spacing) / 2);
   font-size: var(--font-size-small);
   color: var(--font-color-text);
   display: flex;
@@ -100,15 +99,4 @@
 
 .addToken {
   margin-left: 0.3rem;
-}
-
-.debug *,
-.externalContent *,
-.onboarding * {
-  margin-bottom: 0;
-}
-
-.debug,
-.onboarding {
-  margin-top: var(--sub-section-spacing);
 }

@@ -17,12 +17,14 @@ import { useIsMounted } from '@hooks/useIsMounted'
 import { useMarketMetadata } from '@context/MarketMetadata'
 import Alert from '@shared/atoms/Alert'
 import Loader from '@shared/atoms/Loader'
+import WhitelistIndicator from './Compute/WhitelistIndicator'
 
 export default function Download({
   asset,
   file,
   isBalanceSufficient,
   dtBalance,
+  isAccountIdWhitelisted,
   fileIsLoading,
   consumableFeedback
 }: {
@@ -30,6 +32,7 @@ export default function Download({
   file: FileInfo
   isBalanceSufficient: boolean
   dtBalance: string
+  isAccountIdWhitelisted: boolean
   fileIsLoading?: boolean
   consumableFeedback?: string
 }): ReactElement {
@@ -51,6 +54,9 @@ export default function Download({
   const [retry, setRetry] = useState<boolean>(false)
 
   const isUnsupportedPricing =
+    !asset?.accessDetails ||
+    !asset.services.length ||
+    asset?.stats?.price?.value === undefined ||
     asset?.accessDetails?.type === 'NOT_SUPPORTED' ||
     (asset?.accessDetails?.type === 'fixed' &&
       !asset?.accessDetails?.baseToken?.symbol)
@@ -60,7 +66,7 @@ export default function Download({
   }, [asset?.nft.state])
 
   useEffect(() => {
-    if (!asset?.accessDetails || isUnsupportedPricing) return
+    if (isUnsupportedPricing) return
 
     setIsOwned(asset?.accessDetails?.isOwned || false)
     setValidOrderTx(asset?.accessDetails?.validOrderTx || '')
@@ -100,7 +106,6 @@ export default function Download({
       (asset?.accessDetails?.type === 'fixed' && !orderPriceAndFees) ||
       !isMounted ||
       !accountId ||
-      !asset?.accessDetails ||
       isUnsupportedPricing
     )
       return
@@ -111,23 +116,28 @@ export default function Download({
      * - if the user is on the wrong network
      * - if user balance is not sufficient
      * - if user has no datatokens
+     * - if user is not whitelisted or blacklisted
      */
     const isDisabled =
       !asset?.accessDetails.isPurchasable ||
       !isAssetNetwork ||
-      ((!isBalanceSufficient || !isAssetNetwork) && !isOwned && !hasDatatoken)
+      ((!isBalanceSufficient || !isAssetNetwork) &&
+        !isOwned &&
+        !hasDatatoken) ||
+      !isAccountIdWhitelisted
 
     setIsDisabled(isDisabled)
   }, [
     isMounted,
-    asset?.accessDetails,
+    asset,
     isBalanceSufficient,
     isAssetNetwork,
     hasDatatoken,
     accountId,
     isOwned,
     isUnsupportedPricing,
-    orderPriceAndFees
+    orderPriceAndFees,
+    isAccountIdWhitelisted
   ])
 
   async function handleOrderOrDownload() {
@@ -202,26 +212,26 @@ export default function Download({
           />
         ) : (
           <>
-            {isUnsupportedPricing || !asset.services.length ? (
+            {isUnsupportedPricing ? (
               <Alert
                 className={styles.fieldWarning}
                 state="info"
                 text={`No pricing schema available for this asset.`}
               />
             ) : (
-              <>
+              <div className={styles.priceWrapper}>
                 {isPriceLoading ? (
                   <Loader message="Calculating full price (including fees)" />
                 ) : (
                   <Price
-                    accessDetails={asset.accessDetails}
+                    price={asset.stats?.price}
                     orderPriceAndFees={orderPriceAndFees}
                     size="large"
                   />
                 )}
 
                 {!isInPurgatory && <PurchaseButton />}
-              </>
+              </div>
             )}
           </>
         )}
@@ -242,6 +252,12 @@ export default function Download({
         <AlgorithmDatasetsListForCompute
           algorithmDid={asset.id}
           asset={asset}
+        />
+      )}
+      {accountId && (
+        <WhitelistIndicator
+          accountId={accountId}
+          isAccountIdWhitelisted={isAccountIdWhitelisted}
         />
       )}
     </aside>
