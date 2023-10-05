@@ -14,7 +14,10 @@ import ContainerInput from '@shared/FormInput/InputElement/ContainerInput'
 import TagsAutoComplete from './TagsAutoComplete'
 import TabsFile from '@shared/atoms/TabsFile'
 import { extensions, oceanTheme } from '@utils/codemirror'
+import { ConsumerParameters } from './ConsumerParameters'
 import ServiceCredential from './ServiceCredential'
+import ComputeEnvSelection from './ComputeEnvSelection'
+import Credentials from './Credential'
 
 const cx = classNames.bind(styles)
 
@@ -64,6 +67,7 @@ const InputElement = forwardRef(
       additionalComponent,
       disclaimer,
       disclaimerValues,
+      accountId,
       /* eslint-enable @typescript-eslint/no-unused-vars */
       ...props
     }: InputProps,
@@ -141,6 +145,9 @@ const InputElement = forwardRef(
           />
         )
 
+      case 'consumerParameters':
+        return <ConsumerParameters {...field} form={form} {...props} />
+
       case 'textarea':
         return (
           <textarea id={props.name} className={styles.textarea} {...props} />
@@ -160,6 +167,16 @@ const InputElement = forwardRef(
         return (
           <AssetSelection
             assets={options as AssetSelectionAsset[]}
+            accountId={accountId}
+            {...field}
+            {...props}
+          />
+        )
+
+      case 'computeEnvSelection':
+        return (
+          <ComputeEnvSelection
+            computeEnvs={options as ComputeEnvironmentExtended[]}
             {...field}
             {...props}
           />
@@ -196,6 +213,8 @@ const InputElement = forwardRef(
         )
       case 'tags':
         return <TagsAutoComplete {...field} {...props} />
+      case 'credentials':
+        return <Credentials {...field} {...props} />
       default:
         return prefix || postfix ? (
           <div
