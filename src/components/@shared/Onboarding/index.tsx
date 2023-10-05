@@ -7,12 +7,11 @@ import Container from '../atoms/Container'
 import Stepper from './Stepper'
 import DownloadMetamask from './Steps/DownloadMetamask'
 import ConnectAccount from './Steps/ConnectAccount'
-import ConnectNetwork from './Steps/ConnectNetwork'
 import ImportCustomTokens from './Steps/ImportCustomTokens'
 import Ready from './Steps/Ready'
-import ClaimTokens from './Steps/ClaimTokens'
-import { useWeb3 } from '@context/Web3'
+import { useAccount, useNetwork, useProvider } from 'wagmi'
 import { useUserPreferences } from '@context/UserPreferences'
+import useBalance from '@hooks/useBalance'
 import { GEN_X_NETWORK_ID } from 'chains.config'
 
 export interface OnboardingStep {
@@ -27,9 +26,7 @@ export interface OnboardingStep {
 const steps = [
   { shortLabel: 'MetaMask', component: <DownloadMetamask /> },
   { shortLabel: 'Connect', component: <ConnectAccount /> },
-  { shortLabel: 'Network', component: <ConnectNetwork /> },
   { shortLabel: 'Tokens', component: <ImportCustomTokens /> },
-  // { shortLabel: 'Faucet', component: <ClaimTokens /> },
   { shortLabel: 'Ready', component: <Ready /> }
 ]
 
@@ -39,7 +36,10 @@ export enum NavigationDirections {
 }
 
 export default function OnboardingSection(): ReactElement {
-  const { accountId, balance, networkId, web3Provider } = useWeb3()
+  const { address: accountId } = useAccount()
+  const { balance } = useBalance()
+  const web3Provider = useProvider()
+  const { chain } = useNetwork()
   const { onboardingStep, setOnboardingStep } = useUserPreferences()
   const [onboardingCompleted, setOnboardingCompleted] = useState(false)
   const [navigationDirection, setNavigationDirection] =
@@ -51,10 +51,10 @@ export default function OnboardingSection(): ReactElement {
   }, [onboardingStep, setOnboardingStep])
 
   useEffect(() => {
-    if (accountId && web3Provider && networkId === GEN_X_NETWORK_ID) {
+    if (accountId && web3Provider && chain?.id === GEN_X_NETWORK_ID) {
       setOnboardingCompleted(true)
     }
-  }, [accountId, balance, networkId, web3Provider])
+  }, [accountId, balance, chain?.id, web3Provider])
 
   return (
     <div className={styles.wrapper}>

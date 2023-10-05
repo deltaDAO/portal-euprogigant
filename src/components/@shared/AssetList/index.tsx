@@ -85,6 +85,7 @@ export default function AssetList({
   showPagination,
   page,
   totalPages,
+  isLoading,
   onPageChange,
   className,
   noPublisher,

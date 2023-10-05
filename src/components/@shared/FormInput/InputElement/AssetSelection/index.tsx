@@ -39,8 +39,6 @@ export default function AssetSelection({
   disabled?: boolean
   accountId?: string
 }): JSX.Element {
-  const { accountId } = useWeb3()
-
   const [searchValue, setSearchValue] = useState('')
 
   const styleClassesWrapper = `${styles.selection} ${

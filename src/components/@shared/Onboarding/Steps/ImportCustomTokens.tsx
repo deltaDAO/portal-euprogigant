@@ -4,16 +4,21 @@ import { OnboardingStep } from '..'
 import StepBody from '../StepBody'
 import StepHeader from '../StepHeader'
 import content from '../../../../../content/onboarding/steps/importCustomTokens.json'
-import { useWeb3 } from '@context/Web3'
+import { useAccount, useNetwork, useProvider } from 'wagmi'
 import { GEN_X_NETWORK_ID } from 'chains.config'
-import { addTokenToWallet } from '@utils/web3'
+import { addTokenToWallet } from '@utils/wallet'
 import { getErrorMessage } from '@utils/onboarding'
 import { tokenLogos } from '@components/Header/Wallet/AddTokenList'
+import { useMarketMetadata } from '@context/MarketMetadata'
 
 export default function ImportCustomTokens(): ReactElement {
   const { title, subtitle, body, image }: OnboardingStep = content
 
-  const { accountId, approvedBaseTokens, web3Provider, networkId } = useWeb3()
+  const { address: accountId } = useAccount()
+  const web3Provider = useProvider()
+  const { chain } = useNetwork()
+  const { approvedBaseTokens } = useMarketMetadata()
+
   const [loading, setLoading] = useState(false)
   const [completed, setCompleted] = useState(false)
 
@@ -26,10 +31,9 @@ export default function ImportCustomTokens(): ReactElement {
   ) => {
     setLoading(true)
     try {
-      if (networkId !== GEN_X_NETWORK_ID) throw new Error()
+      if (chain?.id !== GEN_X_NETWORK_ID) throw new Error()
 
       await addTokenToWallet(
-        web3Provider,
         tokenAddress,
         tokenSymbol,
         tokenDecimals,
@@ -41,7 +45,7 @@ export default function ImportCustomTokens(): ReactElement {
         getErrorMessage({
           accountId,
           web3Provider: !!web3Provider,
-          networkId
+          networkId: chain?.id
         })
       )
       if (error.message) console.error(error.message)
