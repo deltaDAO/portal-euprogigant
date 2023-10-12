@@ -6,7 +6,7 @@ import Jellyfish from '@oceanprotocol/art/creatures/jellyfish/jellyfish-grid.svg
 import Copy from '@shared/atoms/Copy'
 import Avatar from '@shared/atoms/Avatar'
 import styles from './Account.module.css'
-import { accountTruncate } from '@utils/web3'
+import { accountTruncate } from '@utils/wallet'
 
 export default function Account({
   accountId
@@ -24,7 +24,6 @@ export default function Account({
           <Jellyfish className={styles.image} />
         )}
       </figure>
-
       <div>
         <h3 className={styles.name}>{accountTruncate(accountId)}</h3>
         {accountId && (

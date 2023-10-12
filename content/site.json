@@ -68,6 +68,7 @@
     }
   ],
   "announcement": "",
+  "devPreviewAnnouncement": "You are visiting the Pontus-X Developer Preview. Please note that some functionalities are in beta and may not work as expected. Visit the [Pontus-X portal](https://pontus-x.eu) instead.",
   "warning": {
     "ctd": "Please note that Compute-to-Data is still in alpha phase."
   },
@@ -82,10 +83,6 @@
           {
             "name": "Log",
             "link": "https://explorer.pontus-x.eu/"
-          },
-          {
-            "name": "GEN-X Faucet",
-            "link": "https://faucet.genx.minimal-gaia-x.eu/"
           },
           {
             "name": "BTM",

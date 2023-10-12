@@ -21,7 +21,7 @@ const networksMetadata = [
     explorers: [
       {
         name: 'Exchange Logging Service',
-        url: 'https://explorer.pontus-x.eu/',
+        url: 'https://explorer.pontus-x.eu',
         standard: ''
       }
     ]

@@ -17,7 +17,22 @@
   flex-shrink: 0;
 }
 
+.price {
+  align-self: center;
+}
+
 .feedback {
   width: 100%;
   margin-top: calc(var(--spacer));
+}
+
+.buttonBuy > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.buttonBuy > div > button {
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -34,6 +34,10 @@
   hyphens: auto;
 }
 
+.homeTitleContainer h1 {
+  margin-bottom: calc(var(--spacer) / 2);
+}
+
 .homeTitleContainer h1 span {
   display: block;
 }

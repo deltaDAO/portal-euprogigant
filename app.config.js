@@ -25,6 +25,8 @@ module.exports = {
   // List of all supported chainIds. Used to populate the Chains user preferences list.
   chainIdsSupported: getSupportedChainIds(),
 
+  customProviderUrl: process.env.NEXT_PUBLIC_PROVIDER_URL,
+
   infuraProjectId: process.env.NEXT_PUBLIC_INFURA_PROJECT_ID || 'xxx',
 
   defaultDatatokenTemplateIndex: 2,
@@ -76,5 +78,13 @@ module.exports = {
     'https://raw.githubusercontent.com/deltaDAO/mvg-portal/v4/content/pages/terms.md',
 
   // Purgatory URI, leave as an empty string to disable the API call
-  purgatoryUrl: process.env.NEXT_PUBLIC_PURGATORY_URI || ''
+  purgatoryUrl: process.env.NEXT_PUBLIC_PURGATORY_URI || '',
+
+  // The url used to fetch docker hub image info
+  dockerHubProxyUrl:
+    process.env.NEXT_PUBLIC_DOCKER_HUB_PROXY_URL ||
+    'https://dockerhub-proxy.delta-dao.com',
+
+  // Display alert banner for the developer preview deployment
+  showPreviewAlert: process.env.NEXT_PUBLIC_SHOW_PREVIEW_ALERT || 'false'
 }

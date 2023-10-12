@@ -1,11 +1,12 @@
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { FormEvent, ReactElement, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { OnboardingStep } from '..'
 import { getErrorMessage } from '@utils/onboarding'
 import StepBody from '../StepBody'
 import StepHeader from '../StepHeader'
-import { useWeb3 } from '@context/Web3'
+import { useAccount, useNetwork, useProvider } from 'wagmi'
 import content from '../../../../../content/onboarding/steps/connectAccount.json'
+import { useModal } from 'connectkit'
 
 export default function ConnectAccount(): ReactElement {
   const {
@@ -16,8 +17,11 @@ export default function ConnectAccount(): ReactElement {
     buttonLabel,
     buttonSuccess
   }: OnboardingStep = content
+  const { address: accountId } = useAccount()
+  const web3Provider = useProvider()
+  const { chain } = useNetwork()
+  const { setOpen } = useModal()
 
-  const { accountId, connect, web3Provider, networkId } = useWeb3()
   const [loading, setLoading] = useState(false)
   const [completed, setCompleted] = useState(false)
 
@@ -29,16 +33,18 @@ export default function ConnectAccount(): ReactElement {
     }
   }, [accountId])
 
-  const connectAccount = async () => {
-    setLoading(true)
+  const connectAccount = async (e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+
     try {
-      await connect()
+      setLoading(true)
+      setOpen(true)
     } catch (error) {
       toast.error(
         getErrorMessage({
           accountId,
           web3Provider: !!web3Provider,
-          networkId
+          networkId: chain?.id
         })
       )
       console.error(error.message)
@@ -50,7 +56,7 @@ export default function ConnectAccount(): ReactElement {
   const actions = [
     {
       buttonLabel,
-      buttonAction: async () => await connectAccount(),
+      buttonAction: async (e) => await connectAccount(e),
       successMessage: buttonSuccess,
       loading,
       completed

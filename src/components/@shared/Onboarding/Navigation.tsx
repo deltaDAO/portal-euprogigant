@@ -4,8 +4,8 @@ import styles from './Navigation.module.css'
 import Button from '../atoms/Button'
 import { NavigationDirections } from '.'
 import { toast } from 'react-toastify'
-import { useWeb3 } from '@context/Web3'
 import { getErrorMessage } from '@utils/onboarding'
+import { useAccount, useNetwork, useProvider } from 'wagmi'
 
 const cx = classNames.bind(styles)
 
@@ -22,7 +22,9 @@ export default function Navigation({
   setNavigationDirection: (direction: NavigationDirections) => void
   totalStepsCount: number
 }): ReactElement {
-  const { accountId, networkId, web3Provider } = useWeb3()
+  const { address: accountId } = useAccount()
+  const web3Provider = useProvider()
+  const { chain } = useNetwork()
 
   const handlePreviousStep = () => {
     if (currentStep === 0) return
@@ -37,7 +39,7 @@ export default function Navigation({
         getErrorMessage({
           accountId,
           web3Provider: !!web3Provider,
-          networkId
+          networkId: chain?.id
         })
       )
       return
