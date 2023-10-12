@@ -13,37 +13,34 @@ import { WagmiConfig } from 'wagmi'
 import { ConnectKitProvider } from 'connectkit'
 import { connectKitTheme, wagmiClient } from '@utils/wallet'
 import { FilterProvider } from '@context/Filter'
-import ErrorBoundary from '../components/App/ErrorBoundary'
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   Decimal.set({ rounding: 1 })
 
   return (
     <>
-      <ErrorBoundary>
-        <WagmiConfig client={wagmiClient}>
-          <ConnectKitProvider
-            options={{ initialChainId: 0 }}
-            customTheme={connectKitTheme}
-          >
-            <MarketMetadataProvider>
-              <UrqlProvider>
-                <UserPreferencesProvider>
-                  <ConsentProvider>
-                    <SearchBarStatusProvider>
-                      <FilterProvider>
-                        <App>
-                          <Component {...pageProps} />
-                        </App>
-                      </FilterProvider>
-                    </SearchBarStatusProvider>
-                  </ConsentProvider>
-                </UserPreferencesProvider>
-              </UrqlProvider>
-            </MarketMetadataProvider>
-          </ConnectKitProvider>
-        </WagmiConfig>
-      </ErrorBoundary>
+      <WagmiConfig client={wagmiClient}>
+        <ConnectKitProvider
+          options={{ initialChainId: 0 }}
+          customTheme={connectKitTheme}
+        >
+          <MarketMetadataProvider>
+            <UrqlProvider>
+              <UserPreferencesProvider>
+                <ConsentProvider>
+                  <SearchBarStatusProvider>
+                    <FilterProvider>
+                      <App>
+                        <Component {...pageProps} />
+                      </App>
+                    </FilterProvider>
+                  </SearchBarStatusProvider>
+                </ConsentProvider>
+              </UserPreferencesProvider>
+            </UrqlProvider>
+          </MarketMetadataProvider>
+        </ConnectKitProvider>
+      </WagmiConfig>
     </>
   )
 }
