@@ -9,6 +9,7 @@ import React, {
 import { LoggerInstance, LogLevel } from '@oceanprotocol/lib'
 import { isBrowser } from '@utils/index'
 import { useMarketMetadata } from './MarketMetadata'
+import { AUTOMATION_MODES } from './Automation/AutomationProvider'
 
 interface UserPreferencesValue {
   debug: boolean
@@ -31,6 +32,10 @@ interface UserPreferencesValue {
   showOnboardingModule: boolean
   setShowOnboardingModule: (value: boolean) => void
   locale: string
+  automationWalletJSON: string
+  setAutomationWalletJSON: (encryptedWallet: string) => void
+  automationWalletMode: AUTOMATION_MODES
+  setAutomationWalletMode: (mode: AUTOMATION_MODES) => void
 }
 
 const UserPreferencesContext = createContext(null)
@@ -81,6 +86,15 @@ function UserPreferencesProvider({
     localStorage?.allowExternalContent || false
   )
 
+  const [automationWallet, setAutomationWallet] = useState<string>(
+    localStorage?.automationWalletJSON || ''
+  )
+
+  const [automationWalletMode, setAutomationWalletMode] =
+    useState<AUTOMATION_MODES>(
+      localStorage?.automationWalletMode || AUTOMATION_MODES.SIMPLE
+    )
+
   const [onboardingStep, setOnboardingStep] = useState<number>(
     localStorage?.onboardingStep || 0
   )
@@ -101,6 +115,8 @@ function UserPreferencesProvider({
       privacyPolicySlug,
       showPPC,
       allowExternalContent,
+      automationWalletJSON: automationWallet,
+      automationWalletMode,
       onboardingStep,
       showOnboardingModule
     })
@@ -112,6 +128,8 @@ function UserPreferencesProvider({
     privacyPolicySlug,
     showPPC,
     allowExternalContent,
+    automationWallet,
+    automationWalletMode,
     onboardingStep,
     showOnboardingModule
   ])
@@ -179,6 +197,10 @@ function UserPreferencesProvider({
           setShowPPC,
           allowExternalContent,
           setAllowExternalContent,
+          automationWalletJSON: automationWallet,
+          setAutomationWalletJSON: setAutomationWallet,
+          automationWalletMode,
+          setAutomationWalletMode,
           onboardingStep,
           setOnboardingStep,
           showOnboardingModule,
