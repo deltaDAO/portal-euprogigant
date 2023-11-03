@@ -69,6 +69,7 @@
   --input-border-size: var(--border-size-sm);
   --input-border-radius: var(--border-radius);
   --input-background: var(--brand-white);
+  --input-background-highlight: var(--background-highlight);
   --input-selected-background: var(--checkbox-selected-background);
   --input-selected-border-size: var(--border-size-sm);
   --input-selected-border-color: var(--font-color-text);
