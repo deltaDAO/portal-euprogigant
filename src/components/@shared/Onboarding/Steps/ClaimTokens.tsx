@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import { OnboardingStep } from '..'
 import StepBody from '../StepBody'
 import StepHeader from '../StepHeader'

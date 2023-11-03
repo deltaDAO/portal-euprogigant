@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import styles from './StepBody.module.css'
 import StepAction, { IStepAction } from './StepAction'
 import Button from '../atoms/Button'

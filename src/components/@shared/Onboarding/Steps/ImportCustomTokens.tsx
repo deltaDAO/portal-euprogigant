@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react'
+import { ReactElement, useState } from 'react'
 import { toast } from 'react-toastify'
 import { OnboardingStep } from '..'
 import StepBody from '../StepBody'

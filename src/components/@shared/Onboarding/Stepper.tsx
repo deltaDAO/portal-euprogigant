@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import styles from './Stepper.module.css'
 import classNames from 'classnames/bind'
 import Button from '../atoms/Button'

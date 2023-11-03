@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactElement, useEffect, useState } from 'react'
+import { ChangeEvent, ReactElement, useEffect, useState } from 'react'
 import InputElement from '../../InputElement'
 import Label from '../../Label'
 import styles from './index.module.css'

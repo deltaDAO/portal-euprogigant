@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import styles from './Header.module.css'
 import content from '../../../../content/onboarding/index.json'
 import Container from '../atoms/Container'
