@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react'
+import { ReactElement, useEffect } from 'react'
 import { animated, useSpringRef, useTransition } from 'react-spring'
 import styles from './Main.module.css'
 

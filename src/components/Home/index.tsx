@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import HomeContent from './Content'
 import OnboardingSection from '@components/@shared/Onboarding'
 import FeaturedAssets from './FeaturedAssets'

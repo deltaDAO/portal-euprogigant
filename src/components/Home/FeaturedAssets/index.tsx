@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import styles from './index.module.css'
 import BlobShape from '@images/blobShape.svg'
 import Compute from '@images/compute.svg'

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import styles from './Ready.module.css'
 import content from '../../../../../content/onboarding/steps/ready.json'
 import SuccessConfetti from '@components/@shared/SuccessConfetti'

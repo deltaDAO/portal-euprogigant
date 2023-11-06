@@ -1,4 +1,4 @@
-import React, { FormEvent, ReactElement, useEffect, useState } from 'react'
+import { FormEvent, ReactElement, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { OnboardingStep } from '..'
 import { getErrorMessage } from '@utils/onboarding'

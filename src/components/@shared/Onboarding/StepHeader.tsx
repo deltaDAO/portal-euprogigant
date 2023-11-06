@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import styles from './StepHeader.module.css'
 
 export default function StepHeader({
