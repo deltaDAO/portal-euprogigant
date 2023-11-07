@@ -61,6 +61,12 @@
   --footer-link-text-decoration: none;
   --footer-link-text-decoration-hover: none;
 
+  /* Homepage */
+  --home-brand-logo-size-width: 22rem;
+  --home-brand-logo-size-height: 4rem;
+  --home-gaia-x-logo-size-width: 9rem;
+  --home-gaia-x-logo-size-height: 5rem;
+
   /* Input elements */
   --input-font-color: var(--font-color-text);
   --input-placeholder-font-color: var(--brand-grey);
