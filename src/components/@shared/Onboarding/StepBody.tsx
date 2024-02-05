@@ -9,12 +9,14 @@ export default function StepBody({
   body,
   image,
   actions,
-  refreshOption
+  refreshOption,
+  children
 }: {
   body: string
   image?: string
   actions?: IStepAction[]
   refreshOption?: boolean
+  children?: ReactElement
 }): ReactElement {
   return (
     <div className={styles.content}>
@@ -36,6 +38,7 @@ export default function StepBody({
             {actions?.map((action) => (
               <StepAction key={action.buttonLabel} {...action} />
             ))}
+            {children}
           </div>
         </div>
       </div>
