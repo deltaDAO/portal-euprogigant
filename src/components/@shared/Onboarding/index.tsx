@@ -13,6 +13,8 @@ import { useAccount, useNetwork, useProvider } from 'wagmi'
 import { useUserPreferences } from '@context/UserPreferences'
 import useBalance from '@hooks/useBalance'
 import { GEN_X_NETWORK_ID } from 'chains.config'
+import ImportWallet from './Steps/ImportWallet'
+import AutomationWalletState from './Steps/AutomationWalletState'
 
 export interface OnboardingStep {
   title: string
@@ -27,6 +29,8 @@ const steps = [
   { shortLabel: 'MetaMask', component: <DownloadMetamask /> },
   { shortLabel: 'Connect', component: <ConnectAccount /> },
   { shortLabel: 'Tokens', component: <ImportCustomTokens /> },
+  { shortLabel: 'Import', component: <ImportWallet /> },
+  { shortLabel: 'Automation', component: <AutomationWalletState /> },
   { shortLabel: 'Ready', component: <Ready /> }
 ]
 
