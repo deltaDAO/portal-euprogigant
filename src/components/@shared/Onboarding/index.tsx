@@ -12,9 +12,9 @@ import Ready from './Steps/Ready'
 import { useAccount, useNetwork, useProvider } from 'wagmi'
 import { useUserPreferences } from '@context/UserPreferences'
 import useBalance from '@hooks/useBalance'
-import { GEN_X_NETWORK_ID } from 'chains.config'
 import ImportWallet from './Steps/ImportWallet'
 import AutomationWalletState from './Steps/AutomationWalletState'
+import { getSupportedChainIds } from '../../../../chains.config'
 
 export interface OnboardingStep {
   title: string
@@ -55,7 +55,11 @@ export default function OnboardingSection(): ReactElement {
   }, [onboardingStep, setOnboardingStep])
 
   useEffect(() => {
-    if (accountId && web3Provider && chain?.id === GEN_X_NETWORK_ID) {
+    if (
+      accountId &&
+      web3Provider &&
+      getSupportedChainIds().includes(chain?.id)
+    ) {
       setOnboardingCompleted(true)
     }
   }, [accountId, balance, chain?.id, web3Provider])
