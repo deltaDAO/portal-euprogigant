@@ -9,7 +9,7 @@ import {
   getWhitelistShould
 } from '.'
 
-const defaultBaseQueryReturn = {
+const defaultBaseQueryReturn: SearchQuery = {
   from: 0,
   query: {
     bool: {
@@ -25,12 +25,23 @@ const defaultBaseQueryReturn = {
             ]
           }
         }
-      ],
-      should: [...getWhitelistShould()],
-      ...(getWhitelistShould().length > 0 ? { minimum_should_match: 1 } : [])
+      ]
     }
   },
   size: 1000
+}
+
+// add whitelist filtering
+if (getWhitelistShould()?.length > 0) {
+  const whitelistQuery = {
+    bool: {
+      should: [...getWhitelistShould()],
+      minimum_should_match: 1
+    }
+  }
+  Object.hasOwn(defaultBaseQueryReturn.query.bool, 'must')
+    ? defaultBaseQueryReturn.query.bool.must.push(whitelistQuery)
+    : (defaultBaseQueryReturn.query.bool.must = [whitelistQuery])
 }
 
 describe('@utils/aquarius', () => {
