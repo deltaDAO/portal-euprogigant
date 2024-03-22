@@ -11,7 +11,6 @@
 
 .header {
   margin-bottom: var(--spacer);
-  max-width: 50rem;
 }
 
 .homeWrapper .header {
@@ -74,4 +73,8 @@
   justify-content: center;
   margin-top: calc(var(--spacer) / 2);
   max-width: 30rem;
+}
+
+.networkAlert {
+  margin: var(--spacer) auto;
 }
