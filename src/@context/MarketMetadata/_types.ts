@@ -36,6 +36,10 @@ export interface AppConfig {
     roughTxGasEstimate: number
   }
   showPreviewAlert: string
+  contractingProvider: {
+    enable: boolean
+    endpoint: string
+  }
 }
 export interface SiteContent {
   siteTitle: string

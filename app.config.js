@@ -95,5 +95,10 @@ module.exports = {
   },
 
   // Display alert banner for the developer preview deployment
-  showPreviewAlert: process.env.NEXT_PUBLIC_SHOW_PREVIEW_ALERT || 'false'
+  showPreviewAlert: process.env.NEXT_PUBLIC_SHOW_PREVIEW_ALERT || 'false',
+
+  contractingProvider: {
+    enable: true,
+    endpoint: 'https://contracting.demo.delta-dao.com'
+  }
 }

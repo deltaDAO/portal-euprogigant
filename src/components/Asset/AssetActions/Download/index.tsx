@@ -37,6 +37,7 @@ import WhitelistIndicator from '../Compute/WhitelistIndicator'
 import { Signer } from 'ethers'
 import SuccessConfetti from '@components/@shared/SuccessConfetti'
 import Input from '@components/@shared/FormInput'
+import ContractingProvider, { PAYMENT_MODES } from './ContractingProvider'
 
 export default function Download({
   accountId,
@@ -236,11 +237,21 @@ export default function Download({
       dtSymbol={asset?.datatokens[0]?.symbol}
       dtBalance={dtBalance}
       type="submit"
-      assetTimeout={secondsToString(asset?.services?.[0]?.timeout)}
+      assetTimeout={
+        asset?.metadata?.additionalInformation?.saas?.paymentMode ===
+        PAYMENT_MODES.PAYPERUSE
+          ? // we dont have a timeout on payperuse
+            // as this is handled by service operators utilizing contracting provider
+            secondsToString(0)
+          : secondsToString(asset?.services?.[0]?.timeout)
+      }
       assetType={
         asset?.metadata?.additionalInformation?.saas
           ? 'saas'
           : asset?.metadata?.type
+      }
+      paymentMode={
+        asset?.metadata?.additionalInformation?.saas?.paymentMode ?? undefined
       }
       stepText={statusText}
       isLoading={isLoading}
@@ -360,6 +371,8 @@ export default function Download({
               asset={asset}
             />
           )}
+          {asset?.metadata?.additionalInformation?.saas?.paymentMode ===
+            PAYMENT_MODES.PAYPERUSE && <ContractingProvider did={asset.id} />}
           {accountId && (
             <WhitelistIndicator
               accountId={accountId}
