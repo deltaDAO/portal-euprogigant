@@ -309,20 +309,22 @@ export default function Download({
                 {!isInPurgatory && (
                   <>
                     {asset?.metadata?.additionalInformation?.saas
-                      ?.paymentMode === PAYMENT_MODES.PAYPERUSE && (
-                      <div className={styles.payPerUseBtn}>
-                        <Button
-                          style="primary"
-                          onClick={(e) => {
-                            e.preventDefault()
-                            redirectToSaasUrl()
-                          }}
-                          disabled={!isValid}
-                        >
-                          Go to service
-                        </Button>
-                      </div>
-                    )}
+                      ?.paymentMode === PAYMENT_MODES.PAYPERUSE &&
+                      asset?.metadata?.additionalInformation?.saas
+                        ?.redirectUrl && (
+                        <div className={styles.payPerUseBtn}>
+                          <Button
+                            style="primary"
+                            onClick={(e) => {
+                              e.preventDefault()
+                              redirectToSaasUrl()
+                            }}
+                            disabled={!isValid}
+                          >
+                            Go to service
+                          </Button>
+                        </div>
+                      )}
                     <PurchaseButton isValid={isValid} />
                   </>
                 )}
