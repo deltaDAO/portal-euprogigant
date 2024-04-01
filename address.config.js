@@ -7,7 +7,7 @@ module.exports = {
       '0xb2AF8b92bFaC5299Cb6EDEf16150BFD1d4d26a93',
       '0x3dB4E0b1fC6072271BF51e9a0CC17E3c7C4C99f5',
       '0xB33185E37610bC6f5b00cC26827317EE6fDF547a',
-      '0xD9BAB8E6279CE41C2bC3f1D44ceF855235e0CdB7'
+      '0xD9BAB8E6279CE41C2bC3f1D44ceF855235e0CdB7' // Guehring
     ],
     'datatokens.address': []
   },
