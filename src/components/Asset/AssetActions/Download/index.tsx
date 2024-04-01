@@ -62,7 +62,12 @@ export default function Download({
 }): ReactElement {
   const { isConnected } = useAccount()
   const { isSupportedOceanNetwork } = useNetworkMetadata()
-  const { getOpcFeeForToken } = useMarketMetadata()
+  const {
+    getOpcFeeForToken,
+    appConfig: {
+      contractingProvider: { enable: isContractingFeatureEnabled }
+    }
+  } = useMarketMetadata()
   const { isInPurgatory, isAssetNetwork } = useAsset()
   const isMounted = useIsMounted()
 
@@ -371,8 +376,9 @@ export default function Download({
               asset={asset}
             />
           )}
-          {asset?.metadata?.additionalInformation?.saas?.paymentMode ===
-            PAYMENT_MODES.PAYPERUSE && <ContractingProvider did={asset.id} />}
+          {isContractingFeatureEnabled &&
+            asset?.metadata?.additionalInformation?.saas?.paymentMode ===
+              PAYMENT_MODES.PAYPERUSE && <ContractingProvider did={asset.id} />}
           {accountId && (
             <WhitelistIndicator
               accountId={accountId}
