@@ -194,14 +194,16 @@ export default function ButtonBuy({
     ? 'Retry'
     : action === 'download'
     ? hasPreviousOrder && assetType === 'saas'
-      ? 'Go to service'
+      ? paymentMode === PAYMENT_MODES.PAYPERUSE
+        ? `Buy access credit`
+        : 'Go to service'
       : hasPreviousOrder
       ? 'Download'
       : priceType === 'free'
       ? 'Get'
       : assetType === 'saas'
       ? paymentMode === PAYMENT_MODES.PAYPERUSE
-        ? `Buy access to service`
+        ? `Buy access credit`
         : `Subscribe ${
             assetTimeout === 'Forever' ? '' : ` for ${assetTimeout}`
           }`

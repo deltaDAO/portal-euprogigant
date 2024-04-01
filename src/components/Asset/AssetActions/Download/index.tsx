@@ -38,6 +38,7 @@ import { Signer } from 'ethers'
 import SuccessConfetti from '@components/@shared/SuccessConfetti'
 import Input from '@components/@shared/FormInput'
 import ContractingProvider, { PAYMENT_MODES } from './ContractingProvider'
+import Button from '../../../@shared/atoms/Button'
 
 export default function Download({
   accountId,
@@ -177,16 +178,21 @@ export default function Download({
     isAccountIdWhitelisted
   ])
 
+  function redirectToSaasUrl() {
+    window.open(asset.metadata.additionalInformation.saas.redirectUrl, '_blank')
+  }
+
   async function handleOrderOrDownload(dataParams?: UserCustomParameters) {
     setIsLoading(true)
     setRetry(false)
     try {
       if (isOwned) {
-        if (asset?.metadata?.additionalInformation?.saas?.redirectUrl) {
-          window.open(
-            asset.metadata.additionalInformation.saas.redirectUrl,
-            '_blank'
-          )
+        if (
+          asset?.metadata?.additionalInformation?.saas?.redirectUrl &&
+          asset?.metadata?.additionalInformation?.saas?.paymentMode !==
+            PAYMENT_MODES.PAYPERUSE
+        ) {
+          redirectToSaasUrl()
           setIsLoading(false)
           return
         }
@@ -300,7 +306,26 @@ export default function Download({
                     size="large"
                   />
                 )}
-                {!isInPurgatory && <PurchaseButton isValid={isValid} />}
+                {!isInPurgatory && (
+                  <>
+                    {asset?.metadata?.additionalInformation?.saas
+                      ?.paymentMode === PAYMENT_MODES.PAYPERUSE && (
+                      <div className={styles.payPerUseBtn}>
+                        <Button
+                          style="primary"
+                          onClick={(e) => {
+                            e.preventDefault()
+                            redirectToSaasUrl()
+                          }}
+                          disabled={!isValid}
+                        >
+                          Go to service
+                        </Button>
+                      </div>
+                    )}
+                    <PurchaseButton isValid={isValid} />
+                  </>
+                )}
                 <Field
                   component={Input}
                   name="termsAndConditions"
