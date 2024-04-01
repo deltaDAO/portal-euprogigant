@@ -49,3 +49,7 @@
 .confettiContainer {
   margin-top: calc(var(--spacer) / 2);
 }
+
+.payPerUseBtn {
+  margin-top: calc(var(--spacer) / 4);
+}
