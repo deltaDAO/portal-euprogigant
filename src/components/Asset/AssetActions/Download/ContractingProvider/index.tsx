@@ -19,7 +19,7 @@ export default function ContractingProvider(props: {
   const { did } = props
   const { address } = useAccount()
   const [isRequesting, setIsRequesting] = useState(false)
-  const [allowanceCount, setAllowanceCount] = useState<number>()
+  const [accessCreditsCount, setAccessCreditsCount] = useState<number>()
   const { signMessage, data: signature, isSuccess, isError } = useSignMessage()
   const {
     appConfig: {
@@ -27,7 +27,7 @@ export default function ContractingProvider(props: {
     }
   } = useMarketMetadata()
 
-  const checkAllowance = async () => {
+  const checkAccessCredits = async () => {
     setIsRequesting(true)
     const nonce = await getContractingProviderNonce(
       contractingProviderEndpoint,
@@ -43,7 +43,7 @@ export default function ContractingProvider(props: {
       signature,
       did
     )
-    setAllowanceCount(count)
+    setAccessCreditsCount(count)
     setIsRequesting(false)
   }, [contractingProviderEndpoint, address, signature, did])
 
@@ -56,24 +56,24 @@ export default function ContractingProvider(props: {
 
   return (
     <div className={styles.container}>
-      {allowanceCount ? (
+      {accessCreditsCount ? (
         <Alert
           state="info"
-          text={`You purchased access to this service **${allowanceCount} time${
-            allowanceCount > 1 ? 's' : ''
+          text={`You purchased access to this service **${accessCreditsCount} time${
+            accessCreditsCount > 1 ? 's' : ''
           }**`}
           action={{
             name: 'Re-run',
-            handleAction: () => checkAllowance()
+            handleAction: () => checkAccessCredits()
           }}
         />
       ) : (
         <Button
           style="text"
-          onClick={() => checkAllowance()}
+          onClick={() => checkAccessCredits()}
           disabled={isRequesting}
         >
-          Check Allowance
+          Check Access Credits
         </Button>
       )}
       <div className={styles.help}>
