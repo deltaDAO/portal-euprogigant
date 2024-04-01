@@ -1,8 +1,9 @@
-import { ReactElement } from 'react'
-import classNames from 'classnames/bind'
-import styles from './PageHeader.module.css'
-import Markdown from '@shared/Markdown'
 import SearchBar from '@components/Header/SearchBar'
+import Markdown from '@shared/Markdown'
+import classNames from 'classnames/bind'
+import { ReactElement } from 'react'
+import NetworkStatus from '../NetworkStatus'
+import styles from './PageHeader.module.css'
 
 const cx = classNames.bind(styles)
 
@@ -36,7 +37,10 @@ export default function PageHeader({
             </h1>
           </div>
         ) : (
-          <h1 className={styles.title}>{title}</h1>
+          <div>
+            <h1 className={styles.title}>{title}</h1>
+            <NetworkStatus className={styles.networkAlert} />
+          </div>
         )}
         {description && (
           <Markdown text={description} className={styles.description} />
