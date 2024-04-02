@@ -405,7 +405,9 @@ export default function Download({
           )}
           {isContractingFeatureEnabled &&
             asset?.metadata?.additionalInformation?.saas?.paymentMode ===
-              PAYMENT_MODES.PAYPERUSE && <ContractingProvider did={asset.id} />}
+              PAYMENT_MODES.PAYPERUSE &&
+            accountId &&
+            isAccountIdWhitelisted && <ContractingProvider did={asset.id} />}
           {accountId && (
             <WhitelistIndicator
               accountId={accountId}
