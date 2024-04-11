@@ -5,6 +5,7 @@ import { useAccount, useSignMessage } from 'wagmi'
 import { getContractingProviderNonce, getPayPerUseCount } from '../../utils'
 import Alert from '../../../../@shared/atoms/Alert'
 import { useMarketMetadata } from '../../../../../@context/MarketMetadata'
+import { useAutomation } from '../../../../../@context/Automation/AutomationProvider'
 
 export enum PAYMENT_MODES {
   SUBSCRIPTION = 'subscription',
@@ -20,39 +21,70 @@ export default function ContractingProvider(props: {
   const { address } = useAccount()
   const [isRequesting, setIsRequesting] = useState(false)
   const [accessCreditsCount, setAccessCreditsCount] = useState<number>()
-  const { signMessage, data: signature, isSuccess, isError } = useSignMessage()
+  const {
+    signMessage,
+    data: signMessageData,
+    isSuccess,
+    isError
+  } = useSignMessage()
   const {
     appConfig: {
       contractingProvider: { endpoint: contractingProviderEndpoint }
     }
   } = useMarketMetadata()
 
+  const { autoWallet, isAutomationEnabled } = useAutomation()
+
+  const [activeAddress, setActiveAddress] = useState<string>()
+  const [signature, setSignature] = useState<string>()
+
+  useEffect(() => {
+    if (isAutomationEnabled) setActiveAddress(autoWallet.address)
+    else setActiveAddress(address)
+  }, [address, autoWallet?.address, isAutomationEnabled])
+
   const checkAccessCredits = async () => {
     setIsRequesting(true)
+
     const nonce = await getContractingProviderNonce(
       contractingProviderEndpoint,
-      address
+      activeAddress
     )
-    signMessage({ message: nonce })
+    if (isAutomationEnabled) {
+      try {
+        const autoWalletSignature = await autoWallet.signMessage(nonce)
+        setSignature(autoWalletSignature)
+      } catch (e) {
+        setIsRequesting(false)
+        console.error(e)
+      }
+    } else {
+      signMessage({ message: nonce })
+    }
   }
 
   const updateCount = useCallback(async () => {
     const count = await getPayPerUseCount(
       contractingProviderEndpoint,
-      address,
+      activeAddress,
       signature,
       did
     )
     setAccessCreditsCount(count)
     setIsRequesting(false)
-  }, [contractingProviderEndpoint, address, signature, did])
+  }, [contractingProviderEndpoint, activeAddress, signature, did])
 
   useEffect(() => {
     if (isError) setIsRequesting(false)
     if (isSuccess) {
-      updateCount()
+      setSignature(signMessageData)
     }
   }, [isSuccess, isError])
+
+  useEffect(() => {
+    if (!signature) return
+    updateCount()
+  }, [signature])
 
   return (
     <div className={styles.container}>
@@ -64,13 +96,20 @@ export default function ContractingProvider(props: {
           }**`}
           action={{
             name: 'Re-run',
-            handleAction: () => checkAccessCredits()
+            handleAction: (e) => {
+              setAccessCreditsCount(undefined) // force visible re-render
+              e.preventDefault()
+              checkAccessCredits()
+            }
           }}
         />
       ) : (
         <Button
           style="text"
-          onClick={() => checkAccessCredits()}
+          onClick={(e) => {
+            e.preventDefault()
+            checkAccessCredits()
+          }}
           disabled={isRequesting}
         >
           Check Access Credits
