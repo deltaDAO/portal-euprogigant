@@ -186,12 +186,12 @@ export default function Download({
     setIsLoading(true)
     setRetry(false)
     try {
-      if (isOwned) {
-        if (
-          asset?.metadata?.additionalInformation?.saas?.redirectUrl &&
-          asset?.metadata?.additionalInformation?.saas?.paymentMode !==
-            PAYMENT_MODES.PAYPERUSE
-        ) {
+      if (
+        isOwned &&
+        asset?.metadata?.additionalInformation?.saas?.paymentMode !==
+          PAYMENT_MODES.PAYPERUSE
+      ) {
+        if (asset?.metadata?.additionalInformation?.saas?.redirectUrl) {
           redirectToSaasUrl()
           setIsLoading(false)
           return
