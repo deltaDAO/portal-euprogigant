@@ -16,7 +16,8 @@ module.exports = {
       '0x734395fdC819273374d4e2Ace32fD1D9C9cA92d1', // FEN_Workshop6
       '0x74623b043151Ca7939F05946CfAD3C4c2600DbEC', // FEN_Workshop7
       '0x1f1540638c9F834497aa21E99189ff64E27c2bF6', // FEN_Workshop8
-      '0x055BacD432f6cB05E3FB4320c30c437BFf538369' // FEN_Workshop9
+      '0x055BacD432f6cB05E3FB4320c30c437BFf538369', // FEN_Workshop9
+      '0x9f4ceE0eBD03a1e9E4DcffaF876873d7a3e9595c' // AMIDS
     ],
     'datatokens.address': []
   },
