@@ -17,7 +17,8 @@ module.exports = {
       '0x74623b043151Ca7939F05946CfAD3C4c2600DbEC', // FEN_Workshop7
       '0x1f1540638c9F834497aa21E99189ff64E27c2bF6', // FEN_Workshop8
       '0x055BacD432f6cB05E3FB4320c30c437BFf538369', // FEN_Workshop9
-      '0x9f4ceE0eBD03a1e9E4DcffaF876873d7a3e9595c' // AMIDS
+      '0x9f4ceE0eBD03a1e9E4DcffaF876873d7a3e9595c', // AMIDS
+      '0xe1D7Cf58357Ce5dFCa2343221610138A196C0FEE' // Hochschule Kempten
     ],
     'datatokens.address': []
   },
