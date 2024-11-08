@@ -99,5 +99,21 @@ module.exports = {
   contractingProvider: {
     enable: true,
     endpoint: 'https://contracting.demo.delta-dao.com'
+  },
+
+  networkAlertConfig: {
+    // Refresh interval for network status - 30 sec
+    refreshInterval: 30000,
+    // Margin of error for block count (how much difference between min / max block numbers before showing an alert)
+    errorMargin: 10,
+    // Map chainIds to their respective status endpoints
+    statusEndpoints: {
+      32456: 'https://status.dev.pontus-x.eu/'
+    }
+  },
+
+  faucet: {
+    enabled: process.env.NEXT_PUBLIC_FAUCET_ENABLED || 'false',
+    baseUri: 'https://faucet.api.pontus-x.eu'
   }
 }

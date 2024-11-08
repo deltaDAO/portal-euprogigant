@@ -38,7 +38,6 @@ import { Signer } from 'ethers'
 import SuccessConfetti from '@components/@shared/SuccessConfetti'
 import Input from '@components/@shared/FormInput'
 import ContractingProvider, { PAYMENT_MODES } from './ContractingProvider'
-import Button from '../../../@shared/atoms/Button'
 
 export default function Download({
   accountId,
@@ -306,28 +305,7 @@ export default function Download({
                     size="large"
                   />
                 )}
-                {!isInPurgatory && (
-                  <>
-                    {asset?.metadata?.additionalInformation?.saas
-                      ?.paymentMode === PAYMENT_MODES.PAYPERUSE &&
-                      asset?.metadata?.additionalInformation?.saas
-                        ?.redirectUrl && (
-                        <div className={styles.payPerUseBtn}>
-                          <Button
-                            style="primary"
-                            onClick={(e) => {
-                              e.preventDefault()
-                              redirectToSaasUrl()
-                            }}
-                            disabled={!isValid}
-                          >
-                            Go to service
-                          </Button>
-                        </div>
-                      )}
-                    <PurchaseButton isValid={isValid} />
-                  </>
-                )}
+                {!isInPurgatory && <PurchaseButton isValid={isValid} />}
                 <Field
                   component={Input}
                   name="termsAndConditions"
