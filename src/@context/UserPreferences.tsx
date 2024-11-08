@@ -36,10 +36,6 @@ interface UserPreferencesValue {
   setAutomationWalletJSON: (encryptedWallet: string) => void
   automationWalletMode: AUTOMATION_MODES
   setAutomationWalletMode: (mode: AUTOMATION_MODES) => void
-  showOnboardingModule: boolean
-  setShowOnboardingModule: (value: boolean) => void
-  onboardingStep: number
-  setOnboardingStep: (step: number) => void
 }
 
 const UserPreferencesContext = createContext(null)
