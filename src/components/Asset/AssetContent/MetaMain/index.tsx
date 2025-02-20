@@ -6,8 +6,6 @@ import Nft from '../Nft'
 import VerifiedBadge from '@components/@shared/VerifiedBadge'
 import { useAsset } from '@context/Asset'
 
-const blockscoutNetworks = [1287, 2021000, 2021001, 44787, 246, 1285]
-
 export default function MetaMain({
   asset,
   nftPublisher
@@ -18,19 +16,17 @@ export default function MetaMain({
   const {
     isServiceCredentialVerified,
     serviceCredentialIdMatch,
+    isIdMatchVerifiable,
     serviceCredentialVersion,
     isVerifyingServiceCredential,
     verifiedServiceProviderName
   } = useAsset()
-  const isBlockscoutExplorer = blockscoutNetworks.includes(asset?.chainId)
 
   return (
     <aside className={styles.meta}>
       <header className={styles.asset}>
-        <div className={styles.nftContainer}>
-          <Nft isBlockscoutExplorer={isBlockscoutExplorer} />
-        </div>
-        <MetaAsset asset={asset} isBlockscoutExplorer={isBlockscoutExplorer} />
+        <Nft />
+        <MetaAsset asset={asset} />
       </header>
       <div className={styles.publisherInfo}>
         <MetaInfo
@@ -46,6 +42,7 @@ export default function MetaMain({
               isLoading={isVerifyingServiceCredential}
               isValid={isServiceCredentialVerified}
               idMatch={serviceCredentialIdMatch}
+              isIdMatchVerifiable={isIdMatchVerifiable}
               apiVersion={serviceCredentialVersion}
               timestamp={isServiceCredentialVerified}
             />
