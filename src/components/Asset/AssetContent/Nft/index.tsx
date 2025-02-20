@@ -9,11 +9,7 @@ import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-export default function Nft({
-  isBlockscoutExplorer
-}: {
-  isBlockscoutExplorer: boolean
-}) {
+export default function Nft() {
   const { asset } = useAsset()
   const nftMetadata = decodeTokenURI(asset?.nft?.tokenURI)
 
@@ -52,7 +48,6 @@ export default function Nft({
               nftImage={nftImage}
               address={asset?.nftAddress}
               chainId={asset?.chainId}
-              isBlockscoutExplorer={isBlockscoutExplorer}
             />
           }
         />
