@@ -11,7 +11,7 @@
     },
     {
       "name": "Publish",
-      "link": "/publish"
+      "link": "/publish/1"
     },
     {
       "name": "Verify",
@@ -27,71 +27,71 @@
       "link": "https://explorer.pontus-x.eu/"
     },
     {
-    "name": "Ecosystem",
-    "subItems": [
+      "name": "Ecosystem",
+      "subItems": [
         {
-            "name": "Pontus-X Ecosystem",
-            "link": "https://www.pontus-x.eu/"
+          "name": "Pontus-X Ecosystem",
+          "link": "https://www.pontus-x.eu/"
         },
         {
-            "name": "GX4FM moveID",
-            "link": "https://portal.moveid.eu/"
+          "name": "GX4FM moveID",
+          "link": "https://portal.moveid.eu/"
         },
         {
-            "name": "COOPERANTS",
-            "link": "https://federator.cooperants.info/marketplace"
+          "name": "COOPERANTS",
+          "link": "https://federator.cooperants.info/marketplace"
         },
         {
-            "name": "ACCURATE",
-            "link": "https://accurate.pontus-x.eu"
+          "name": "ACCURATE",
+          "link": "https://accurate.pontus-x.eu"
         },
         {
-            "name": "Flex4Res",
-            "link": "https://flex4res.pontus-x.eu/"
+          "name": "Flex4Res",
+          "link": "https://flex4res.pontus-x.eu/"
         },
         {
-            "name": "Airbus",
-            "link": "https://airbus.pontus-x.eu/"
+          "name": "Airbus",
+          "link": "https://airbus.pontus-x.eu/"
         },
         {
-            "name": "Pontus-X Main Portal",
-            "link": "https://portal.main.pontus-x.eu/"
+          "name": "Pontus-X Main Portal",
+          "link": "https://portal.main.pontus-x.eu/"
         },
         {
-            "name": "AgrospAI",
-            "link": "https://agrospai.udl.cat/"
+          "name": "AgrospAI",
+          "link": "https://agrospai.udl.cat/"
         },
         {
-            "name": "beebucket",
-            "link": "https://daseen.pontus-x.eu/"
+          "name": "beebucket",
+          "link": "https://daseen.pontus-x.eu/"
         },
         {
-            "name": "Future Engineering Network (FEN)",
-            "link": "https://fen.pontus-x.eu/"
+          "name": "Future Engineering Network (FEN)",
+          "link": "https://fen.pontus-x.eu/"
         },
         {
-            "name": "Berlin State Library",
-            "link": "https://sbb.pontus-x.eu/"
+          "name": "Berlin State Library",
+          "link": "https://sbb.pontus-x.eu/"
         },
         {
-            "name": "FIWARE",
-            "link": "https://fiware-marketplace-a4eqd.ondigitalocean.app/"
+          "name": "FIWARE",
+          "link": "https://fiware-marketplace-a4eqd.ondigitalocean.app/"
         },
         {
-            "name": "Polish Agriculture Data Space",
-            "link": "https://dataspaces.psnc.pl/"
+          "name": "Polish Agriculture Data Space",
+          "link": "https://dataspaces.psnc.pl/"
         },
         {
-            "name": "Open Dataspace Lab",
-            "link": "https://www.opendataspacelab.eu/"
+          "name": "Open Dataspace Lab",
+          "link": "https://www.opendataspacelab.eu/"
         },
         {
-            "name": "Car Repair 4.0",
-            "link": "https://portal.autowerkstatt40.org/"
+          "name": "Car Repair 4.0",
+          "link": "https://portal.autowerkstatt40.org/"
         },
         {
-            "name": "Service-Meister",
-            "link": "https://servicemeister.pontus-x.eu/"
+          "name": "Service-Meister",
+          "link": "https://servicemeister.pontus-x.eu/"
         }
       ]
     },
